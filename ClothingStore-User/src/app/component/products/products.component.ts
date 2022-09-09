@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { SignInComponent } from '../sign-in/sign-in.component';
 
 @Component({
   selector: 'app-products',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private router: Router, private dialog: MatDialog) { }
+  item=[1,2,3,4,5,6]
   ngOnInit(): void {
+  }
+  addToCart()
+  {
+    if(localStorage.getItem("isLogin")=="true")
+    {
+      this.router.navigate(['product-detail/1'])
+    }
+    else {
+      this.router.navigate(['sign-in'])
+    }
   }
 
 }

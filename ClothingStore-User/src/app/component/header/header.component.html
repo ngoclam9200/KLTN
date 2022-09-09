@@ -53,13 +53,33 @@
             <li *ngIf="active!='ContactUs'" class="nav-item">
               <a class="nav-link" (click)="goContactUsPage()">Liên hệ</a>
             </li>
-            <li class="nav-item">
+            <li *ngIf="active=='SignIn'  && !isLogin" class="nav-item active">
               <a class="nav-link" (click)="goSignInPage()">Đăng nhập</a>
             </li>
-            <li class="nav-item">
+            <li *ngIf="active!='SignIn'  && !isLogin" class="nav-item">
+              <a class="nav-link"  (click)="goSignInPage()">Đăng nhập</a>
+            </li>
+            <li *ngIf="active=='SignUp' && !isLogin" class="nav-item active">
               <a class="nav-link" (click)="goSignUpPage()">Đăng kí</a>
             </li>
-            
+            <li *ngIf="active!='SignUp'  && !isLogin" class="nav-item">
+              <a class="nav-link" (click)="goSignUpPage()">Đăng kí</a>
+            </li>
+            <li *ngIf="active=='ShoppingCart'" class="nav-item active cart" >
+              <a class="nav-link" (click)="goShoppingCartPage()"><mat-icon  matBadge="15" matBadgeColor="warn" matBadgeSize="small">shopping_cart</mat-icon></a>
+            </li>
+            <li *ngIf="active!='ShoppingCart'" class="nav-item">
+              <a class="nav-link"   (click)="goShoppingCartPage()"><mat-icon matBadge="15" matBadgeColor="warn" matBadgeSize="small">shopping_cart</mat-icon></a>
+              
+            </li>
+            <li   class="nav-item">
+              <a class="nav-link" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger"  (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)"> Username</a>
+              <mat-menu #menu="matMenu" [hasBackdrop]="false" >
+                <button mat-menu-item (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)" (click)="goProfilePage()">Quản lí tài khoản</button>
+                <button mat-menu-item (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)" (click)="goProfilePage()">Đơn mua</button>
+                <button mat-menu-item (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)" (click)="logOut()">Đăng xuất</button>
+              </mat-menu>
+            </li>
              
             
           </ul>

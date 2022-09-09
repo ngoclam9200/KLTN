@@ -1,0 +1,121 @@
+<app-header></app-header>
+<div class="container">
+
+    <mat-card>
+
+        <div style="color: #f33f3f;" class="d-flex flex-row">
+            <div class="p-2">
+                <mat-icon>location_on</mat-icon>
+            </div>
+            <div class="p-2">Địa chỉ nhận hàng </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="p-2">
+                <b>Username (0364681528)</b>
+            </div>
+            <div class="p-2">Số 8 , đường 128, Phước Long A , Quận 9, TPHCM </div>
+            <div class="p-2" style="color: red">(Mặc định)</div>
+            <button (click)="changeAddress()" class="p-2" mat-button color="primary" style="margin-left: 50px;">Thay đổi</button>
+        </div>
+
+
+
+    </mat-card>
+    <br>
+    <mat-card>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="ten">
+                <th mat-header-cell *matHeaderCellDef> Sản phẩm </th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="d-flex align-items-center">
+                        <img src="../../../assets/images/product_01.jpg">
+                        San pham 1
+                    </div>
+                </td>
+            </ng-container>
+            <br>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="dongia">
+                <th mat-header-cell *matHeaderCellDef> Đơn giá </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="soluong">
+                <th mat-header-cell *matHeaderCellDef> Số lượng </th>
+                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="thanhtien">
+                <th mat-header-cell *matHeaderCellDef> Thành tiền </th>
+                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+
+
+
+    </mat-card>
+    <br>
+    <mat-card>
+        <div style="color: #f33f3f;" class="d-flex flex-row">
+            <div class="p-2">
+                <mat-icon>local_shipping</mat-icon>
+            </div>
+            <div class="p-2">Vận chuyển </div>
+        </div>
+
+        <div class="d-flex">
+            <div class="mr-auto p-2">Lời nhắn</div>
+            <div class="p-2" style="margin-right:550px ;"><input placeholder="Lời nhắn cho shop"></div>
+            <div class="p-2">Phí vận chuyển</div>
+            <div class="p-2" style="color: #f33f3f;">100.000đ</div>
+        </div>
+        <mat-card-actions align="end">
+            <div class="d-flex align-items-center">
+                <div>Thành tiền({{dataSource.length}} sản phẩm): </div>
+                <div style="color: #f33f3f;">100.000đ</div>
+            </div>
+        </mat-card-actions>
+
+    </mat-card>
+    <br>
+    <mat-card>
+        <div class="d-flex flex-row">
+
+
+        </div>
+        <div class="d-flex align-items-center">
+            <div style="color: #f33f3f;" class="p-2">
+                <mat-icon>account_balance</mat-icon>
+            </div>
+            <div style="color: #f33f3f;" class="p-2">Phương thức thanh toán </div>
+            <div class="p-2" >Thanh toán khi nhận hàng </div>
+            <div class="p-2"> </div>
+           
+            <button (click)="changePaymentMethod()" class="p-2" mat-button color="primary" style="margin-left: 50px;">Thay đổi</button>
+             
+        </div>
+        
+
+        <div class="d-flex justify-content-end">
+            <div class="d-flex flex-column">
+                <div class="p-2">Tổng tiền hàng : 100000d</div>
+                <div class="p-2">Phí vận chuyển: 100000đ</div>
+                <div class="p-2">Thành tiền : 10000đ</div>
+            </div>
+
+
+        </div>
+        <mat-card-actions align="end">
+            <button mat-raised-button style="color:#f33f3f">Thanh toán</button>
+        </mat-card-actions>
+
+    </mat-card>
+</div>

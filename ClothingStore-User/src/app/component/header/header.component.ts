@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SigninService } from 'src/app/services/signin.service';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +8,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor(private router: Router) { }
+ isLogin=false;
+ timedOutCloser:any;
+  constructor(private router: Router,private signInService :SigninService ) { }
   @Input() active = "";
   ngOnInit(): void {
+    if(localStorage.getItem("isLogin")=="true")
+    
+    {
+      this.isLogin=true
+    }
+    
+    this.signInService.isLogin.subscribe(res=>{
+      this.isLogin=true
+    })
 
+  }
+  logOut()
+  {
+    localStorage.clear();
+    this.isLogin=false
+    this.router.navigate(['sign-in'])
   }
   goProductPage() {
     this.router.navigate(['products'])
@@ -31,5 +48,25 @@ export class HeaderComponent implements OnInit {
   goSignUpPage() {
     this.router.navigate(['sign-up'])
   }
+  goShoppingCartPage() {
+    this.router.navigate(['shopping-cart'])
+  }
+  goProfilePage() {
+    this.router.navigate(['profile'])
+  }
+  mouseEnter(trigger:any) {
+    if (this.timedOutCloser) {
+      clearTimeout(this.timedOutCloser);
+    }
+    trigger.openMenu();
+  }
+  
+
+  mouseLeave(trigger:any) {
+    this.timedOutCloser = setTimeout(() => {
+      trigger.closeMenu();
+    }, 100);
+  }
+  
 
 }

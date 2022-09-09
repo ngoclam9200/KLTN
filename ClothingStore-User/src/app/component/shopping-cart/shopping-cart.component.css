@@ -1,0 +1,38 @@
+.container{
+    margin-top: 100px;
+}
+img{
+    width: 100px;
+    height: 100px;
+}
+input{
+    width: 40px;
+    height: 26px;
+    margin-left: 10px;
+    text-align: center;
+    margin-right: 10px;
+}
+.btn-increase{
+    height: 26px;
+}
+.btn-decrease{
+    height: 26px;
+}
+.btn-buy{
+    margin-left: 30%;
+}
+.buy-all{
+    position: fixed;
+    bottom: 0;
+    width: 90%;
+ 
+    box-sizing: border-box;
+    /* background: #DD3543; */
+    height: 80px;
+ 
+ 
+    /* box-sizing: border-box; */
+}
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+    background-color: #f33f3f !important;
+  }

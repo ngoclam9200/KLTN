@@ -1,0 +1,42 @@
+
+<h2 mat-dialog-title>Địa chỉ của tôi</h2>
+<mat-dialog-content class="mat-typography">
+    
+      <p *ngFor="let task of tasks">
+        <mat-card >
+            <div class="d-flex align-items-center">
+                <div class="p-2">
+                    <section class="example-section">
+                        <mat-checkbox   color="primary" class="example-margin"></mat-checkbox>
+                    </section>
+                </div>
+                <div class="p-2">
+                    <div class="d-flex flex-column">
+                        <div class="p-2"><b>Username | (0364681528)</b></div>
+                        <div class="p-2">
+                            <div class="d-flex flex-row">
+                                <div class="p-2">Số 8 , đường 128, Phước Long Aaaaaa , Quận 9, TPHCM</div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <mat-card-actions align="end">
+                <button (click)="updateAddress()" mat-button color="primary">Cập nhật</button>
+         
+            </mat-card-actions>
+        </mat-card>
+        <br>
+      </p>
+     
+     
+      
+      
+</mat-dialog-content>
+<mat-dialog-actions align="start">
+    <button mat-raised-button    cdkFocusInitial>Thêm địa chỉ</button>
+  </mat-dialog-actions>
+<mat-dialog-actions align="end">
+  <button mat-raised-button  mat-dialog-close color="warn">Hủy</button>
+  <button mat-raised-button  color="primary" cdkFocusInitial>Thay đổi</button>
+</mat-dialog-actions>

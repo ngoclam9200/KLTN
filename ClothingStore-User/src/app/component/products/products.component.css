@@ -1,0 +1,33 @@
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+    background-color: #f33f3f !important;
+  }
+.fab-chat{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    
+ 
+    box-sizing: border-box;
+}
+.fab-call{
+    position: fixed;
+    bottom: 50px;
+    right: 0;
+    
+ 
+    box-sizing: border-box;
+}
+
+.products ul.pages {
+    margin-top: 0px;
+    text-align: center;
+}
+.add-cart-btn{
+    background-color: #f33f3f;
+    border: 2px solid #f33f3f;
+    margin-right: 8px;
+}
+.add-cart-btn:hover{
+    background-color: #fff;
+    color: #f33f3f;
+}

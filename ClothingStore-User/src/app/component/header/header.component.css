@@ -1,3 +1,20 @@
  
-  
+ li.nav-item.active.cart{
+    height: 63.5px;
+ }
+ a.nav-link{
+    height: 58.5px;
+ }
+ header{
+    position: fixed;
+    top: 0;
+ 
+    box-sizing: border-box;
+   
 
+ }
+ .navbar .navbar-nav .nav-item
+ {
+   cursor: pointer;
+ }
+ 

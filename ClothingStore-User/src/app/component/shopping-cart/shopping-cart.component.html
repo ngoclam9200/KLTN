@@ -1,0 +1,72 @@
+<app-header active="ShoppingCart"></app-header>
+
+<div class="container">
+     
+        <div *ngFor="let task of tasks">
+            <mat-card>
+
+                <div class="d-flex align-items-center">
+                    <div class="p-2">
+                        <section class="example-section">
+                            <mat-checkbox [(ngModel)]="checked" color="primary" class="example-margin">
+                            </mat-checkbox>
+                        </section>
+                    </div>
+                    <div class="p-2"><img src="../../../assets/images/logoshop.png"></div>
+                    <div class="p-2">
+                        <div class="d-flex flex-column">
+                            <div class="p-2">Áo nam 123</div>
+                            <div class="p-2">
+
+
+                                <div class="d-flex flex-row">
+                                    <div class="p-2"><button mat-raised-button class="btn-decrease"
+                                            color="">-</button></div>
+                                    <div class="p-2"> <input type="number" value="1" readonly></div>
+                                    <div class="p-2">
+                                        <button mat-raised-button class="btn-increase" color="">+</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="p-2">12.000đ</div>
+                    </div>
+
+
+                    <div class="p-2 btn-buy">
+                        <mat-card-actions align="end">
+                            <button mat-raised-button color="primary">Mua</button>
+                            <button mat-raised-button color="warn">Xóa</button>
+                        </mat-card-actions>
+                    </div>
+                </div>
+
+            </mat-card>
+            <br>
+        </div>
+        <mat-card class="buy-all">
+            <div class="d-flex">
+                <div class="p-2">
+                    <section class="example-section">
+                        <mat-checkbox [(ngModel)]="checked" color="primary" class="example-margin">Tất cả</mat-checkbox>
+                    </section>
+                </div>
+                <div class="ml-auto p-2">
+                    <mat-card-actions align="end">
+                        <button mat-raised-button color="primary">Mua</button>
+                        <button mat-raised-button color="warn">Xóa tất cả</button>
+                    </mat-card-actions>
+                </div>
+            </div>
+    
+    
+        </mat-card>
+         
+
+
+    <!-- <app-fab-call-chat></app-fab-call-chat> -->
+</div>
