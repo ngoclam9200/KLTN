@@ -2,28 +2,35 @@
     <li style="margin-top: 10%" class="border-bottom"><a class="active">
             <div class="d-flex align-items-center">
                 <img class="border border-primary rounded-circle" src="../../../assets/images/logoshop.png">
-                <span class="p-2">username</span>
-            </div>
-        </a></li>
-
-    <li><a routerLink="/profile">
-            <div class="d-flex align-items-center">
-                <mat-icon color="primary">person</mat-icon>
-                <div class="p-2">Hồ sơ</div>
+                <span  class="p-2 ">username</span>
             </div>
         </a>
     </li>
+
+    <li><a  routerLink="/profile">
+            <div class="d-flex align-items-center">
+                <mat-icon color="primary">person</mat-icon>
+                <div *ngIf="active=='Profile'" class="p-2 active">Hồ sơ</div>
+                <div *ngIf="active!='Profile'" class="p-2">Hồ sơ</div>
+            </div>
+        </a>
+    </li>
+     
     <li><a routerLink="/orders">
             <div class="d-flex align-items-center">
                 <mat-icon color="primary">dvr</mat-icon>
-                <div class="p-2">Đơn mua</div>
+               
+                <div *ngIf="active=='Order'" class="p-2 active">Đơn mua</div>
+                <div *ngIf="active!='Order'" class="p-2">Đơn mua</div>
             </div>
         </a>
     </li>
-    <li><a>
+    <li><a routerLink="/notification">
             <div class="d-flex align-items-center">
-                <mat-icon color="warn">notifications</mat-icon>
-                <div class="p-2">Thông báo</div>
+                <mat-icon class="notification-icon">notifications</mat-icon>
+                 
+                <div *ngIf="active=='Notification'" class="p-2 active">Thông báo</div>
+                <div *ngIf="active!='Notification'" class="p-2">Thông báo</div>
             </div>
         </a>
     </li>

@@ -45,14 +45,4 @@ body {
   }
    
   
-  .active{
-    color: #f33f3f;
-    
-  }
-  .notification-icon {
-    color: #ffd633;
-}
-/* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
-.notification-icon svg {
-    fill: #ffd633;
-}
+  

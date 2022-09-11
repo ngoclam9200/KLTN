@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,9 +12,13 @@ export class ShoppingCartComponent implements OnInit {
     completed: true
   },
   { completed: false }]
-  constructor() { }
+  constructor(private alertService: AlertService) { }
 
   ngOnInit(): void {
   }
-  
+  deleteItem() {
+    this.alertService.openAlertDelete()
+
+  }
+
 }

@@ -73,10 +73,10 @@
               
             </li>
             <li   class="nav-item">
-              <a class="nav-link" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger"  (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)"> Username</a>
+              <a class="nav-link" routerLink="/profile" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger"  (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)"> Username</a>
               <mat-menu #menu="matMenu" [hasBackdrop]="false" >
                 <button mat-menu-item (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)" (click)="goProfilePage()">Quản lí tài khoản</button>
-                <button mat-menu-item (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)" (click)="goProfilePage()">Đơn mua</button>
+                <button mat-menu-item (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)" (click)="goOrderPage()">Đơn mua</button>
                 <button mat-menu-item (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)" (click)="logOut()">Đăng xuất</button>
               </mat-menu>
             </li>

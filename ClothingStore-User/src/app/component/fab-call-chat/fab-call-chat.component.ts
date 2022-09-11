@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { ChatBoxComponent } from '../chat-box/chat-box.component';
 
 @Component({
   selector: 'app-fab-call-chat',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FabCallChatComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog : MatDialog, private router:Router) { }
 
   ngOnInit(): void {
   }
-
+  openChatBox()
+  {
+    this.dialog.open(ChatBoxComponent,{
+      position: {
+        bottom: "0px",
+        right : "0px",
+      },
+      maxHeight:"500px",
+      width : "600px"
+    })
+  }
+  goNotificationPage()
+  {
+    this.router.navigate(["/notification"])
+  }
 }

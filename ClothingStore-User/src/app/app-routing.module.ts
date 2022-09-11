@@ -4,6 +4,7 @@ import { AboutUsComponent } from './component/about-us/about-us.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { HomeComponent } from './component/home/home.component';
+import { NotificationComponent } from './component/notification/notification.component';
 import { OrdersComponent } from './component/orders/orders.component';
 import { ProductDetailComponent } from './component/product-detail/product-detail.component';
 import { ProductsComponent } from './component/products/products.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'product-detail/:id', component: ProductDetailComponent },
       { path: 'checkout', component: CheckoutComponent },
       { path: 'orders', component: OrdersComponent },
+      { path: 'notification', component: NotificationComponent },
 
 
 ];

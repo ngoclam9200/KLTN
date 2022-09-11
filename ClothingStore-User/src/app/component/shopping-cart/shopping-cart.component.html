@@ -40,7 +40,7 @@
                     <div class="p-2 btn-buy">
                         <mat-card-actions align="end">
                             <button mat-raised-button color="primary">Mua</button>
-                            <button mat-raised-button color="warn">Xóa</button>
+                            <button (click)="deleteItem()" mat-raised-button color="warn">Xóa</button>
                         </mat-card-actions>
                     </div>
                 </div>
@@ -68,5 +68,5 @@
          
 
 
-    <!-- <app-fab-call-chat></app-fab-call-chat> -->
+    <app-fab-call-chat></app-fab-call-chat>
 </div>

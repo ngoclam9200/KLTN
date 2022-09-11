@@ -54,6 +54,9 @@ export class HeaderComponent implements OnInit {
   goProfilePage() {
     this.router.navigate(['profile'])
   }
+  goOrderPage() {
+    this.router.navigate(['orders'])
+  }
   mouseEnter(trigger:any) {
     if (this.timedOutCloser) {
       clearTimeout(this.timedOutCloser);

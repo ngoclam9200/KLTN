@@ -49,6 +49,8 @@ import { QrcodePaymentComponent } from './component/checkout/change-payment-meth
 import { FabCallChatComponent } from './component/fab-call-chat/fab-call-chat.component';
 import { OrdersComponent } from './component/orders/orders.component';
 import { NavigationBarComponent } from './component/navigation-bar/navigation-bar.component';
+import { ChatBoxComponent } from './component/chat-box/chat-box.component';
+import { NotificationComponent } from './component/notification/notification.component';
  
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { NavigationBarComponent } from './component/navigation-bar/navigation-ba
     FabCallChatComponent,
     OrdersComponent,
     NavigationBarComponent,
+    ChatBoxComponent,
+    NotificationComponent,
 
   ],
   imports: [

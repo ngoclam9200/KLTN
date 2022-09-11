@@ -14,7 +14,7 @@
 	width: 80%;
 	display: block;
 	margin:auto;
-	padding-top: 100px;
+	padding-top: 10px;
 }
 .content-section{
 	float: left;
@@ -107,6 +107,9 @@
 	text-align: center;
 }
 
+}
+.left-content{
+	padding-left: 10px;
 }
 
 
