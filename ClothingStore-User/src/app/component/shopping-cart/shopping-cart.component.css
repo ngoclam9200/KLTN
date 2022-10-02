@@ -29,10 +29,37 @@ input{
     box-sizing: border-box;
     /* background: #DD3543; */
     height: 80px;
- 
+
  
     /* box-sizing: border-box; */
 }
 ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
     background-color: #f33f3f !important;
   }
+  mat-cart{
+    height: 100px;
+  }
+  body{
+    margin-top:20px;
+    background:#eee;
+}
+.ui-w-40 {
+    width: 40px !important;
+    height: auto;
+}
+
+.card{
+    box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);    
+}
+
+.ui-product-color {
+    display: inline-block;
+    overflow: hidden;
+    margin: .144em;
+    width: .875rem;
+    height: .875rem;
+    border-radius: 10rem;
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
+    vertical-align: middle;
+}

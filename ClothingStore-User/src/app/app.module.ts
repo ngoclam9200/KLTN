@@ -33,7 +33,7 @@ import { registerLocaleData } from '@angular/common';
 import hi from '@angular/common/locales/hi';
 
 import { HttpClientModule } from '@angular/common/http';
-
+import {  ReactiveFormsModule } from '@angular/forms';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
@@ -51,7 +51,8 @@ import { OrdersComponent } from './component/orders/orders.component';
 import { NavigationBarComponent } from './component/navigation-bar/navigation-bar.component';
 import { ChatBoxComponent } from './component/chat-box/chat-box.component';
 import { NotificationComponent } from './component/notification/notification.component';
- 
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AddAddressComponent } from './component/checkout/add-address/add-address.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +77,7 @@ import { NotificationComponent } from './component/notification/notification.com
     NavigationBarComponent,
     ChatBoxComponent,
     NotificationComponent,
+    AddAddressComponent,
 
   ],
   imports: [
@@ -94,7 +96,7 @@ import { NotificationComponent } from './component/notification/notification.com
     MatInputModule,
     MatExpansionModule,
     MatTabsModule, 
-    
+    ReactiveFormsModule, NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

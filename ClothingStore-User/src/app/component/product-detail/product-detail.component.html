@@ -17,29 +17,25 @@
             <div class = "product-div">
                 <div class = "product-div-left">
                     <div class = "img-container">
-                        <img class="" src = "{{currentImage}}" alt = "watch">
+                        <img class="main-image" src = "{{currentImage}}" alt = "watch">
                     </div>
                     <div class = "hover-container">
-                        <div *ngFor="let image of images" (click)="changeImage(image)"><img  src = {{image}}></div>
+                        <div *ngFor="let image of images" (click)="changeImage(image.url)"><img  src = {{image.url}}></div>
                        
                     </div>
                 </div>
                 <div class = "product-div-right">
-                    <span class = "product-name">(New) Analog Watch - For Men</span>
-                    <span class = "product-price">{{price | currency :"VND" }}</span>
+                    <span class = "product-name">{{dataProduct?.name}}</span>
+                    <span class = "product-price">{{dataProduct?.price | currency :"VND" }}</span>
                     <div class = "product-rating">
-                        <span><i class = "fas fa-star"></i></span>
-                        <span><i class = "fas fa-star"></i></span>
-                        <span><i class = "fas fa-star"></i></span>
-                        <span><i class = "fas fa-star"></i></span>
-                        <span><i class = "fas fa-star-half-alt"></i></span>
-                        <span>(350 ratings)</span>
+                        <span>Số lượng còn lại </span>
+                        
+                        <span>({{dataProduct?.stock}})</span>
                     </div>
-                    <p class = "product-description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae animi ad minima veritatis dolore. Architecto facere dignissimos voluptate fugit ratione molestias quis quidem exercitationem voluptas.</p>
+                    <p class = "product-description">{{dataProduct?.description}}</p>
                     <div class = "btn-groups">
-                        <button type = "button" class = "add-cart-btn"><i class = "fas fa-shopping-cart"></i>Thêm vào giở</button>
-                        <button type = "button" class = "buy-now-btn"><i class = "fas fa-wallet"></i>Mua</button>
-                    </div>
+                        <button (click)="addCart()" type = "button" class = "add-cart-btn"><i class = "fas fa-shopping-cart"></i>Thêm vào giở</button>
+                     </div>
                 </div>
             </div>
         </div>

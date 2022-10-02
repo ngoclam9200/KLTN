@@ -14,23 +14,23 @@
         </div>
       </div>
       
-      <div *ngFor="let item of item"   class="col-md-4">
+      <div *ngFor="let item of dataSource"   class="col-md-4">
         <div class="product-item">
-          <a routerLink="/product-detail/1"><img src="assets/images/product_01.jpg" alt=""></a>
+          <a routerLink="/product-detail/{{item.id}}"><img src="{{item.image}}" alt=""></a>
           <div class="down-content">
             <a routerLink="/product-detail/1" >
-              <h4>Tittle goes here</h4>
+              <h4>{{item.name}}</h4>
             </a>
-            <h6>$25.75</h6>
-            <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
+            <h6>{{item.price |  currency:"VND":"symbol"}}</h6>
+            <p>{{item.description}}</p>
 
 
             <ul>
-              <span>Reviews (24)</span>
+              <span>Số lượng ({{item.stock}})</span>
             </ul>
 
 
-            <button (click)="addToCart()" type="button" class="add-cart-btn"><i class="fas fa-shopping-cart"></i>Thêm vào giỏ</button>
+            <button (click)="addToCart(item.id)" type="button" class="add-cart-btn"><i class="fas fa-shopping-cart"></i>Thêm vào giỏ</button>
 
 
           </div>
@@ -52,17 +52,15 @@
       </div>
       <div class="col-md-6">
         <div class="left-content">
-          <h4>Looking for the best products?</h4>
-          <p><a rel="nofollow" href="https://templatemo.com/tm-546-sixteen-clothing" target="_parent">This template</a>
-            is free to use for your business websites. However, you have no permission to redistribute the downloadable
-            ZIP file on any template collection website. <a rel="nofollow" href="https://templatemo.com/contact">Contact
-              us</a> for more info.</p>
+          <h4>Bạn đang muốn tìm sản phẩm tốt nhất ?</h4>
+          <p><a rel="nofollow" href="https://templatemo.com/tm-546-sixteen-clothing" target="_parent">Double-L Store</a>
+            luôn là cửa hàng đi đầu trong việc nắm bắt tâm lí , ý định mua sắm của khách hàng  <a rel="nofollow" href="https://templatemo.com/contact">Liên hệ chúng tôi nếu bạn muốn phản hồi về sản phẩm </a></p>
           <ul class="featured-list">
-            <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-            <li><a href="#">Consectetur an adipisicing elit</a></li>
-            <li><a href="#">It aquecorporis nulla aspernatur</a></li>
-            <li><a href="#">Corporis, omnis doloremque</a></li>
-            <li><a href="#">Non cum id reprehenderit</a></li>
+            <li><a href="#">Sản phẩm mới hợp thời trang</a></li>
+            <li><a href="#">Nhiều hình thức thanh toán </a></li>
+            <li><a href="#">Đổi trả miễn phí </a></li>
+            <li><a href="#">Luôn lắng nghe phản hồi của khách hàng</a></li>
+            <li><a href="#">Tư vấn nhiệt tình</a></li>
           </ul>
           <a href="about.html" class="filled-button">Read More</a>
         </div>

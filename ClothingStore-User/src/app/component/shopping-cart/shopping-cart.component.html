@@ -1,72 +1,197 @@
 <app-header active="ShoppingCart"></app-header>
 
 <div class="container">
-     
-        <div *ngFor="let task of tasks">
-            <mat-card>
-
-                <div class="d-flex align-items-center">
-                    <div class="p-2">
-                        <section class="example-section">
-                            <mat-checkbox [(ngModel)]="checked" color="primary" class="example-margin">
-                            </mat-checkbox>
-                        </section>
-                    </div>
-                    <div class="p-2"><img src="../../../assets/images/logoshop.png"></div>
-                    <div class="p-2">
-                        <div class="d-flex flex-column">
-                            <div class="p-2">Áo nam 123</div>
-                            <div class="p-2">
-
-
-                                <div class="d-flex flex-row">
-                                    <div class="p-2"><button mat-raised-button class="btn-decrease"
-                                            color="">-</button></div>
-                                    <div class="p-2"> <input type="number" value="1" readonly></div>
-                                    <div class="p-2">
-                                        <button mat-raised-button class="btn-increase" color="">+</button>
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-
-                        </div>
-                        <div class="p-2">12.000đ</div>
-                    </div>
-
-
-                    <div class="p-2 btn-buy">
-                        <mat-card-actions align="end">
-                            <button mat-raised-button color="primary">Mua</button>
-                            <button (click)="deleteItem()" mat-raised-button color="warn">Xóa</button>
-                        </mat-card-actions>
-                    </div>
-                </div>
-
-            </mat-card>
-            <br>
-        </div>
-        <mat-card class="buy-all">
-            <div class="d-flex">
-                <div class="p-2">
-                    <section class="example-section">
-                        <mat-checkbox [(ngModel)]="checked" color="primary" class="example-margin">Tất cả</mat-checkbox>
-                    </section>
-                </div>
-                <div class="ml-auto p-2">
-                    <mat-card-actions align="end">
-                        <button mat-raised-button color="primary">Mua</button>
-                        <button mat-raised-button color="warn">Xóa tất cả</button>
-                    </mat-card-actions>
-                </div>
+    <div class=" px-3 my-5 clearfix">
+        <!-- Shopping cart table -->
+        <div class="card">
+            <div class="card-header">
+                <h2>Giỏ hàng</h2>
             </div>
-    
-    
-        </mat-card>
-         
+            <div *ngIf="allProduct?.length>0" class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered m-0">
+                        <thead>
+                            <tr>
+                                <!-- Set columns width -->
+                                <th class="text-center py-3 px-4" style="min-width: 300px;">Sản phẩm &amp; Mô tả
+                                </th>
+                                <th class="text-center py-3 px-4" style="width: 100px;">Giá</th>
+                                <th class="text-center py-3 px-4" style="width: 120px;">Số lượng</th>
+                                <th class="text-center py-3 px-4" style="width: 100px;">Tổng tiền</th>
+                                <th class="text-center align-middle py-3 px-0" style="width: 150px;"> 
+                                </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let item of allProduct">
+                                <td class="p-4">
+                                    <div class="media align-items-center">
+                                        <img src="{{item.product.image}}" class="d-block ui-w-40 ui-bordered mr-4"
+                                            alt="">
+                                        <div class="media-body">
+                                            <a  class="d-block text-dark">{{item.product.name}}</a>
+                                            <a  class="d-block text-dark">So {{item.product.stock}}</a>
+                                            <small>
+
+                                                <span class="text-muted">Giảm giá: </span> {{item.product.discount}}%
+                                                &nbsp;
+                                                <span class="text-muted">Mô tả: </span> <span *ngIf="item.product.description.length>30">{{item.product.description.slice(0,30)}}...</span> 
+                                                <span *ngIf="item.product.description.length<30">{{item.product.description}}</span> 
+                                            </small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-right font-weight-semibold align-middle p-4">
+                                    <div class="d-flex flex-row">
+                                        <div class="p-2">
+                                            <p style="text-decoration: line-through;">
+                                                {{item.product.price | currency :"VND"}}
+                                            </p>
+                                        </div>
+                                        <div class="p-2">
+                                            <p style="color: red;">
+                                                {{item.product.price- item.product.price*item.product.discount/100 |
+                                                currency
+                                                :"VND" }}
+                                            </p>
+                                        </div>
+
+                                    </div>
 
 
-    <app-fab-call-chat></app-fab-call-chat>
+                                </td>
+                                <td class="align-middle p-4">
+                                    <div class="d-flex flex-row">
+                                        <div class="p-2"><button [disabled]="!item.decreaseProduct"
+                                                (click)="decreaseProduct(item.id, item.productId)" mat-raised-button
+                                                class="btn-decrease" color="">-</button></div>
+                                        <div class="p-2"> <input type="number" value="{{item.quantity}}" readonly></div>
+                                        <div class="p-2">
+                                            <button [disabled]="!item.increaseProduct"
+                                                (click)="increaseProduct(item.id, item.productId)" mat-raised-button
+                                                class="btn-increase" color="">+</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-right font-weight-semibold align-middle p-4"> {{(item.product.price-
+                                    item.product.price*item.product.discount/100)*item.quantity | currency
+                                    :"VND" }}</td>
+                                <td class="text-center align-middle px-0"> 
+                                    <div class="d-flex flex-row">
+                                        <div class="p-2">
+                                            <button (click)="buy(item.id)" mat-raised-button color="primary">Mua</button>
+                                        </div>
+                                        <div class="p-2">
+                                            <button (click)="deleteCart(item.id)" mat-raised-button color="warn">Xóa</button>
+                                        </div>
+
+                                    </div>
+
+                                   
+                                   
+                                </td>
+                            </tr>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- / Shopping cart table -->
+
+
+                <div class="float-right">
+                    <button (click)="continueBuy()" type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Tiếp tục mua</button>
+                    <button (click)="deleteAllCart()" type="button" class="btn btn-lg btn-primary mt-2">Xóa tất cả sản phẩm</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>
+<div class="text-center" *ngIf="allProduct?.length==0">Không có sản phẩm trong giỏ hàng</div>
+
+
+
+
+<!-- <div *ngFor="let item of allProduct">
+    <mat-card>
+
+        <div class="d-flex align-items-center">
+            <div class="p-2">
+                <section class="example-section">
+                    <mat-checkbox [(ngModel)]="checked" color="primary" class="example-margin">
+                    </mat-checkbox>
+                </section>
+            </div>
+            <div class="p-2"><img src="{{item.product.image}}"></div>
+            <div class="p-2">
+                <div class="d-flex flex-column">
+                    <div class="p-2">{{item.product.name}}</div>
+                    <div class="p-2">
+
+
+                        <div class="d-flex flex-row">
+                            <div class="p-2"><button [disabled]="!item.decreaseProduct" (click)="decreaseProduct(item.id, item.productId)" mat-raised-button class="btn-decrease"
+                                    color="">-</button></div>
+                            <div class="p-2"> <input   type="number" value="{{item.quantity}}" readonly></div>
+                            <div class="p-2">
+                                <button [disabled]="!item.increaseProduct" (click)="increaseProduct(item.id, item.productId)" mat-raised-button class="btn-increase" color="">+</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+                <div class="p-2">
+                    <div class="d-flex flex-row">
+                        <div class="p-2">  <p style="text-decoration: line-through;">
+                            {{item.product.price | currency :"VND"}}
+                        </p></div>
+                        <div class="p-2"> <p style="color: red;">
+                            {{item.product.price- item.product.price*item.product.discount/100 | currency :"VND"  }}
+                         </p></div>
+                        
+                      </div>
+                  
+                    
+                    </div>
+            </div>
+
+
+            <div class="p-2 btn-buy">
+                <mat-card-actions align="end">
+                   
+                </mat-card-actions>
+            </div>
+        </div>
+
+    </mat-card>
+    <br>
+</div>
+<mat-card class="buy-all">
+    <div class="d-flex">
+        <div class="p-2">
+            <section class="example-section">
+                <mat-checkbox [(ngModel)]="checked" color="primary" class="example-margin">Tất cả</mat-checkbox>
+            </section>
+        </div>
+        <div class="ml-auto p-2">
+            <mat-card-actions align="end">
+                <button mat-raised-button color="primary">Mua</button>
+                <button mat-raised-button color="warn">Xóa tất cả</button>
+            </mat-card-actions>
+        </div>
+    </div>
+
+
+</mat-card>
+ 
+
+
+<app-fab-call-chat></app-fab-call-chat> -->

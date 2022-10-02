@@ -10,6 +10,7 @@ import { SigninService } from 'src/app/services/signin.service';
 export class HeaderComponent implements OnInit {
  isLogin=false;
  timedOutCloser:any;
+ username:any;
   constructor(private router: Router,private signInService :SigninService ) { }
   @Input() active = "";
   ngOnInit(): void {
@@ -17,10 +18,15 @@ export class HeaderComponent implements OnInit {
     
     {
       this.isLogin=true
+      this.username=localStorage.getItem("username")
     }
     
     this.signInService.isLogin.subscribe(res=>{
       this.isLogin=true
+    })
+    this.signInService.username.subscribe(res=>{
+      
+      this.username=res
     })
 
   }

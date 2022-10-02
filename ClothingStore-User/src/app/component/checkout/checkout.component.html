@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="container">
+<div *ngFor="let item of dataCart" class="container">
 
     <mat-card>
 
@@ -11,11 +11,12 @@
         </div>
         <div class="d-flex align-items-center">
             <div class="p-2">
-                <b>Username (0364681528)</b>
+                <b>{{item.user.fullname}} ({{item.user.phonenumber}})</b>
             </div>
-            <div class="p-2">Số 8 , đường 128, Phước Long A , Quận 9, TPHCM </div>
-            <div class="p-2" style="color: red">(Mặc định)</div>
-            <button (click)="changeAddress()" class="p-2" mat-button color="primary" style="margin-left: 50px;">Thay đổi</button>
+            <div *ngIf="address.length>0" class="p-2">Số 8 , đường 128, Phước Long A , Quận 9, TPHCM </div>
+            <div *ngIf="address.length>0" class="p-2" style="color: red">(Mặc định)</div>
+            <button *ngIf="address.length>0" (click)="changeAddress()" class="p-2" mat-button color="primary" style="margin-left: 50px;">Thay đổi</button>
+            <button *ngIf="address.length==0" (click)="addAddress()" class="p-2" mat-button color="primary" style="margin-left: 50px;">Thêm</button>
         </div>
 
 

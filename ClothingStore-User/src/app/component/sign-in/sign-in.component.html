@@ -18,11 +18,11 @@
       <h1>Đăng nhập</h1>
   
       <div class="login-form">
-        <form action="">
-          <input type="email" placeholder="E-mail">
-          <input type="password" placeholder="Mật khẩu">
+        <form [formGroup]="formGroup"  action="">
+          <input formControlName="username" type="email" placeholder="E-mail">
+          <input formControlName="password" type="password" placeholder="Mật khẩu">
 
-          <div class="remember-form">
+          <div  class="remember-form">
             <input type="checkbox">
             <span>Remember me</span>
           </div>

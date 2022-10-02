@@ -24,7 +24,7 @@ const routes: Routes = [
       { path: 'shopping-cart', component: ShoppingCartComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'product-detail/:id', component: ProductDetailComponent },
-      { path: 'checkout', component: CheckoutComponent },
+      { path: 'checkout/:id', component: CheckoutComponent },
       { path: 'orders', component: OrdersComponent },
       { path: 'notification', component: NotificationComponent },
 

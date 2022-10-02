@@ -31,3 +31,17 @@
     background-color: #fff;
     color: #f33f3f;
 }
+img{
+    height: 250px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 90%;
+    margin-top: 10px;
+}
+::ng-deep .ngx-pagination .current {
+    background: #f33f3f !important;
+    
+}
+pagination-controls   {
+    text-align: center !important;
+}
