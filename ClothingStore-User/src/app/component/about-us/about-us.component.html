@@ -3,19 +3,13 @@
 <html lang="en">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/brands.min.css" integrity="sha512-+oRH6u1nDGSm3hH8poU85YFIVTdSnS2f+texdPGrURaJh8hzmhMiZrQth6l56P4ZQmxeZzd2DqVEMqQoJ8J89A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
- 
-  
-
   <body>
- 
-
-
     <div class="best-features about-features">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Our Background</h2>
+              <h2>Thông tin</h2>
             </div>
           </div>
           <div class="col-md-6">
@@ -25,13 +19,17 @@
           </div>
           <div  class="col-md-6">
             <div class="left-content">
-              <h4>Who we are &amp; What we do?</h4>
-              <p>Lorem ipsum dolor sit ame reprehenderit vo dipisicing elit.<br><br>Lorem itia corporis um ratione ex ea praesentium quibusdam? Aut, in eum facere corrupti necessitatibus perspiciatis quis.</p>
+              <h4>Bạn đang muốn tìm sản phẩm tốt nhất ?</h4>
+              <p> Double-L Store
+                luôn là cửa hàng đi đầu trong việc nắm bắt tâm lí , ý định mua sắm của khách hàng  </p>
+                <p>Liên hệ qua :
+                  
+                 </p>
               <ul class="social-icons">
-                <li><a href="#"><i class="fa-brands fa-facebook-messenger"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href="https://www.facebook.com/nguyen.v.long.1420" target="_blank"><i class="fa-brands fa-facebook-messenger"></i></a></li>
+                <li><a href="https://www.facebook.com/nguyen.v.long.1420" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/nguyen.v.long.1420" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
+                <li><a href="https://www.facebook.com/nguyen.v.long.1420" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
               </ul>
             </div>
           </div>
@@ -45,75 +43,32 @@
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Our Team Members</h2>
+              <h2>Thành viên DoubleL Store</h2>
             </div>
           </div>
-          <div class="col-md-4">
+          <div *ngFor="let mem of allMember" class="col-md-4">
             <div class="team-member">
               <div class="thumb-container">
-                <img src="assets/images/team_01.jpg" alt="">
+                <img src="{{mem.avatar}}" alt="">
                 <div class="hover-effect">
                   <div class="hover-content">
                     <ul class="social-icons">
-                      <li><a href="#"><i class="fa-brands fa-facebook-messenger"></i></a></li>
-                      <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                      <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                      <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                      <li><a href="https://www.facebook.com/nguyen.v.long.1420" target="_blank"><i class="fa-brands fa-facebook-messenger"></i></a></li>
+                      <li><a href="https://www.facebook.com/nguyen.v.long.1420" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+                      <li><a href="https://www.facebook.com/nguyen.v.long.1420" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
+                      <li><a href="https://www.facebook.com/nguyen.v.long.1420" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
                     </ul>
                   </div>
                 </div>
               </div>
               <div class="down-content">
-                <h4>Johnny William</h4>
+                <h4>{{mem.fullname}}</h4>
                 <span>CO-Founder</span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing itaque corporis nulla.</p>
+                
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="team-member">
-              <div class="thumb-container">
-                <img src="assets/images/team_02.jpg" alt="">
-                <div class="hover-effect">
-                  <div class="hover-content">
-                    <ul class="social-icons">
-                      <li><a href="#"><i class="fa-brands fa-facebook-messenger"></i></a></li>
-                      <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                      <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                      <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="down-content">
-                <h4>Karry Pitcher</h4>
-                <span>Product Expert</span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing itaque corporis nulla.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="team-member">
-              <div class="thumb-container">
-                <img src="assets/images/team_03.jpg" alt="">
-                <div class="hover-effect">
-                  <div class="hover-content">
-                    <ul class="social-icons">
-                      <li><a href="#"><i class="fa-brands fa-facebook-messenger"></i></a></li>
-                      <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                      <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                      <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="down-content">
-                <h4>Michael Soft</h4>
-                <span>Chief Marketing</span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing itaque corporis nulla.</p>
-              </div>
-            </div>
-          </div>
+          
            
         </div>
       </div>

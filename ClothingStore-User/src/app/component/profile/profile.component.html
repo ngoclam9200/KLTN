@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header  active="Profile"></app-header>
  
 <!DOCTYPE html>
 <html>
@@ -11,7 +11,7 @@
 
 <app-navigation-bar active="Profile"></app-navigation-bar>
 
-    <div class="border" style="margin-left:25%;padding:1px 16px;  position: fixed;
+    <div  class="border" style="margin-left:25%;padding:1px 16px;  position: fixed;
     height: 100%;width: 70%;">
         <mat-card>
 
@@ -22,92 +22,68 @@
         
         <div class="d-flex align-items-center">
             <mat-card class="information">
-                <form>
+                <form [formGroup]="formGroup">
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Tên đăng nhập</label>
                         <div class="col-sm-10">
                             <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                value="email@example.com">
+                                value="{{dataUser?.username}}">
                         </div>
+                     
                     </div>
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
                             <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                value="email@example.com">
+                                value="{{dataUser?.email}}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Tên</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputPassword">
+                            <input formControlName="fullname" type="text" class="form-control" id="inputPassword">
+                            <mat-hint  *ngIf=" (formGroup.get('fullname')?.invalid && formGroup.get('fullname')?.touched)"> 
+                                Vui lòng nhập họ tên
+                            </mat-hint>
                         </div>
+                     
                     </div>
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputPassword">
-                        </div>
-                    </div>
+                  
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Số điện thoại</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="inputPassword">
+                            <input formControlName="phonenumber" type="number" class="form-control" id="inputPassword">
+                            <mat-hint  *ngIf=" (formGroup.get('phonenumber')?.invalid && formGroup.get('phonenumber')?.touched)"> 
+                                Vui lòng nhập số điện thoại
+                            </mat-hint>
+                            <mat-hint *ngIf=" !phonenumberValidate && formGroup.get('phonenumber')?.valid">Số điện thoại không hợp lệ </mat-hint>
                         </div>
                     </div>
+                    
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Giới tính</label>
                         <div class="col-sm-10">
                             <div class="d-flex align-items-center">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                                        value="option1" checked>
-                                    <label class="form-check-label" for="exampleRadios1">
-                                        Nam
-                                    </label>
-                                </div>
-                                <div class="form-check" style="padding-left: 4.5em;">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                                        value="option2">
-                                    <label class="form-check-label" for="exampleRadios2">
-                                        Nữ
-                                    </label>
-                                </div>
-                                <div class="form-check " style="padding-left: 4.5em;">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
-                                        value="option3">
-                                    <label class="form-check-label" for="exampleRadios3">
-                                        Khác
-                                    </label>
-                                </div>
+                            
+                            
+                                <mat-form-field appearance="outline">
+                                <mat-select formControlName="gender">
+                                    <mat-option value="Name">Nam</mat-option>
+                                    <mat-option value="Nữ">Nữ</mat-option>
+                                    <mat-option value="Khác">Khác</mat-option>
+                                  </mat-select>
+                                  <mat-hint  *ngIf=" (formGroup.get('gender')?.invalid && formGroup.get('gender')?.touched) || (formGroup.get('gender')?.invalid && isSubmit)"> 
+                                    Vui lòng chọn giới tính
+                                  </mat-hint>
+                                  </mat-form-field>
                             </div>
     
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Ngày sinh</label>
-                        <div class="col-sm-3">
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                              </select>
-                        </div>
-                        <div class="col-sm-3">
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                              </select>
-                        </div>
-                        <div class="col-sm-3">
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                              </select>
-                        </div>
-                    </div>
+                   
                     <div class="form-group row">
                         <div class="col-sm-10">
-                          <button type="submit" class="btn btn-primary">Lưu</button>
+                          <button type="submit" (click)="editUser()" class="btn btn-primary">Lưu</button>
                         </div>
                       </div>
                 </form>
@@ -115,12 +91,12 @@
             <mat-card class="avatar">
                 <div class="d-flex justify-content-center">
                     <div class="p-2">
-                        <img class="avatar-change border border-primary rounded-circle" src="../../../assets/images/logoshop.png">
+                        <img class="avatar-change border border-primary rounded-circle" src="{{dataUser?.avatar}}">
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
                     <div class="p-2">
-                        <button mat-raised-button> Thay đổi</button>
+                        <button (click)="changeAvatar()" mat-raised-button> Thay đổi</button>
                     </div>
                 </div>
                 

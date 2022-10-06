@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -7,10 +8,17 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NavigationBarComponent implements OnInit {
   @Input() active = "";
-  constructor() { }
-
+  constructor(private userService: UserService) { }
+  dataUser:any
   ngOnInit(): void {
-    console.log(this.active)
+    this.userService.getUserById(localStorage.getItem("userId")).subscribe(res=>{
+  
+      this.dataUser=res
+      this.dataUser=this.dataUser.data
+      console.log(this.dataUser)
+    })
+   
+
   }
 
 }

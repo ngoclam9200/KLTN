@@ -13,10 +13,12 @@
             <div class="p-2">
                 <b>{{item.user.fullname}} ({{item.user.phonenumber}})</b>
             </div>
-            <div *ngIf="address.length>0" class="p-2">Số 8 , đường 128, Phước Long A , Quận 9, TPHCM </div>
-            <div *ngIf="address.length>0" class="p-2" style="color: red">(Mặc định)</div>
-            <button *ngIf="address.length>0" (click)="changeAddress()" class="p-2" mat-button color="primary" style="margin-left: 50px;">Thay đổi</button>
-            <button *ngIf="address.length==0" (click)="addAddress()" class="p-2" mat-button color="primary" style="margin-left: 50px;">Thêm</button>
+            <div *ngIf="addressUser?.length>0" class="p-2"> {{addressUser[0]?.address}} </div>
+
+            <button *ngIf="addressUser?.length>0" (click)="changeAddress(addressUser[0])" class="p-2" mat-button color="primary"
+                style="margin-left: 50px;">Thay đổi</button>
+            <button *ngIf="addressUser?.length==0" (click)="addAddress()" class="p-2" mat-button color="primary"
+                style="margin-left: 50px;">Thêm</button>
         </div>
 
 
@@ -24,14 +26,14 @@
     </mat-card>
     <br>
     <mat-card>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataCart" class="mat-elevation-z8">
 
             <ng-container matColumnDef="ten">
                 <th mat-header-cell *matHeaderCellDef> Sản phẩm </th>
                 <td mat-cell *matCellDef="let element">
                     <div class="d-flex align-items-center">
-                        <img src="../../../assets/images/product_01.jpg">
-                        San pham 1
+                        <img src="{{item.product.image}}">
+                        {{item.product.name}}
                     </div>
                 </td>
             </ng-container>
@@ -40,19 +42,28 @@
             <!-- Name Column -->
             <ng-container matColumnDef="dongia">
                 <th mat-header-cell *matHeaderCellDef> Đơn giá </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                <td mat-cell *matCellDef="let element"> {{item.product.price | currency :"VND"}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="discount">
+                <th mat-header-cell *matHeaderCellDef> Phần trăm giảm</th>
+                <td mat-cell *matCellDef="let element"> {{item.product.discount}}%
+                </td>
             </ng-container>
 
             <!-- Weight Column -->
             <ng-container matColumnDef="soluong">
                 <th mat-header-cell *matHeaderCellDef> Số lượng </th>
-                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                <td mat-cell *matCellDef="let element"> {{item.quantity}} </td>
             </ng-container>
 
             <!-- Symbol Column -->
             <ng-container matColumnDef="thanhtien">
                 <th mat-header-cell *matHeaderCellDef> Thành tiền </th>
-                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                <td style="color: #f33f3f" mat-cell *matCellDef="let element"> {{item.product.price-
+                    item.product.price*item.product.discount/100 |
+                    currency
+                    :"VND" }} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -64,7 +75,7 @@
 
     </mat-card>
     <br>
-    <mat-card>
+    <mat-card class="border">
         <div style="color: #f33f3f;" class="d-flex flex-row">
             <div class="p-2">
                 <mat-icon>local_shipping</mat-icon>
@@ -73,21 +84,23 @@
         </div>
 
         <div class="d-flex">
-            <div class="mr-auto p-2">Lời nhắn</div>
-            <div class="p-2" style="margin-right:550px ;"><input placeholder="Lời nhắn cho shop"></div>
-            <div class="p-2">Phí vận chuyển</div>
-            <div class="p-2" style="color: #f33f3f;">100.000đ</div>
-        </div>
-        <mat-card-actions align="end">
-            <div class="d-flex align-items-center">
-                <div>Thành tiền({{dataSource.length}} sản phẩm): </div>
-                <div style="color: #f33f3f;">100.000đ</div>
+            <div class="p-2">Lời nhắn</div>
+            <div class="p-2"><input [(ngModel)]="message" placeholder="Lời nhắn cho shop"></div>
+            <div class="ml-auto p-2">
+                <div class="d-flex flex-column">
+                    <div  class="d-flex flex-row">
+                        <div class="p-2">Phí vận chuyển:</div>
+                        <div style="color: #f33f3f" class="p-2">{{shippingfee | currency:"VND"}}</div>
+                    </div>
+                     
+                </div>
             </div>
-        </mat-card-actions>
+          </div>
+        
 
     </mat-card>
     <br>
-    <mat-card>
+    <mat-card class="border">
         <div class="d-flex flex-row">
 
 
@@ -97,25 +110,57 @@
                 <mat-icon>account_balance</mat-icon>
             </div>
             <div style="color: #f33f3f;" class="p-2">Phương thức thanh toán </div>
-            <div class="p-2" >Thanh toán khi nhận hàng </div>
+            <div class="p-2">Thanh toán khi nhận hàng </div>
             <div class="p-2"> </div>
-           
-            <button (click)="changePaymentMethod()" class="p-2" mat-button color="primary" style="margin-left: 50px;">Thay đổi</button>
-             
+
+            <button (click)="changePaymentMethod()" class="p-2" mat-button color="primary"
+                style="margin-left: 50px;">Thay đổi</button>
+
         </div>
-        
+
 
         <div class="d-flex justify-content-end">
             <div class="d-flex flex-column">
-                <div class="p-2">Tổng tiền hàng : 100000d</div>
+                <div class="d-flex flex-row">
+                    <div class="p-2">Tổng tiền hàng : </div>
+                    <div *ngIf="!isCodeVoucherPrice"  style="color: #f33f3f;" class="p-2">{{item.product.price-item.product.price*item.product.discount/100 | currency:"VND" }}</div>
+                    <div *ngIf="isCodeVoucher && discountbyvoucher[0].discountprice>0"  style="color: #f33f3f;" class="p-2">{{(item.product.price-item.product.price*item.product.discount/100)- ((item.product.price-item.product.price*item.product.discount/100)*(discountbyvoucher[0].discountprice/100)) | currency:"VND" }} (đã áp dụng voucher)</div>
+
+                  </div>
+                  <div class="d-flex flex-row">
+                    <div class="p-2">Phí vận chuyển :</div>
+                    <div *ngIf="!isCodeVoucherShip" style="color: #f33f3f;" class="p-2">{{shippingfee | currency:"VND"}}</div>
+                    <div *ngIf="isCodeVoucher &&  discountbyvoucher[0].discountfreeship>0"  style="color: #f33f3f;" class="p-2">{{shippingfee-shippingfee*discountbyvoucher[0].discountfreeship/100 | currency:"VND"}} (đã áp dụng voucher)</div>
+                  </div>
+                 
+                  <div class="d-flex align-items-center">
+                    <div class="p-2">Nhập voucher để được giảm giá : </div>
+                    <div style="color: #f33f3f;" class="p-2"><input [(ngModel)]="codeVoucher" placeholder="Nhập mã voucher" /></div>
+                    <div class="p-2"> <button (click)="searchVoucher()" mat-raised-button style="color:#f33f3f">Áp dụng</button> </div>
+                  </div>
+                  <div *ngIf="isCodeVoucher" class="d-flex flex-row">
+                    <div class="p-2">Giảm giá từ voucher : </div>
+                    <div *ngIf="discountbyvoucher[0].discountprice>0" style="color: #f33f3f;" class="p-2"> giảm {{discountbyvoucher[0].discountprice}}% cho tổng giá trị tiền hàng </div>
+                    <div *ngIf="discountbyvoucher[0].discountfreeship>0" style="color: #f33f3f;" class="p-2">giảm {{discountbyvoucher[0].discountfreeship}}% cho tổng tiền ship</div>
+                  </div>
+                  <div class="d-flex flex-row">
+                    <div class="p-2">Thành tiền : </div>
+                    <div *ngIf="!isCodeVoucher" style="color: #f33f3f;" class="p-2">{{(item.product.price-item.product.price*item.product.discount/100) + shippingfee | currency:"VND" }}</div>
+                    <div *ngIf="isCodeVoucher" style="color: #f33f3f;" class="p-2">{{unitPrice| currency:"VND" }}</div>
+
+
+                  </div>
+                <!-- <div class="p-2">
+                    <div class="p-2">Phí vận chuyển:</div>
+                    Tổng tiền hàng :  </div>
                 <div class="p-2">Phí vận chuyển: 100000đ</div>
-                <div class="p-2">Thành tiền : 10000đ</div>
+                <div class="p-2">Thành tiền : 10000đ</div> -->
             </div>
 
 
         </div>
         <mat-card-actions align="end">
-            <button mat-raised-button style="color:#f33f3f">Thanh toán</button>
+            <button (click)="checkout()" mat-raised-button style="color:#f33f3f">Thanh toán</button>
         </mat-card-actions>
 
     </mat-card>

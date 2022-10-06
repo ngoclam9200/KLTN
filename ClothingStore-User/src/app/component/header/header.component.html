@@ -66,13 +66,21 @@
               <a class="nav-link" (click)="goSignUpPage()">Đăng kí</a>
             </li>
             <li *ngIf="active=='ShoppingCart'  && isLogin" class="nav-item active cart" >
-              <a class="nav-link" (click)="goShoppingCartPage()"><mat-icon  matBadge="15" matBadgeColor="warn" matBadgeSize="small">shopping_cart</mat-icon></a>
+              <a class="nav-link" (click)="goShoppingCartPage()"><mat-icon  matBadge="{{countProductInCart}}" matBadgeColor="warn" matBadgeSize="small">shopping_cart</mat-icon></a>
             </li>
             <li *ngIf="active!='ShoppingCart'  && isLogin" class="nav-item">
-              <a class="nav-link"   (click)="goShoppingCartPage()"><mat-icon matBadge="15" matBadgeColor="warn" matBadgeSize="small">shopping_cart</mat-icon></a>
+              <a class="nav-link"   (click)="goShoppingCartPage()"><mat-icon matBadge="{{countProductInCart}}" matBadgeColor="warn" matBadgeSize="small">shopping_cart</mat-icon></a>
               
             </li>
-            <li   class="nav-item" *ngIf="isLogin">
+            <li   class="nav-item active" *ngIf=" active=='Profile' && isLogin ">
+              <a class="nav-link" routerLink="/profile" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger"  (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)"> {{username}}</a>
+              <mat-menu #menu="matMenu" [hasBackdrop]="false" >
+                <button mat-menu-item (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)" (click)="goProfilePage()">Quản lí tài khoản</button>
+                <button mat-menu-item (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)" (click)="goOrderPage()">Đơn mua</button>
+                <button mat-menu-item (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)" (click)="logOut()">Đăng xuất</button>
+              </mat-menu>
+            </li>
+            <li   class="nav-item " *ngIf=" active!='Profile' && isLogin ">
               <a class="nav-link" routerLink="/profile" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger"  (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)"> {{username}}</a>
               <mat-menu #menu="matMenu" [hasBackdrop]="false" >
                 <button mat-menu-item (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)" (click)="goProfilePage()">Quản lí tài khoản</button>

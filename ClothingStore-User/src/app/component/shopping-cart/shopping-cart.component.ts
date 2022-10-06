@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 import { CartService } from 'src/app/services/cart.service';
+import { SigninService } from 'src/app/services/signin.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -16,7 +17,7 @@ export class ShoppingCartComponent implements OnInit {
     completed: true
   },
   { completed: false }]
-  constructor(private alertService: AlertService, private cartService: CartService, private router: Router) { }
+  constructor(private alertService: AlertService, private signInService: SigninService, private cartService: CartService, private router: Router) { }
 
   ngOnInit(): void {
     this.getData()
@@ -77,6 +78,9 @@ export class ShoppingCartComponent implements OnInit {
   deleteCart(id: any) {
     this.cartService.deleteCart(id).subscribe(res => {
       console.log(res);
+      this.cartService.getCountProductInCart(localStorage.getItem("userId")).subscribe(res=>{
+        this.signInService.countProductInCart.emit(res)
+      })
       this.getData()
 
     })
@@ -90,6 +94,9 @@ export class ShoppingCartComponent implements OnInit {
     this.cartService.deleteAllCart(userId).subscribe(res=>
       {
         console.log(res)
+        this.cartService.getCountProductInCart(localStorage.getItem("userId")).subscribe(res=>{
+          this.signInService.countProductInCart.emit(res)
+        })
         this.getData()
       })
   }

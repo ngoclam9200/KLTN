@@ -1,35 +1,43 @@
- 
-<h2 mat-dialog-title>Cập nhật địa chỉ</h2>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   
+    <script
+        src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg">
+        
+    </script>
+
+   
+</head>
+<h2 mat-dialog-title>Chỉnh sửa địa chỉ</h2>
 <mat-dialog-content class="mat-typography">
-    
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Tên</mat-label>
-          <input matInput placeholder="Tên">
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Số điện thoại</mat-label>
-          <input matInput placeholder="Số điện thoại">
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Địa chỉ</mat-label>
-          <input matInput placeholder="Địa chỉ">
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          
-        </mat-form-field>
-      </p>
-     
+    <form  >
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Địa chỉ</mat-label>
+        <input  id="search_input"    matInput placeholder="Nhập địa chỉ">
+        <mat-icon matSuffix>edit</mat-icon>
+        <!-- <mat-hint *ngIf="( formGroup.get('name').invalid && formGroup.get('name').touched )|| (formGroup.get('name').invalid && isSubmit) " class="text-danger">Chọn tên  sản phẩm</mat-hint> -->
+      </mat-form-field>
+    </p>
+    </form>
+    <input style="visibility: hidden;" id="lat">
+    <input style="visibility: hidden;" id="lng">
+                
+               
       
-      
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-raised-button  mat-dialog-close color="warn" (click)="openChangeAddressDialog()">Trở lại</button>
-  <button mat-raised-button [mat-dialog-close]="true" color="primary" cdkFocusInitial>Cập nhật</button>
-</mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close color="warn">Đóng</button>
+  <button    mat-raised-button (click)=" updateAddress()"   color="primary" cdkFocusInitial>Chỉnh sửa</button>
+ </mat-dialog-actions>
+ 
+
+</html>

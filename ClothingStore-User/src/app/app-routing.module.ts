@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutUsComponent } from './component/about-us/about-us.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { HomeComponent } from './component/home/home.component';
 import { NotificationComponent } from './component/notification/notification.component';
 import { OrdersComponent } from './component/orders/orders.component';
@@ -12,6 +13,7 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { ShoppingCartComponent } from './component/shopping-cart/shopping-cart.component';
 import { SignInComponent } from './component/sign-in/sign-in.component';
 import { SignUpComponent } from './component/sign-up/sign-up.component';
+import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -27,6 +29,8 @@ const routes: Routes = [
       { path: 'checkout/:id', component: CheckoutComponent },
       { path: 'orders', component: OrdersComponent },
       { path: 'notification', component: NotificationComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
+      { path: 'verify-email', component: VerifyEmailComponent },
 
 
 ];

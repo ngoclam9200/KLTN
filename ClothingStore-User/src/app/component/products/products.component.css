@@ -26,13 +26,14 @@
     background-color: #f33f3f;
     border: 2px solid #f33f3f;
     margin-right: 8px;
+    border-radius: 25px;
 }
 .add-cart-btn:hover{
     background-color: #fff;
-    color: #f33f3f;
+    color: black;
 }
 img{
-    height: 250px;
+    height: 200px;
     margin-left: 10px;
     margin-right: 10px;
     width: 90%;

@@ -13,6 +13,7 @@
             <ul>
               <mat-tab-group mat-align-tabs="center" (selectedTabChange)="getProduct($event)">
                 <mat-tab *ngFor="let cate of allCate" label="{{cate.name}}">
+                  <br>
                   <div class="col-md-12">
                     <div class="filters-content">
                       <div class="row grid">
@@ -20,7 +21,7 @@
                           *ngFor="let item of listProduct | paginate :{itemsPerPage :1 , currentPage:page, totalItems:totalLength}"
                           class="col-lg-4 col-md-4 all des">
                           <div class="product-item">
-                            <a routerLink="/product-detail/{{item.id}}"><img src="{{item.image}}" alt=""></a>
+                            <a routerLink="/product-detail/{{item.id}}"><img class="border" src="{{item.image}}" alt=""></a>
                             <div class="down-content">
                               <div class="d-flex justify-content-between">
                                 <a routerLink="/product-detail/{{item.id}}">
@@ -30,7 +31,7 @@
                               </div>
                               <p>{{item.description}}</p>
                               <div class="d-flex align-items-center">
-                                <button (click)="addToCart()" type="button" class="add-cart-btn"><i
+                                <button (click)="addToCart(item.id)" type="button" class="add-cart-btn"><i
                                     class="fas fa-shopping-cart"></i>Thêm vào
                                   giỏ</button>
                                 <span>Số lượng ({{item.stock}})</span>

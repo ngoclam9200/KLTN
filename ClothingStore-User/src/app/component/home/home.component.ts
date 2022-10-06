@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class HomeComponent implements OnInit {
   dataSource:any
-  constructor(private router : Router, private productService : ProductService) { }
+  constructor(private router : Router, private productService : ProductService, private cartService:CartService) { }
  
   ngOnInit(): void {
     this.getLastestProduct()
@@ -28,10 +29,23 @@ export class HomeComponent implements OnInit {
   {
     if(localStorage.getItem("isLogin")=="true")
     {
-      this.router.navigate(['product-detail/'+ id])
+      // this.router.navigate(['product-detail/'+ id])
+      this.addCart(id)
     }
     else {
       this.router.navigate(['sign-in'])
     }
+  }
+  addCart(productId:any)
+  {
+    var data={
+      productId: productId,
+      userId: localStorage.getItem("userId")
+    }
+    console.log(data)
+    this.cartService.createCart(data).subscribe(res=>{
+      this.router.navigate(['shopping-cart'])
+    })
+
   }
 }

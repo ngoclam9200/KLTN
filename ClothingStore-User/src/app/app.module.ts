@@ -52,7 +52,11 @@ import { NavigationBarComponent } from './component/navigation-bar/navigation-ba
 import { ChatBoxComponent } from './component/chat-box/chat-box.component';
 import { NotificationComponent } from './component/notification/notification.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { AddAddressComponent } from './component/checkout/add-address/add-address.component'; 
+import { AddAddressComponent } from './component/checkout/add-address/add-address.component';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
+import { ChangeAvatarComponent } from './component/profile/change-avatar/change-avatar.component'; 
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +82,10 @@ import { AddAddressComponent } from './component/checkout/add-address/add-addres
     ChatBoxComponent,
     NotificationComponent,
     AddAddressComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
+    ChangeAvatarComponent,
+    
 
   ],
   imports: [
@@ -96,7 +104,10 @@ import { AddAddressComponent } from './component/checkout/add-address/add-addres
     MatInputModule,
     MatExpansionModule,
     MatTabsModule, 
-    ReactiveFormsModule, NgxPaginationModule
+    MatSelectModule,
+ 
+    ReactiveFormsModule, NgxPaginationModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

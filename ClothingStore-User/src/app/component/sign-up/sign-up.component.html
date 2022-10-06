@@ -1,39 +1,90 @@
 <app-header active="SignUp"></app-header>
  
  
-  <div>
-    <div class="parent clearfix">
-    <div class="bg-illustration">
-      <div class="d-flex justify-content-center"><img class="rounded-circle" src="../../../assets/images/logoshop.png" alt="logo"></div>
-      <!-- <img class="rounded-circle" src="../../../assets/images/logoshop.png" alt="logo"> -->
-  
-      <div class="burger-btn">
-        <span></span>
-        <span></span>
-        <span></span>
+ 
+ 
+  <div class="container">
+    <div style="font-size: 30px;" class="d-flex justify-content-center">Đăng kí tài khoản</div>
+    <form [formGroup]="formGroup">
+      <div class="d-flex justify-content-center">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput placeholder="Nhập email">
+            
+            <mat-hint  *ngIf=" (formGroup.get('email')?.invalid && formGroup.get('email')?.touched) || (formGroup.get('email')?.invalid && isSubmit)"> Chọn một
+              địa chỉ email</mat-hint>
+            <mat-hint  *ngIf=" !emailValidate && formGroup.get('email')?.valid">Email không hợp lệ </mat-hint>
+            <mat-hint  *ngIf=" !emailExist && emailValidate && formGroup.get('email')?.valid">Email đã tồn tại </mat-hint>
+          </mat-form-field>
+        </p>
       </div>
-  
-    </div>
-        
-    <div class="login">
-      <div class="container">
-        <h1>Đăng kí tài khoản</h1>
-    
-        <div class="login-form">
-          <form action="">
-            <input type="text" placeholder="Tên tài khoản">
-            <input type="text" placeholder="Họ tên đầy đủ">
-            <input type="number" placeholder="Số điện thoại">
-            <input type="password" placeholder="Mật khẩu">
-            <input type="password" placeholder="Nhập lại mật khẩu">
-            <button type="submit">Đăng kí</button>
+      <div class="d-flex justify-content-center">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Tên đăng nhập</mat-label>
+            <input formControlName="username" matInput placeholder="Nhập tên đăng nhập">
+            
+            <mat-hint  *ngIf=" (formGroup.get('username')?.invalid && formGroup.get('username')?.touched) || (formGroup.get('username')?.invalid && isSubmit)">  Vui lòng nhập tên đăng nhập</mat-hint>
+          <mat-hint   *ngIf=" !usernameValidate && formGroup.get('username')?.valid">Tên đăng nhập không hợp lệ 
+          (ít nhất 8 kí tự nhiều nhất 16 kí tự, không có kí tự đặc biệt) </mat-hint>
+          <mat-hint   *ngIf=" !usernameExist && usernameValidate && formGroup.get('username')?.valid">Tên đăng nhập đã tồn tại </mat-hint>
+          </mat-form-field>
+        </p>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Họ tên đầy đủ</mat-label>
+            <input formControlName="fullname" matInput placeholder="Nhập họ tên">
+            
+            <mat-hint  *ngIf=" (formGroup.get('fullname')?.invalid && formGroup.get('fullname')?.touched) || (formGroup.get('fullname')?.invalid && isSubmit)"> 
+              Vui lòng nhập họ tên
+            </mat-hint>
+          </mat-form-field>
+        </p>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Số điện thoại</mat-label>
+            <input type="" formControlName="phonenumber" matInput placeholder="Nhập số điện thoại">
+            
+            <mat-hint  *ngIf=" (formGroup.get('phonenumber')?.invalid && formGroup.get('phonenumber')?.touched) || (formGroup.get('phonenumber')?.invalid && isSubmit)">Vui lòng nhập số điện thoại</mat-hint>
+            <mat-hint *ngIf="!phonenumberValidate && formGroup.get('phonenumber')?.valid">Số điện thoại không hợp lệ </mat-hint>
+          </mat-form-field>
+        </p>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Mật khẩu</mat-label>
+            <input type="password" formControlName="password" matInput placeholder="Nhập mật khẩu">
+            <mat-hint  *ngIf=" (formGroup.get('password')?.invalid && formGroup.get('password')?.touched) || (formGroup.get('password')?.invalid && isSubmit)">Vui lòng nhập mật khẩu</mat-hint>
 
-          </form>
-        </div>
+          <mat-hint *ngIf=" !passwordValidate && formGroup.get('password')?.valid">Mật khẩu  không hợp lệ ( mật khẩu ít nhất 6 kí tự , nhiều nhất 20 kí tự , bao gồm chữ hoa, chữ thường và số) </mat-hint>
+          </mat-form-field>
+        </p>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Nhập lại mật khẩu</mat-label>
+            <input [(ngModel)]="confirmpass" [ngModelOptions]="{standalone: true}" type="password"  matInput placeholder="Nhập lại mật khẩu">
+            <!-- <mat-hint *ngIf="confirmpass.length<0"> Vui lòng nhập lại mật khẩu</mat-hint> -->
+            <mat-hint *ngIf=" !isconfirmpassword"> Mật khẩu không trùng</mat-hint>
+          </mat-form-field>
+        </p>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button mat-raised-button   (click)="registerUser()"  color="primary" cdkFocusInitial>Đăng kí tài khoản</button>
+
+      </div>
+      
+      
+      
+    </form>
     
-      </div>
-      </div>
-     
-  </div>
-  </div>
-<app-footer></app-footer>
+    </div>
+ 
+ 

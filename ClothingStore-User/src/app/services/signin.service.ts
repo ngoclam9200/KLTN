@@ -3,6 +3,7 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import jwt_decode from "jwt-decode";
+import { CartService } from './cart.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,8 +19,10 @@ export class SigninService {
   @Output()
   isLogin = new EventEmitter();
   isLoginFailed = new EventEmitter();
+  countProductInCart = new EventEmitter();
+  errText=new EventEmitter();
   username = new EventEmitter();
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private http: HttpClient, private cartService:CartService) {
 
   }
 
@@ -29,6 +32,8 @@ export class SigninService {
  {
   let headers = new HttpHeaders();
   return this.http.post(this.apiUrl + "/login-user", data, { headers: headers }).subscribe(res => {
+      console.log(res);
+      
       this.data = res
       let token = this.data.data
       localStorage.setItem("token", token)
@@ -44,6 +49,7 @@ export class SigninService {
       this.isLogin.emit(true)
       
       localStorage.setItem("password", data.password)
+      this.getCountProductInCart()
       this.router.navigate(['home'])
 
 
@@ -54,6 +60,11 @@ export class SigninService {
  
   },err=>{
     
+      var error:any
+      error=err
+      error=error.error.message
+      console.log(error)
+      this.errText.emit(error)
       this.isLoginFailed.emit(true)
      
       
@@ -64,4 +75,14 @@ export class SigninService {
 
 
  }
+ getCountProductInCart()
+  {
+    this.cartService.getCountProductInCart(localStorage.getItem("userId")).subscribe(res=>
+      {
+        console.log(res)
+        this.countProductInCart.emit(res)
+
+
+      })
+  }
 }

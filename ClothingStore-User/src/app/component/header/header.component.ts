@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
 import { SigninService } from 'src/app/services/signin.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class HeaderComponent implements OnInit {
  isLogin=false;
  timedOutCloser:any;
  username:any;
-  constructor(private router: Router,private signInService :SigninService ) { }
+ countProductInCart:any
+  constructor(private router: Router,private signInService :SigninService, private cartService:CartService ) { }
   @Input() active = "";
   ngOnInit(): void {
     if(localStorage.getItem("isLogin")=="true")
@@ -19,17 +21,24 @@ export class HeaderComponent implements OnInit {
     {
       this.isLogin=true
       this.username=localStorage.getItem("username")
+      this.getCountProductInCart()
     }
     
     this.signInService.isLogin.subscribe(res=>{
       this.isLogin=true
+      this.getCountProductInCart()
     })
     this.signInService.username.subscribe(res=>{
       
       this.username=res
     })
+    this.signInService.countProductInCart.subscribe(res=>{
+      
+      this.countProductInCart=res
+    })
 
   }
+  
   logOut()
   {
     localStorage.clear();
@@ -77,5 +86,15 @@ export class HeaderComponent implements OnInit {
     }, 100);
   }
   
+  getCountProductInCart()
+  {
+    this.cartService.getCountProductInCart(localStorage.getItem("userId")).subscribe(res=>
+      {
+        
+        this.countProductInCart=(res)
+
+
+      })
+  }
 
 }

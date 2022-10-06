@@ -11,14 +11,23 @@ import { SigninService } from 'src/app/services/signin.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-   
+   errText:any
   constructor(private router:Router, private signInService: SigninService    ) {}
   formGroup: FormGroup
   ngOnInit(): void {
      this.initForm()
+     this.signInService.errText.subscribe(res=>
+      {
+        this.errText=res
+      })
+
   }
   goSignUpPage() {
     this.router.navigate(['sign-up'])
+  }
+  forgotPass()
+  {
+    this.router.navigate(['forgot-password'])
   }
   initForm() {
     

@@ -27,9 +27,9 @@
             <span>Remember me</span>
           </div>
           <div class="forget-pass">
-            <a href="#">Quên mật khẩu?</a>
+            <a (click)="forgotPass()" >Quên mật khẩu?</a>
           </div>
-
+          <div style="color: red;">{{errText}}</div>
           <button (click)="signIn()" type="submit">LOG-IN</button>
 
         </form>

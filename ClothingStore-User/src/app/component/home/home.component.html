@@ -16,7 +16,7 @@
       
       <div *ngFor="let item of dataSource"   class="col-md-4">
         <div class="product-item">
-          <a routerLink="/product-detail/{{item.id}}"><img src="{{item.image}}" alt=""></a>
+          <a routerLink="/product-detail/{{item.id}}"><img class="border" src="{{item.image}}" alt=""></a>
           <div class="down-content">
             <a routerLink="/product-detail/1" >
               <h4>{{item.name}}</h4>
@@ -56,13 +56,13 @@
           <p><a rel="nofollow" href="https://templatemo.com/tm-546-sixteen-clothing" target="_parent">Double-L Store</a>
             luôn là cửa hàng đi đầu trong việc nắm bắt tâm lí , ý định mua sắm của khách hàng  <a rel="nofollow" href="https://templatemo.com/contact">Liên hệ chúng tôi nếu bạn muốn phản hồi về sản phẩm </a></p>
           <ul class="featured-list">
-            <li><a href="#">Sản phẩm mới hợp thời trang</a></li>
-            <li><a href="#">Nhiều hình thức thanh toán </a></li>
-            <li><a href="#">Đổi trả miễn phí </a></li>
-            <li><a href="#">Luôn lắng nghe phản hồi của khách hàng</a></li>
-            <li><a href="#">Tư vấn nhiệt tình</a></li>
+            <li><a  >Sản phẩm mới hợp thời trang</a></li>
+            <li><a  >Nhiều hình thức thanh toán </a></li>
+            <li><a  >Đổi trả miễn phí </a></li>
+            <li><a  >Luôn lắng nghe phản hồi của khách hàng</a></li>
+            <li><a  >Tư vấn nhiệt tình</a></li>
           </ul>
-          <a href="about.html" class="filled-button">Read More</a>
+          <a routerLink="/about-us" class="filled-button">Xem thêm</a>
         </div>
       </div>
       <div class="col-md-6">

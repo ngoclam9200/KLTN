@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Maps JavaScript API with Places Library Autocomplete Address Field</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -16,40 +15,29 @@
 
    
 </head>
-
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
+<h2 mat-dialog-title>Thêm địa chỉ</h2>
+<mat-dialog-content class="mat-typography">
+    <form  >
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Địa chỉ</mat-label>
+        <input [(ngModel)]="address" [ngModelOptions]="{standalone: true}" id="search_input"    matInput placeholder="Nhập địa chỉ">
+        <mat-icon matSuffix>edit</mat-icon>
+        <!-- <mat-hint *ngIf="( formGroup.get('name').invalid && formGroup.get('name').touched )|| (formGroup.get('name').invalid && isSubmit) " class="text-danger">Chọn tên  sản phẩm</mat-hint> -->
+      </mat-form-field>
+    </p>
+    </form>
+    <input style="visibility: hidden;" id="lat">
+    <input style="visibility: hidden;" id="lng">
                 
-
-                <!-- Autocomplete location search input -->
-                <div class="form-group">
-                    <label>Location:</label>
-                    <input type="text" class="form-control" id="search_input" placeholder="Type address..." />
-                </div>
-            </div>
-        </div>
-    </div>
-    <script  >
+               
       
-        var searchInput = 'search_input';
 
-        $(document).ready(function () {
-            var autocomplete;
-            autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
-                types: ['geocode'],
-                componentRestrictions: {
-                    country: "VN"
-                }
-            });
-            google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                var near_place = autocomplete.getPlace();
-                console.log(near_place.geometry.location.lat())
-            });
-        });
-       
-    </script>
-</body>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close color="warn">Đóng</button>
+  <button    mat-raised-button (click)=" addAddress()"   color="primary" cdkFocusInitial>Thêm</button>
+ </mat-dialog-actions>
+ 
 
 </html>

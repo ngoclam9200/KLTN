@@ -53,6 +53,11 @@ export class CartService {
     let headers=this.getHeader()
     return this.http.get(this.apiUrl+ "/get-cart-by-id/"+ id, {headers:headers})
   }
+  getCountProductInCart(userid:any)
+  {
+    let headers=this.getHeader()
+    return this.http.get(this.apiUrl+"/get-count-product-in-cart/"+ userid , {headers:headers})
+  }
   
   
    
