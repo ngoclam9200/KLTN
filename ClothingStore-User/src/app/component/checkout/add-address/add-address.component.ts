@@ -33,11 +33,9 @@ export class AddAddressComponent implements OnInit {
       lat: parseFloat( lat.value),
       lng: parseFloat(lng.value)
     }
-    console.log(data)
-    
+     
     this.addressService.createAddress(data).subscribe(res=>{
-      console.log(res)
-      this.dialogRef.close()
+       this.dialogRef.close()
        
     })
  

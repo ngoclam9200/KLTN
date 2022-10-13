@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -7,7 +7,9 @@ import { environment } from 'src/environments/environment';
 })
 export class OrderService {
   apiUrl=environment.apiUrl+"/Order"
- 
+   
+  isCheckout = new EventEmitter();
+   dataCheckout:any
   constructor( private http: HttpClient ,) { }
   getHeader()
   {
@@ -22,5 +24,36 @@ export class OrderService {
     let headers=this.getHeader()
     return this.http.post(this.apiUrl+ "/create-order", data, {headers:headers})
   }
-  
+  getOrderWaitConfirm(id:any)
+  {
+    let header=this.getHeader()
+    return this.http.get(this.apiUrl+ "/get-all-waitconfirm-order/"+id, {headers:header})
+  }
+  getOrderDelivering(id:any)
+  {
+    let header=this.getHeader()
+    return this.http.get(this.apiUrl+ "/get-all-delivering-order/"+id, {headers:header})
+  }
+  getOrderDelivered(id:any)
+  {
+    let header=this.getHeader()
+    return this.http.get(this.apiUrl+ "/get-all-delivered-order/"+id, {headers:header})
+  }
+  getOrderCancle(id:any)
+  {
+    let header=this.getHeader()
+    return this.http.get(this.apiUrl+ "/get-all-cancle-order/"+id, {headers:header})
+  }
+  paymentPayPal(data:any)
+  {
+    
+    let header=this.getHeader()
+    return this.http.post(this.apiUrl+ "/PaymentPaypal/",data, {headers:header})
+  }
+  checkoutPaypal(data:any)
+  {
+    this.isCheckout.emit(true)
+    let header=this.getHeader()
+    return this.http.post(this.apiUrl+ "/CheckoutPaypal/",data, {headers:header})
+  }
 }

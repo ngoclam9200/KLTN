@@ -32,20 +32,19 @@ export class SigninService {
  {
   let headers = new HttpHeaders();
   return this.http.post(this.apiUrl + "/login-user", data, { headers: headers }).subscribe(res => {
-      console.log(res);
-      
-      this.data = res
+       this.data = res
       let token = this.data.data
+      
       localStorage.setItem("token", token)
       this.decodedToken = jwt_decode(token);
-      console.log(this.decodedToken)
-
+ 
       localStorage.setItem("isLogin", "true")
+      localStorage.setItem("usernameLogin", data.username)
       localStorage.setItem("username", this.decodedToken.username)
       localStorage.setItem("role", "user")
       localStorage.setItem("userId", this.decodedToken.id)
       localStorage.setItem("isRemember",data.isRemember)
-      this.username.emit(data.username)
+      this.username.emit(this.decodedToken.username)
       this.isLogin.emit(true)
       
       localStorage.setItem("password", data.password)
@@ -54,8 +53,7 @@ export class SigninService {
 
 
 
-      // this.signInService.login(this.formGroup.value)
-
+ 
 
  
   },err=>{
@@ -63,8 +61,7 @@ export class SigninService {
       var error:any
       error=err
       error=error.error.message
-      console.log(error)
-      this.errText.emit(error)
+       this.errText.emit(error)
       this.isLoginFailed.emit(true)
      
       
@@ -79,8 +76,7 @@ export class SigninService {
   {
     this.cartService.getCountProductInCart(localStorage.getItem("userId")).subscribe(res=>
       {
-        console.log(res)
-        this.countProductInCart.emit(res)
+         this.countProductInCart.emit(res)
 
 
       })

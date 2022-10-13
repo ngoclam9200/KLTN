@@ -32,19 +32,16 @@ export class ProductsComponent implements OnInit {
   getData()
   {
     this.categoryService.getAllCategory().subscribe(res=>{
-      console.log(res)
-      this.allCate=res
+       this.allCate=res
       this.allCate=this.allCate.data
       
     })
   }
   getProduct($event :any)
   {
-    console.log(this.allCate[$event.index].id)
-    let id=this.allCate[$event.index].id
+     let id=this.allCate[$event.index].id
     this.productService.getProductByCateId(id).subscribe(res=>{
-      console.log(res)
-      this.listProduct=res
+       this.listProduct=res
       this.listProduct=this.listProduct.data
       this.totalLength=this.listProduct.length
       if(this.listProduct.length<=1) this.isPagination=false
@@ -67,8 +64,7 @@ export class ProductsComponent implements OnInit {
       productId: productId,
       userId: localStorage.getItem("userId")
     }
-    console.log(data)
-    this.cartService.createCart(data).subscribe(res=>{
+     this.cartService.createCart(data).subscribe(res=>{
       this.router.navigate(['shopping-cart'])
     })
 

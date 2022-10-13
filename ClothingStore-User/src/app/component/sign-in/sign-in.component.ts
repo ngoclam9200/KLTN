@@ -35,7 +35,7 @@ export class SignInComponent implements OnInit {
     {
      
       this.formGroup = new FormGroup({
-        username: new FormControl(localStorage.getItem("username"), [Validators.required]),
+        username: new FormControl(localStorage.getItem("usernameLogin"), [Validators.required]),
         password: new FormControl(localStorage.getItem("password"), [Validators.required]),
         isRemember: new FormControl(true, [Validators.required])
       });

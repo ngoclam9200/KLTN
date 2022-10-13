@@ -27,8 +27,7 @@ export class ChangeAvatarComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private userService: UserService) { }
 
   ngOnInit(): void {
-    console.log(this.data)
-  }
+   }
   uploadAvatar()
   {
     if(this.imagePreview)
@@ -37,10 +36,8 @@ export class ChangeAvatarComponent implements OnInit {
         id: this.data.id,
         avatar: this.imagePreview
       }
-      console.log(data);
-      this.userService.editAvatarUser(data).subscribe(res=>{
-        console.log(res);
-        
+       this.userService.editAvatarUser(data).subscribe(res=>{
+         
       })
       
     }

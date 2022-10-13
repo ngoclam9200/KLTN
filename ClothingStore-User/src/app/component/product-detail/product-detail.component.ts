@@ -23,19 +23,15 @@ export class ProductDetailComponent implements OnInit {
   {
     let id = this.route.snapshot.params.id;
     this.productService.getAllImageProductById(id).subscribe(res=>{
-      console.log(res)
-      this.images=res
+       this.images=res
       this.images=this.images.data
-      console.log(this.images);
-      
+       
       this.currentImage=this.images[0].url
-      // console.log(this.images)
-    })
+     })
     this.productService.getProductById(id).subscribe(res=>{
       this.dataProduct=res
       this.dataProduct=this.dataProduct.data
-      console.log(this.dataProduct)
-
+ 
 
     })
 
@@ -52,10 +48,8 @@ export class ProductDetailComponent implements OnInit {
       productId: this.route.snapshot.params.id,
       userId: localStorage.getItem("userId")
     }
-    console.log(data)
-    this.cartService.createCart(data).subscribe(res=>{
-      console.log(res)
-    })
+     this.cartService.createCart(data).subscribe(res=>{
+     })
 
   }
 }

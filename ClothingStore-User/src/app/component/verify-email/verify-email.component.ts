@@ -17,13 +17,11 @@ export class VerifyEmailComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.token = params['token'];
       this.decodeToken = jwt_decode(this.token)
-      console.log(this.decodeToken.email); // Print the parameter to the console. 
-      var data={
+       var data={
         email: this.decodeToken.email.trim()
       }
       this.userService.verifyEmail(data).subscribe(res => {
-        console.log(res)
-        Swal.fire(
+         Swal.fire(
           'Đã xác thực  !',
           'Xác thực tài khoản thành công.',
           'success'

@@ -41,8 +41,7 @@ export class SignUpComponent implements OnInit {
   }
   registerUser()
   {
-    console.log(this.validateService.validatePhoneNumber("0364681528"));
-    this.emailExist=true
+     this.emailExist=true
   this.usernameExist=true
     this.isSubmit=true
     this.emailValidate = this.validateService.ValidateEmail(this.formGroup.controls['email'].value)
@@ -77,8 +76,7 @@ export class SignUpComponent implements OnInit {
         
         },
         err=>{
-          console.log(err)
-          this.errorRes=err
+           this.errorRes=err
           this.errorRes=this.errorRes.error.message
            
           if(this.errorRes=="Email đã tồn tại, vui lòng thử email khác") this.emailExist=false

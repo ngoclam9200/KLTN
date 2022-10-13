@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class HomeComponent implements OnInit {
   dataSource:any
+  isLoading:boolean=true
   constructor(private router : Router, private productService : ProductService, private cartService:CartService) { }
  
   ngOnInit(): void {
@@ -18,12 +19,10 @@ export class HomeComponent implements OnInit {
   getLastestProduct()
   {
     this.productService.getLastestProduct().subscribe(res=>{
-      console.log(res)
-      this.dataSource=res
+       this.dataSource=res
       this.dataSource=this.dataSource.data
-      
-      // console.log(this.dataSource)
-    })
+      this.isLoading=false
+     })
   }
   addToCart(id:any)
   {
@@ -42,8 +41,7 @@ export class HomeComponent implements OnInit {
       productId: productId,
       userId: localStorage.getItem("userId")
     }
-    console.log(data)
-    this.cartService.createCart(data).subscribe(res=>{
+     this.cartService.createCart(data).subscribe(res=>{
       this.router.navigate(['shopping-cart'])
     })
 

@@ -26,8 +26,7 @@ export class UpdateAddressComponent implements OnInit {
     lng.value=this.data.lng
     var address = <HTMLInputElement>document.getElementById("search_input");
     address.value=this.data.address
-    console.log(address.value)
-    this.createScript()
+     this.createScript()
     
   }
   updateAddress() {
@@ -43,11 +42,9 @@ export class UpdateAddressComponent implements OnInit {
       lng: parseFloat(lng.value),
       id: this.data.id
     }
-    console.log(data)
-    
+     
     this.addressService.editAddress(data).subscribe(res=>{
-      console.log(res)
-      this.dialogRef.close()
+       this.dialogRef.close()
     })
  
   }

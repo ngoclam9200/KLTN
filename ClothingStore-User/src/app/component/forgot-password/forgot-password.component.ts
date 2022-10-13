@@ -24,8 +24,7 @@ export class ForgotPasswordComponent implements OnInit {
     if(this.formGroup.valid)
     {
       this.userService.forgotPass(this.formGroup.value).subscribe(res=>{
-        console.log(res)
-        
+         
       })
     }
     

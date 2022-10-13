@@ -1,0 +1,18 @@
+<app-header></app-header>
+<div class="container">
+    <div *ngIf="!isPaymentSuccess" class="d-flex justify-content-center">
+     
+        <button (click)="checkout()" mat-raised-button style="color:#f33f3f">Xác nhận đã thanh toán</button>  
+    </div>
+    <div *ngIf="isPaymentSuccess" class="d-flex justify-content-center">
+         
+       Thanh toán thành công 
+    </div>
+    <br>
+    <div *ngIf="isPaymentSuccess" class="d-flex justify-content-center">
+         
+        <button (click)="checkOrder()"  mat-raised-button style="color:#f33f3f">Kiểm tra đơn hàng</button>  
+        <button (click)="continueBuy()"  mat-raised-button style="color:#f33f3f; margin-left: 20px;">Tiếp tục mua </button>  
+     </div>
+    
+</div>

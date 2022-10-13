@@ -16,8 +16,7 @@ export class AboutUsComponent implements OnInit {
   getData()
   {
     this.aboutusService.getAllAdmin().subscribe(res=>{
-      console.log(res);
-      this.allMember=res
+       this.allMember=res
       this.allMember=this.allMember.data
       
     })

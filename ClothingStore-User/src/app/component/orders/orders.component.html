@@ -2,16 +2,124 @@
  
 <body class="container">
     <app-navigation-bar active="Order"></app-navigation-bar>
-    <div class="border" style="margin-left:25%;padding:1px 16px;  position: fixed;
-    height: 100%;width: 70%;">
+    <div class="border" style="margin-left:25%;padding:1px 16px; ;
+    height: 100%;width: 75%;">
         
         
-        <mat-tab-group mat-align-tabs="center">
-            <mat-tab label="Chờ xác nhận"> Content 1 </mat-tab>
-            <mat-tab label="Chờ lấy hàng"> Content 2 </mat-tab>
-            <mat-tab label="Đang giao"> Content 3 </mat-tab>
-            <mat-tab label="Đã giao"> Content 3 </mat-tab>
-            <mat-tab label="Đã hủy"> Content 3 </mat-tab>
+        <mat-tab-group mat-align-tabs="center" (selectedTabChange)="getOrder($event)">
+            <mat-tab  *ngFor="let status of allStatus"  label="{{status.name}}">
+               
+            <div *ngFor="let order of allOrder">
+                
+                <mat-card class="border">
+                    <div>Id đơn hàng : {{order.id}}</div>
+                    <mat-card>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-column">
+                                <div class=" font-weight-bold">Ngày đặt hàng :</div>
+                                <div class="">{{order.orderDate | date :"dd-MM-yyyy"}}</div>
+                                
+                                 
+                            </div>
+                            <div class="d-flex flex-column">
+                                <div class="  font-weight-bold">Dự kiến giao :</div>
+                                <div class="">{{estimateDelivery(order.orderDate) | date:"dd-MM-yyyy"}}</div>
+                                 
+                            </div>
+                            <div class="d-flex flex-column">
+                                <div class="  font-weight-bold">Người nhận :</div>
+                                <div class="">{{order.user.fullname}}- {{order.user.phonenumber}}</div>
+                                
+                                 
+                            </div>
+                            <div class="d-flex flex-column">
+                                <div class=" font-weight-bold">Thanh toán: </div>
+                                <div class="">{{order.transaction.name}}</div>
+                                
+                            </div>
+                           
+                        </div>
+                       
+
+                        <br>
+                        <div class="table-responsive">
+                            <table class="table table-bordered m-0 border">
+                                <thead>
+                                    <tr>
+                                        <!-- Set columns width -->
+            
+                                        <th class="text-center  " style="width: 300px;">Sản phẩm
+                                        </th>
+                                        <th class="text-center  " style="width: 100px;">Số lượng</th>
+                                       
+                                        <th class="text-center  " style="width: 100px;">Thành  tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of allProduct">
+                                        <td class="p-2" *ngIf="item.orderId==order.id">
+                                            <div class="media align-items-center">
+                                                <div class="d-flex align-items-center ">
+                                                    <img style="margin-right:30px ;" class="border" src="{{item.product.image}}">
+                                                    {{item.product.name}}
+                                                </div>
+                                            </div>
+                                        </td >
+                                     
+                                        <td *ngIf="item.orderId==order.id" class="text-right font-weight-semibold align-middle p-2 text-center">
+                                            {{item.productCount}}
+                                        </td>
+                                        
+                                        <td *ngIf="item.orderId==order.id" style="color: #f33f3f" class="text-right font-weight-semibold align-middle p-2 text-center">
+                                            {{(item.product.price-
+                                            item.product.price*item.product.discount/100)*item.productCount |
+                                            currency
+                                            :"VND" }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-left">
+                            <div class="d-flex flex-row">
+                                <div class=" font-weight-bold p-2">Phí vận chuyển :</div>
+                                <div style="color: #f33f3f" class="p-2"> {{order.shippingFee.price | currency:"VND"}} </div>
+                                
+                                 
+                            </div>
+                            <div *ngIf="order.voucherId!='0'" style="margin-left:40px ;" class="d-flex flex-row">
+                                <div  class="  font-weight-bold p-2">Voucher:</div>
+                                <div *ngIf="order.voucher.discountfreeship >0" style="color: #f33f3f" class="p-2 ">giảm {{order.voucher.discountfreeship}} % phí vận chuyển</div>
+                                <div *ngIf="order.voucher.discountprice >0" style="color: #f33f3f" class="p-2 ">giảm {{order.voucher.discountprice}} % phí tổng tiền hàng</div>
+
+                            </div>
+                            <div style="margin-left:40px ;" class="d-flex flex-row">
+                                <div class="  font-weight-bold p-2">Thành tiền:</div>
+                                <div style="color: #f33f3f" class="p-2">{{order.unitPrice  | currency:"VND"}} </div>
+                            </div>
+                          
+
+                           
+                            
+                           
+                        </div>
+                        <div   class="d-flex flex-row">
+                            <div class="p-2  font-weight-bold">Địa chỉ giao:</div>
+                            <div class="p-2">{{order.addressShip}} </div>
+                        </div>
+                          
+
+                    </mat-card>
+                    <br>
+                    
+                    
+                   </mat-card> 
+                   <br>
+            </div>    
+          
+            <div  *ngIf="allOrder?.length==0" class="d-flex justify-content-center" >Không có đơn hàng</div>
+            </mat-tab>
+          
           </mat-tab-group>
 
     </div>

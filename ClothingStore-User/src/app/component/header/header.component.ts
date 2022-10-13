@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit {
     this.signInService.username.subscribe(res=>{
       
       this.username=res
+       
     })
     this.signInService.countProductInCart.subscribe(res=>{
       
@@ -41,9 +42,22 @@ export class HeaderComponent implements OnInit {
   
   logOut()
   {
-    localStorage.clear();
-    this.isLogin=false
-    this.router.navigate(['sign-in'])
+    if(localStorage.getItem("isRemember")=="true")
+    {
+      localStorage.removeItem("token")
+      localStorage.removeItem("isLogin")
+      localStorage.removeItem("role")
+      localStorage.removeItem("userId")
+      this.isLogin=false
+      this.router.navigate(['sign-in'])
+    
+    }
+    else{
+      localStorage.clear();
+      this.isLogin=false
+      this.router.navigate(['sign-in'])
+    }
+   
   }
   goProductPage() {
     this.router.navigate(['products'])

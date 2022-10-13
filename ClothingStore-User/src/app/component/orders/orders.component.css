@@ -1,6 +1,4 @@
-.container{
-    margin-top: 80px;
-}
+
 ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
     background-color: #f33f3f !important;
   }
@@ -20,8 +18,8 @@ body {
  
     position: fixed;
     height: 100%;
-    overflow: auto;
-    left: 0;
+    /* overflow: auto; */
+    /* left: 0; */
     
   }
   
@@ -49,6 +47,10 @@ body {
     width: 100px;
     height: 100px;
   }
-   
-  
+   .container{
+    margin-top: 80px;
+}
+table {
+  width: 100%;
+}
   

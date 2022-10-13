@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutUsComponent } from './component/about-us/about-us.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
+import { ConfirmCheckoutComponent } from './component/checkout/confirm-checkout/confirm-checkout.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { HomeComponent } from './component/home/home.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'product-detail/:id', component: ProductDetailComponent },
       { path: 'checkout/:id', component: CheckoutComponent },
+      { path: 'checkout', component: ConfirmCheckoutComponent },
       { path: 'orders', component: OrdersComponent },
       { path: 'notification', component: NotificationComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },

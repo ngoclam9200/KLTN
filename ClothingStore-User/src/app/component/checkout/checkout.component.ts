@@ -23,9 +23,13 @@ export class CheckoutComponent implements OnInit {
     private cartService: CartService, private addressService: AddressUserService
     , private infoShopService: InfoshopService, private shippingfeeService: ShippingfeeService,
     private voucherService: VoucherService,
-    private orderService : OrderService, private router : Router) { }
+    private orderService: OrderService, private router: Router,
+     ) {
+      this.orderService.isCheckout.subscribe(res=>{
+       })
+      }
   rows: any = [];
-  dataCart: any
+  dataCart: any=[]
   addressUser: any;
   shippingfee: any
   addressShop: any
@@ -36,32 +40,46 @@ export class CheckoutComponent implements OnInit {
   isCodeVoucherShip: any = false
   total: any
   feeship: any
-  unitPrice: any
+  unitPrice: any=0
   shippingFeeId: any
-  message: any=" "
+  message: any = " "
+  transactionName="Thanh toán khi nhận hàng"
+  returnUrl:any
   displayedColumns: string[] = ['ten', 'dongia', 'discount', 'soluong', 'thanhtien'];
   // dataSource:any;
   changePayment = false
-
+  data:any
   ngOnInit(): void {
+
     this.getData()
   }
   getData() {
-    let id = this.route.snapshot.params.id
-    this.cartService.getCartById(id).subscribe(res => {
-      console.log(res)
-      this.dataCart = res
-      this.dataCart = this.dataCart.data
-      this.total = this.dataCart[0].product.price -
-        this.dataCart[0].product.price * this.dataCart[0].product.discount / 100
+    let listid = this.route.snapshot.params.id
 
-    })
+    var id = listid.split("&")
+     for (let i = 0; i < id.length; i++) {
+      this.cartService.getCartById(id[i]).subscribe(res => {
+         var datares:any
+        datares=res
+        datares=datares.data
+        this.dataCart.push(datares[0])
+         this.unitPrice += ( datares[0].product.price - datares[0].product.price*datares[0].product.discount/100)*datares[0].quantity
+        
+      })
+           
+    
+    
+      
+    }
+    
+   
     this.addressService.getAddressDefaultUser(localStorage.getItem("userId")).subscribe(res => {
-      console.log(res)
+      
       this.addressUser = res
       this.addressUser = this.addressUser.data
+ 
       this.infoShopService.getInfoShop().subscribe(res => {
-        console.log(res)
+       
         this.addressShop = res
         this.addressShop = this.addressShop.data
         var provinceUser = this.addressUser[0].address.split(",")
@@ -70,12 +88,13 @@ export class CheckoutComponent implements OnInit {
         provinceShop = provinceShop[provinceShop.length - 2]
         if (provinceShop.trim() == provinceUser.trim()) {
           this.shippingfeeService.searchShippingFee("Nội thành").subscribe(res => {
-            console.log(res)
+           
             this.shippingfee = res
             this.shippingFeeId = this.shippingfee.data[0]?.id
             this.shippingfee = this.shippingfee.data[0]?.price
-            this.feeship = this.shippingfee
-            console.log(this.shippingfee)
+           
+           
+         
 
           })
         }
@@ -84,11 +103,15 @@ export class CheckoutComponent implements OnInit {
 
             this.shippingfee = res
             this.shippingfee = this.shippingfee.data[0].price
-
+            this.total=this.unitPrice+this.shippingfee
           })
         }
       })
     })
+    for (let i = 0; i < this.dataCart.length; i++) {
+ 
+     }
+    
   }
   changeAddress(data: any) {
     const dialogRef = this.dialog.open(ChangeAddressComponent, {
@@ -111,94 +134,124 @@ export class CheckoutComponent implements OnInit {
     })
   }
   changePaymentMethod() {
-    this.dialog.open(ChangePaymentMethodComponent, {
+   const dialogRef= this.dialog.open(ChangePaymentMethodComponent, {
       width: '700px',
+      data: this.transactionName
     })
+    dialogRef.afterClosed().subscribe(result => {
+      this.transactionName=result
+     
+    });
 
   }
   searchVoucher() {
     this.voucherService.searchVoucher(this.codeVoucher).subscribe(res => {
-      console.log(res)
-      this.discountbyvoucher = res
+       this.discountbyvoucher = res
       this.isCodeVoucher = true
       this.discountbyvoucher = this.discountbyvoucher.data
       if (this.discountbyvoucher[0].discountprice > 0) {
         this.isCodeVoucherPrice = true
         this.isCodeVoucherShip = false
-        this.unitPrice = (this.total - this.total * this.discountbyvoucher[0].discountprice / 100) + this.feeship
+
+        this.unitPrice = (this.unitPrice - this.unitPrice * this.discountbyvoucher[0].discountprice / 100)
       }
       else {
         this.isCodeVoucherPrice = false
         this.isCodeVoucherShip = true
-        this.unitPrice = this.total + (this.feeship - this.feeship * this.discountbyvoucher[0].discountfreeship / 100)
-      }
-      console.log(this.total)
+         this.shippingfee=this.shippingfee-this.shippingfee*this.discountbyvoucher[0].discountfreeship / 100
+       }
+      
+      
     }, err => {
 
     })
   }
   checkout() {
+    
     var data: any = {
       userId: localStorage.getItem("userId"),
       addressShip: this.addressUser[0]?.address,
-      unitPrice: 0,
+      unitPrice: this.shippingfee+ this.unitPrice,
       shippingFeeId: this.shippingFeeId,
       transactionId: "1",
       statusOrderId: "1",
-      productId: this.dataCart[0].product.id,
-      quantity: this.dataCart[0].quantity,
+      listProduct: [],
+      quantity: this.dataCart.length,
       phonenumber: this.dataCart[0].user.phonenumber,
       voucherId: "0",
       message: this.message,
-      cartId: this.dataCart[0].id,
+      
 
 
     }
-    var price = this.dataCart[0].product.price - this.dataCart[0].product.price * this.dataCart[0].product.discount / 100
-    if (this.discountbyvoucher?.length > 0) {
-      console.log(this.discountbyvoucher)
+     if (this.discountbyvoucher?.length > 0) {
+      
       data.voucherId = this.discountbyvoucher[0].id
-
-      console.log(price)
-      if (this.discountbyvoucher[0].discountfreeship == 0) {
-        data.unitPrice = Math.round(this.shippingfee + price - price * this.discountbyvoucher[0].discountprice)
-      }
-      else {
-        console.log(this.shippingfee, price,)
-        data.unitPrice = Math.round(price + this.shippingfee - this.shippingfee * this.discountbyvoucher[0].discountfreeship / 100)
-
-      }
+      data.unitPrice = Math.round(this.shippingfee + this.unitPrice)
+      
+      
 
 
     }
-    else {
-      data.unitPrice = Math.round(this.shippingfee + price)
+    for(let i=0 ; i<this.dataCart.length ;i++)
+    {
+      data.listProduct.push({
+        productId:this.dataCart[i].product.id,
+        productCount: this.dataCart[i].quantity
+      })
     }
-    console.log(data)
-    Swal.fire({
-      title: 'Mua sản phẩm này?',
-      text: "Sản phẩm này sẽ không còn trong giỏ hàng!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Mua !'
-    }).then((result) => {
-      
-      if (result.isConfirmed) {
-        this.orderService.createOrder(data).subscribe(res=>{
-          console.log(res)
-          Swal.fire(
-            'Đã mua !',
-            'Sản phẩm đã được mua.',
-            'success'
-          )
-          this.router.navigate(['/orders'])
-          })
-      
-      }
-    })
+     
     
+
+    if(this.transactionName=="Thanh toán qua Paypal")
+    {
+      var url=window.location.origin + "/checkout/"
+       
+      var paypal={
+        total:  ( data.unitPrice),
+        returnUrl:url
+      }
+
+       
+      this.orderService.paymentPayPal(paypal).subscribe(res=>
+        {
+           this.returnUrl=res
+          this.returnUrl=this.returnUrl.data
+          window.open(this.returnUrl, "_self");
+          data.transactionId="2"
+           localStorage.setItem("dataPayment",JSON.stringify(data))
+           localStorage.setItem("currentUrl", location.href)
+          
+        })
+      
+    }
+    else
+    {
+       Swal.fire({
+        title: 'Mua sản phẩm này?',
+        text: "Sản phẩm này sẽ không còn trong giỏ hàng!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Mua !'
+      }).then((result) => {
+  
+        if (result.isConfirmed) {
+          this.orderService.createOrder(data).subscribe(res => {
+             Swal.fire(
+              'Đã mua !',
+              'Sản phẩm đã được mua.',
+              'success'
+            )
+            this.router.navigate(['/orders'])
+          })
+  
+        }
+      })
+    }
+    
+
 
   }
 

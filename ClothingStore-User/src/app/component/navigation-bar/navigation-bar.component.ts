@@ -15,8 +15,7 @@ export class NavigationBarComponent implements OnInit {
   
       this.dataUser=res
       this.dataUser=this.dataUser.data
-      console.log(this.dataUser)
-    })
+     })
    
 
   }

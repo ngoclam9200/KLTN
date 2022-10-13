@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FooterComponent } from './footer.component';
+import { ConfirmCheckoutComponent } from './confirm-checkout.component';
 
-describe('FooterComponent', () => {
-  let component: FooterComponent;
-  let fixture: ComponentFixture<FooterComponent>;
+describe('ConfirmCheckoutComponent', () => {
+  let component: ConfirmCheckoutComponent;
+  let fixture: ComponentFixture<ConfirmCheckoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FooterComponent ]
+      declarations: [ ConfirmCheckoutComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FooterComponent);
+    fixture = TestBed.createComponent(ConfirmCheckoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

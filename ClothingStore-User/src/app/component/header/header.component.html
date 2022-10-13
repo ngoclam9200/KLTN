@@ -81,7 +81,7 @@
               </mat-menu>
             </li>
             <li   class="nav-item " *ngIf=" active!='Profile' && isLogin ">
-              <a class="nav-link" routerLink="/profile" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger"  (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)"> {{username}}</a>
+              <a style="text-transform: lowercase;" class="nav-link" routerLink="/profile" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger"  (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)"> {{username}}</a>
               <mat-menu #menu="matMenu" [hasBackdrop]="false" >
                 <button mat-menu-item (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)" (click)="goProfilePage()">Quản lí tài khoản</button>
                 <button mat-menu-item (mouseenter)="mouseEnter(trigger)" (mouseleave)="mouseLeave(trigger)" (click)="goOrderPage()">Đơn mua</button>

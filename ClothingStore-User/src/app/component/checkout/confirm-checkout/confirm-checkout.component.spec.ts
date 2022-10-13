@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { QrcodePaymentComponent } from './qrcode-payment.component';
+import { ConfirmCheckoutComponent } from './confirm-checkout.component';
 
-describe('QrcodePaymentComponent', () => {
-  let component: QrcodePaymentComponent;
-  let fixture: ComponentFixture<QrcodePaymentComponent>;
+describe('ConfirmCheckoutComponent', () => {
+  let component: ConfirmCheckoutComponent;
+  let fixture: ComponentFixture<ConfirmCheckoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ QrcodePaymentComponent ]
+      declarations: [ ConfirmCheckoutComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QrcodePaymentComponent);
+    fixture = TestBed.createComponent(ConfirmCheckoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

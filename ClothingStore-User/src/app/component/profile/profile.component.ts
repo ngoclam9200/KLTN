@@ -24,11 +24,9 @@ export class ProfileComponent implements OnInit {
   getData()
   {
     this.userService.getUserById(localStorage.getItem("userId")).subscribe(res=>{
-      // console.log(res)
-      this.dataUser=res
+       this.dataUser=res
       this.dataUser=this.dataUser.data
-      console.log(this.dataUser.fullname)
-      this.initForm()
+       this.initForm()
     })
   }
   initForm() {
@@ -41,8 +39,7 @@ export class ProfileComponent implements OnInit {
         gender: new FormControl(this.dataUser?.gender, [Validators.required]),
         phonenumber: new FormControl(this.dataUser?.phonenumber, [Validators.required])
       });
-      console.log(this.formGroup.value)
- 
+  
     
     
     
@@ -55,8 +52,7 @@ export class ProfileComponent implements OnInit {
     if(this.formGroup.valid && this.phonenumberValidate)
     {
       this.userService.editUser(this.formGroup.value).subscribe(res=>{
-        console.log(res)
-      })
+       })
     }
   }
   changeAvatar()

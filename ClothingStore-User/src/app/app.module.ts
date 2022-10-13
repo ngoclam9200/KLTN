@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
-import { FooterComponent } from './component/footer/footer.component';
 import { HomeComponent } from './component/home/home.component';
 import { ProductsComponent } from './component/products/products.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
@@ -45,8 +44,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion'
 import { ChangePaymentMethodComponent } from './component/checkout/change-payment-method/change-payment-method.component';
-import { QrcodePaymentComponent } from './component/checkout/change-payment-method/qrcode-payment/qrcode-payment.component';
-import { FabCallChatComponent } from './component/fab-call-chat/fab-call-chat.component';
+ import { FabCallChatComponent } from './component/fab-call-chat/fab-call-chat.component';
 import { OrdersComponent } from './component/orders/orders.component';
 import { NavigationBarComponent } from './component/navigation-bar/navigation-bar.component';
 import { ChatBoxComponent } from './component/chat-box/chat-box.component';
@@ -55,13 +53,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AddAddressComponent } from './component/checkout/add-address/add-address.component';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
-import { ChangeAvatarComponent } from './component/profile/change-avatar/change-avatar.component'; 
- 
+import { ChangeAvatarComponent } from './component/profile/change-avatar/change-avatar.component';
+import { ConfirmCheckoutComponent } from './component/checkout/confirm-checkout/confirm-checkout.component';
+  
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
+    
     HomeComponent,
     ProductsComponent,
     AboutUsComponent,
@@ -75,8 +74,7 @@ import { ChangeAvatarComponent } from './component/profile/change-avatar/change-
     ChangeAddressComponent,
     UpdateAddressComponent,
     ChangePaymentMethodComponent,
-    QrcodePaymentComponent,
-    FabCallChatComponent,
+     FabCallChatComponent,
     OrdersComponent,
     NavigationBarComponent,
     ChatBoxComponent,
@@ -85,7 +83,8 @@ import { ChangeAvatarComponent } from './component/profile/change-avatar/change-
     ForgotPasswordComponent,
     VerifyEmailComponent,
     ChangeAvatarComponent,
-    
+    ConfirmCheckoutComponent,
+     
 
   ],
   imports: [
@@ -109,7 +108,7 @@ import { ChangeAvatarComponent } from './component/profile/change-avatar/change-
     ReactiveFormsModule, NgxPaginationModule,
    
   ],
-  providers: [],
+  providers: [CheckoutComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

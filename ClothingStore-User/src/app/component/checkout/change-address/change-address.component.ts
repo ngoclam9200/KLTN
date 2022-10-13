@@ -19,8 +19,7 @@ export class ChangeAddressComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,private dialog: MatDialog, private addressService:AddressUserService) { }
 
   ngOnInit(): void {
-    console.log("data", this.data)
-    this.getData()
+     this.getData()
   }
   updateAddress(data:any)
   {
@@ -40,8 +39,7 @@ export class ChangeAddressComponent implements OnInit {
   }
   changeAddress()
   {
-    console.log(this.addressChangeId)
-    this.addressService.editAddressDefault({id:this.addressChangeId}).subscribe(res=>
+     this.addressService.editAddressDefault({id:this.addressChangeId}).subscribe(res=>
       {
         this.dialog.closeAll()
         
@@ -49,8 +47,7 @@ export class ChangeAddressComponent implements OnInit {
   }
   showOptions($event:any)
   {
-    // console.log($event.checked)
-    // console.log($event.source.id)
+     
     for(let i=0;i<this.address.length;i++)
       {
         if(this.address[i].isChecked==true && $event.source.id==i )
@@ -61,8 +58,7 @@ export class ChangeAddressComponent implements OnInit {
         } 
         if(this.address[i].isChecked==true && $event.source.id!=i )
         {
-          console.log("test")
-          this.address[i].isChecked=false
+           this.address[i].isChecked=false
           this.address[parseInt( $event.source.id)].isChecked=true
           this.addressChangeId=this.address[parseInt( $event.source.id)].id
           break
@@ -73,8 +69,7 @@ export class ChangeAddressComponent implements OnInit {
   getData()
   {
     this.addressService.getAllAddressUser(localStorage.getItem("userId")).subscribe(res=>{
-      console.log(res)
-      this.address=res
+       this.address=res
       this.address=this.address.data
       for(let i=0;i<this.address.length;i++)
       {

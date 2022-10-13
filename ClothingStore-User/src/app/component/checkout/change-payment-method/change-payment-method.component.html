@@ -1,41 +1,33 @@
-
 <h2 mat-dialog-title>Chọn hình thức thanh toán</h2>
 <mat-dialog-content class="mat-typography">
-    
-  <mat-card >
-    <div class="d-flex align-items-center">
-        <div class="p-2">
-             <img src="../../../../assets/images/momo.png">
-        </div>
-        <div class="p-2">
-             Thanh toán qua MoMo 
-        </div>
-        <div class="p-2" style="margin-left: 230px ;">
-           <button (click)="paymentByMoMo()"  mat-button color="primary">Chọn</button>
-     </div>
-    </div>
-    
-</mat-card>
 
-<mat-card >
-  <div class="d-flex align-items-center">
-      <div class="p-2">
-           <img src="../../../../assets/images/paypal.png">
-      </div>
-      <div class="p-2">
-           Thanh toán qua PayPal
-      </div>
-      <div class="p-2" style="margin-left: 230px ;">
-         <button (click)="paymentByPayPal()"  mat-button color="primary">Chọn</button>
-   </div>
-  </div>
-  
-</mat-card>
-     
-     
-      
+     <mat-card *ngFor="let transaction of allTransaction ; let i=index">
+          <div *ngIf="transaction.id!='1'" class="d-flex align-items-center">
+               <div  >
+                    <section   >
+                         <mat-checkbox (change)="showOptions($event)" id="{{i}}" [(ngModel)]="transaction.checked"  ></mat-checkbox>
 
+                    </section>
+               </div>
+               <div style="margin-left: 50px;" class="p-2">
+                    <img src="{{transaction.image}}">
+               </div>
+               <div style="margin-left: 250px;" class="p-2">
+                    {{transaction.name}}
+               </div>
+              
+          </div>
+
+     </mat-card>
+
+
+
+
+
+
+     
+</mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-raised-button  mat-dialog-close color="warn">Hủy</button>
-  <button mat-raised-button  color="primary" cdkFocusInitial>Xử lí giao dịch</button>
+     <button mat-raised-button mat-dialog-close color="warn">Hủy</button>
+     <button [disabled]="!isChoose" mat-raised-button [mat-dialog-close]="data" (click)="chooseTransaction()" color="primary" cdkFocusInitial>Chọn</button>
 </mat-dialog-actions>
