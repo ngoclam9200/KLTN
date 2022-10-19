@@ -24,12 +24,12 @@ export class CheckoutComponent implements OnInit {
     , private infoShopService: InfoshopService, private shippingfeeService: ShippingfeeService,
     private voucherService: VoucherService,
     private orderService: OrderService, private router: Router,
-     ) {
-      this.orderService.isCheckout.subscribe(res=>{
-       })
-      }
-  rows: any = [];
-  dataCart: any=[]
+  ) {
+    this.orderService.isCheckout.subscribe(res => {
+    })
+  }
+  
+  dataCart: any = []
   addressUser: any;
   shippingfee: any
   addressShop: any
@@ -39,16 +39,18 @@ export class CheckoutComponent implements OnInit {
   isCodeVoucherPrice: any = false
   isCodeVoucherShip: any = false
   total: any
-  feeship: any
-  unitPrice: any=0
-  shippingFeeId: any
+  shippingFeeDiscount:any
+  unitPriceDiscount:any
+  unitPrice: any = 0
+  
   message: any = " "
-  transactionName="Thanh toán khi nhận hàng"
-  returnUrl:any
+  transactionName = "Thanh toán khi nhận hàng"
+  returnUrl: any
   displayedColumns: string[] = ['ten', 'dongia', 'discount', 'soluong', 'thanhtien'];
   // dataSource:any;
   changePayment = false
-  data:any
+  data: any
+
   ngOnInit(): void {
 
     this.getData()
@@ -57,62 +59,60 @@ export class CheckoutComponent implements OnInit {
     let listid = this.route.snapshot.params.id
 
     var id = listid.split("&")
-     for (let i = 0; i < id.length; i++) {
+    this.dataCart = []
+    for (let i = 0; i < id.length; i++) {
       this.cartService.getCartById(id[i]).subscribe(res => {
-         var datares:any
-        datares=res
-        datares=datares.data
+        var datares: any
+        datares = res
+        datares = datares.data
         this.dataCart.push(datares[0])
-         this.unitPrice += ( datares[0].product.price - datares[0].product.price*datares[0].product.discount/100)*datares[0].quantity
-        
+        this.unitPrice += (datares[0].product.price - datares[0].product.price * datares[0].product.discount / 100) * datares[0].quantity
+        this.unitPriceDiscount=this.unitPrice
       })
-           
-    
-    
-      
+
+
+
+
     }
-    
-   
+
+    var data :any= {
+      service_type_id: 2,
+      insurance_value: this.unitPrice,
+      coupon: null,
+      // from_district_id:this.addressShop.districtID ,
+      // to_district_id: this.addressUser.districtID,
+      // to_ward_code: this.addressUser.wardCode,
+      height: 10,
+      length: 20,
+      weight: 500,
+      width: 20
+    }
     this.addressService.getAddressDefaultUser(localStorage.getItem("userId")).subscribe(res => {
-      
+
       this.addressUser = res
       this.addressUser = this.addressUser.data
- 
+      console.log(this.addressUser)
+      data. to_district_id=this.addressUser[0].districtID
+      data.to_ward_code= this.addressUser[0].wardCode
       this.infoShopService.getInfoShop().subscribe(res => {
-       
+
         this.addressShop = res
         this.addressShop = this.addressShop.data
-        var provinceUser = this.addressUser[0].address.split(",")
-        provinceUser = provinceUser[provinceUser.length - 2]
-        var provinceShop = this.addressShop[0].address.split(",")
-        provinceShop = provinceShop[provinceShop.length - 2]
-        if (provinceShop.trim() == provinceUser.trim()) {
-          this.shippingfeeService.searchShippingFee("Nội thành").subscribe(res => {
-           
-            this.shippingfee = res
-            this.shippingFeeId = this.shippingfee.data[0]?.id
-            this.shippingfee = this.shippingfee.data[0]?.price
-           
-           
+      data.from_district_id=this.addressShop[0].districtID 
+        console.log(data)
+        this.shippingfeeService.getShippingFeeGHN(data).subscribe(res=>{
+          console.log(res)
+          this.shippingfee=res
+          this.shippingfee=this.shippingfee.data.total
+          this.shippingFeeDiscount=this.shippingfee
+        })
          
-
-          })
-        }
-        else {
-          this.shippingfeeService.searchShippingFee("Ngoại thành").subscribe(res => {
-
-            this.shippingfee = res
-            this.shippingfee = this.shippingfee.data[0].price
-            this.total=this.unitPrice+this.shippingfee
-          })
-        }
       })
     })
-    for (let i = 0; i < this.dataCart.length; i++) {
- 
-     }
-    
+
+
   }
+ 
   changeAddress(data: any) {
     const dialogRef = this.dialog.open(ChangeAddressComponent, {
       width: '800px',
@@ -125,8 +125,8 @@ export class CheckoutComponent implements OnInit {
   }
   addAddress() {
     const dialogRef = this.dialog.open(AddAddressComponent, {
-      width: '800px',
-      height: '300px'
+      width: '80%',
+      height: '370px'
 
     })
     dialogRef.afterClosed().subscribe(res => {
@@ -134,45 +134,47 @@ export class CheckoutComponent implements OnInit {
     })
   }
   changePaymentMethod() {
-   const dialogRef= this.dialog.open(ChangePaymentMethodComponent, {
+    const dialogRef = this.dialog.open(ChangePaymentMethodComponent, {
       width: '700px',
       data: this.transactionName
     })
     dialogRef.afterClosed().subscribe(result => {
-      this.transactionName=result
-     
+      this.transactionName = result
+
     });
 
   }
   searchVoucher() {
+    this.unitPriceDiscount=this.unitPrice
+    this.shippingFeeDiscount=this.shippingfee
     this.voucherService.searchVoucher(this.codeVoucher).subscribe(res => {
-       this.discountbyvoucher = res
+      this.discountbyvoucher = res
       this.isCodeVoucher = true
       this.discountbyvoucher = this.discountbyvoucher.data
       if (this.discountbyvoucher[0].discountprice > 0) {
         this.isCodeVoucherPrice = true
         this.isCodeVoucherShip = false
 
-        this.unitPrice = (this.unitPrice - this.unitPrice * this.discountbyvoucher[0].discountprice / 100)
+        this.unitPriceDiscount = (this.unitPrice - this.unitPrice * this.discountbyvoucher[0].discountprice / 100)
       }
       else {
         this.isCodeVoucherPrice = false
         this.isCodeVoucherShip = true
-         this.shippingfee=this.shippingfee-this.shippingfee*this.discountbyvoucher[0].discountfreeship / 100
-       }
-      
-      
+        this.shippingFeeDiscount = this.shippingfee - this.shippingfee * this.discountbyvoucher[0].discountfreeship / 100
+      }
+
+
     }, err => {
 
     })
   }
   checkout() {
-    
+
     var data: any = {
       userId: localStorage.getItem("userId"),
       addressShip: this.addressUser[0]?.address,
-      unitPrice: this.shippingfee+ this.unitPrice,
-      shippingFeeId: this.shippingFeeId,
+      // unitPrice: this.shippingfee + this.unitPrice,
+      shippingFee: this.shippingFeeDiscount,
       transactionId: "1",
       statusOrderId: "1",
       listProduct: [],
@@ -180,54 +182,70 @@ export class CheckoutComponent implements OnInit {
       phonenumber: this.dataCart[0].user.phonenumber,
       voucherId: "0",
       message: this.message,
-      
+
 
 
     }
-     if (this.discountbyvoucher?.length > 0) {
-      
+    if (this.discountbyvoucher?.length > 0) {
+
       data.voucherId = this.discountbyvoucher[0].id
-      data.unitPrice = Math.round(this.shippingfee + this.unitPrice)
-      
-      
+      // data.unitPrice = Math.round(this.shippingfee + this.unitPrice)
+
+
 
 
     }
-    for(let i=0 ; i<this.dataCart.length ;i++)
-    {
+    for (let i = 0; i < this.dataCart.length; i++) {
       data.listProduct.push({
-        productId:this.dataCart[i].product.id,
+        productId: this.dataCart[i].product.id,
         productCount: this.dataCart[i].quantity
       })
     }
-     
-    
 
-    if(this.transactionName=="Thanh toán qua Paypal")
-    {
-      var url=window.location.origin + "/checkout/"
-       
-      var paypal={
-        total:  ( data.unitPrice),
-        returnUrl:url
+
+
+    if (this.transactionName == "Thanh toán qua Paypal") {
+      var url = window.location.origin + "/checkout/"
+
+      var paypal = {
+        total: Math.round(this.unitPriceDiscount+this.shippingFeeDiscount),
+        returnUrl: url
       }
 
-       
-      this.orderService.paymentPayPal(paypal).subscribe(res=>
-        {
-           this.returnUrl=res
-          this.returnUrl=this.returnUrl.data
-          window.open(this.returnUrl, "_self");
-          data.transactionId="2"
-           localStorage.setItem("dataPayment",JSON.stringify(data))
-           localStorage.setItem("currentUrl", location.href)
-          
-        })
+      console.log(paypal);
       
+      this.orderService.paymentPayPal(paypal).subscribe(res => {
+        this.returnUrl = res
+        this.returnUrl = this.returnUrl.data
+        window.open(this.returnUrl, "_self");
+        data.transactionId = "2"
+        localStorage.setItem("dataPayment", JSON.stringify(data))
+        localStorage.setItem("currentUrl", location.href)
+
+      })
+
     }
-    else
+    else if(this.transactionName == "Thanh toán qua VnPay")
     {
-       Swal.fire({
+    data.transactionId="3"
+     data.bankCode=""
+     data.vnpLocale=""
+     data.vnp_Returnurl=window.location.origin + "/checkout/"
+     console.log(data)
+     this.orderService.paymentVnPay(data).subscribe(res=>{
+      console.log(res);
+      this.returnUrl=res
+      this.returnUrl = this.returnUrl.data
+      window.open(this.returnUrl, "_self");
+      localStorage.setItem("dataPayment", JSON.stringify(data))
+      localStorage.setItem("transaction","vnpay")
+     
+      
+     })
+    }
+    else {
+       
+      Swal.fire({
         title: 'Mua sản phẩm này?',
         text: "Sản phẩm này sẽ không còn trong giỏ hàng!",
         icon: 'warning',
@@ -236,21 +254,21 @@ export class CheckoutComponent implements OnInit {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Mua !'
       }).then((result) => {
-  
+
         if (result.isConfirmed) {
           this.orderService.createOrder(data).subscribe(res => {
-             Swal.fire(
+            Swal.fire(
               'Đã mua !',
               'Sản phẩm đã được mua.',
               'success'
             )
             this.router.navigate(['/orders'])
           })
-  
+
         }
       })
     }
-    
+
 
 
   }

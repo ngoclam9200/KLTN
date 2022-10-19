@@ -1,43 +1,123 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   
-    <script
-        src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg">
-        
-    </script>
-
-   
-</head>
+ 
+ 
 <h2 mat-dialog-title>Thêm địa chỉ</h2>
 <mat-dialog-content class="mat-typography">
-    <form  >
-    <p>
-      <mat-form-field appearance="outline">
-        <mat-label>Địa chỉ</mat-label>
-        <input [(ngModel)]="address" [ngModelOptions]="{standalone: true}" id="search_input"    matInput placeholder="Nhập địa chỉ">
-        <mat-icon matSuffix>edit</mat-icon>
-        <!-- <mat-hint *ngIf="( formGroup.get('name').invalid && formGroup.get('name').touched )|| (formGroup.get('name').invalid && isSubmit) " class="text-danger">Chọn tên  sản phẩm</mat-hint> -->
-      </mat-form-field>
-    </p>
-    </form>
-    <input style="visibility: hidden;" id="lat">
-    <input style="visibility: hidden;" id="lng">
-                
-               
+   
+  <mat-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup"   >
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Chọn tỉnh, thành phố</ng-template>
       
+        <mat-form-field style="width:400px"  appearance="outline">
+          <mat-label>Tỉnh, thành phố</mat-label>
+          <mat-select   (selectionChange)="getDistrict($event)" formControlName="firstCtrl" >
+            <mat-option  *ngFor="let prov of allProvince" [value]="prov.ProvinceID">{{prov.ProvinceName}} </mat-option>
+
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Tiếp</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup"  >
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Chọn quận, huyện</ng-template>
+        <mat-form-field style="width:400px" appearance="outline">
+          <mat-label>Quận, huyện </mat-label>
+          <mat-select   (selectionChange)="getWard($event)" formControlName="secondCtrl"  >
+            <mat-option *ngFor="let dis of allDistrict" [value]="dis.DistrictID">{{dis.DistrictName}} </mat-option>
+
+          </mat-select>
+        </mat-form-field>
+        
+        <div>
+          <button mat-button matStepperPrevious>Quay lại</button>
+          <button mat-button matStepperNext>Tiếp</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="threeFormGroup"  >
+      <form [formGroup]="threeFormGroup">
+        <ng-template matStepLabel>Chọn xã, phường</ng-template>
+       
+        <mat-form-field style="width:400px" appearance="outline">
+          <mat-label>Phường xã</mat-label>
+          <mat-select  (selectionChange)="getWardChange($event)"  formControlName="threeCtrl" >
+            <mat-option *ngFor="let w of allWard" [value]="w.WardCode">{{w.WardName}} </mat-option>
+          
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Quay lại</button>
+          <button mat-button matStepperNext>Tiếp</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="fourFormGroup"  >
+      
+      <form [formGroup]="fourFormGroup">
+        <ng-template matStepLabel>Chọn số nhà , tên đường</ng-template>
+        
+            <mat-form-field style="width:150px" appearance="outline">
+              <mat-label>Số nhà</mat-label>
+              <input formControlName="four1Ctrl"  matInput>
+            </mat-form-field>
+          
+            <mat-form-field style="width:225px; margin-left: 25px;" appearance="outline">
+              <mat-label>Tên đường</mat-label>
+              <input formControlName="four2Ctrl"   matInput>
+            </mat-form-field>
+       
+            
+          
+      </form>
+     
+      <div>
+        <button mat-button matStepperPrevious>Quay lại</button>
+        <button mat-button matStepperNext (click)="getAddress()">Tiếp</button>
+      </div>
+    </mat-step>
+    <mat-step  >
+      
+      
+     
+      <div>
+        <div style="font-size: 16px;" class="d-flex justify-content-center">
+         Địa chỉ:  {{address}}
+        </div>
+        <br>
+        <div class="d-flex justify-content-center">
+          <div class="p-2">
+            <button mat-button matStepperPrevious>Quay lại</button>
+          </div>
+          <div class="p-2">
+          <button  mat-raised-button (click)="stepper.reset()"  color="primary">Reset</button>
+            
+          </div>
+          <div class="p-2">
+          <button mat-raised-button mat-dialog-close color="warn">Đóng</button>
+            
+          </div>
+          <div class="p-2">
+          <button mat-raised-button (click)=" addAddress()" color="primary" cdkFocusInitial>Thêm địa chỉ</button>
+            
+          </div>
+        
+        </div>
+       
+      </div>
+    </mat-step>
+  </mat-stepper>
+
+
+
 
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-raised-button mat-dialog-close color="warn">Đóng</button>
-  <button    mat-raised-button (click)=" addAddress()"   color="primary" cdkFocusInitial>Thêm</button>
- </mat-dialog-actions>
  
+
 
 </html>

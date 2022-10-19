@@ -25,8 +25,8 @@ export class ChangeAddressComponent implements OnInit {
   {
     
     const dialogRef=this.dialog.open(UpdateAddressComponent, {
-      width: '700px',
-      height: '548px,',
+      width: '80%',
+      height: '370px,',
       data:data
     })
     dialogRef.afterClosed().subscribe(res=>{
@@ -86,8 +86,9 @@ export class ChangeAddressComponent implements OnInit {
   {
     
    const dialogRef= this.dialog.open(AddAddressComponent, {
-      width: '800px',
-      height :'300px'
+    width: '80%',
+    height: '370px'
+
       
     })
     dialogRef.afterClosed().subscribe(res=>{

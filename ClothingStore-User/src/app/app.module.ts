@@ -55,7 +55,7 @@ import { ForgotPasswordComponent } from './component/forgot-password/forgot-pass
 import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
 import { ChangeAvatarComponent } from './component/profile/change-avatar/change-avatar.component';
 import { ConfirmCheckoutComponent } from './component/checkout/confirm-checkout/confirm-checkout.component';
-  
+import {MatStepperModule} from '@angular/material/stepper';
 @NgModule({
   declarations: [
     AppComponent,
@@ -104,6 +104,7 @@ import { ConfirmCheckoutComponent } from './component/checkout/confirm-checkout/
     MatExpansionModule,
     MatTabsModule, 
     MatSelectModule,
+    MatStepperModule,
  
     ReactiveFormsModule, NgxPaginationModule,
    

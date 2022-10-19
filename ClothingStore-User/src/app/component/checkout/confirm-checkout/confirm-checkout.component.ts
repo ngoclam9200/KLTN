@@ -15,14 +15,36 @@ export class ConfirmCheckoutComponent implements OnInit {
   isPaymentSuccess:boolean=false
   
   ngOnInit(): void {
-  
-    var data:any =localStorage.getItem("dataPayment")
-  if(data==null)
-  this.isPaymentSuccess=true
-  
+   
+    if(localStorage.getItem("transaction")=="vnpay")
+    {
+      this.isPaymentSuccess=true
+      this.route.queryParams.subscribe(params => {
+        let orderInfo = params['vnp_OrderInfo'];
+         orderInfo= orderInfo.split(":")
+         let orderId=orderInfo[1]
+         let data={
+          id:orderId
+         }
+         this.orderService.checkoutVnPay(data).subscribe(res=>{
+          
+         })
+    
+      })
+      localStorage.removeItem("dataPayment")
+      localStorage.removeItem("transaction")
+    }
+    else
+    {
+      var data:any =localStorage.getItem("dataPayment")
+      if(data==null)
+      this.isPaymentSuccess=true
+    }
+   
+    
 
   }
-  checkout()
+  checkoutPayPal()
   {
     this.route.queryParams.subscribe(params => {
       let paymentId = params['paymentId'];

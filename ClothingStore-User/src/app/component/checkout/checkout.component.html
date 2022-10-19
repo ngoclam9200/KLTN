@@ -125,19 +125,19 @@
             <div class="d-flex flex-column">
                 <div class="d-flex flex-row">
                     <div class="p-2">Tổng tiền hàng : </div>
-                    <div *ngIf="!isCodeVoucherPrice"  style="color: #f33f3f;" class="p-2"> {{unitPrice | currency: "VND"}}</div>
-                    <div *ngIf="isCodeVoucherPrice && discountbyvoucher[0].discountprice>0"   style="color: #f33f3f;" class="p-2"> {{unitPrice | currency: "VND"}}</div>
+                    <div *ngIf="!isCodeVoucherPrice"  style="color: #f33f3f;" class="p-2"> {{unitPriceDiscount | currency: "VND"}}</div>
+                    <div *ngIf="isCodeVoucherPrice && discountbyvoucher[0].discountprice>0"   style="color: #f33f3f;" class="p-2"> {{unitPriceDiscount | currency: "VND"}} (đã áp dụng voucher)</div>
  
                   </div>
                   <div class="d-flex flex-row">
                     <div class="p-2">Phí vận chuyển :</div>
-                    <div *ngIf="!isCodeVoucherShip" style="color: #f33f3f;" class="p-2">{{shippingfee | currency:"VND"}}</div>
-                    <div *ngIf="isCodeVoucher &&  discountbyvoucher[0].discountfreeship>0"  style="color: #f33f3f;" class="p-2">{{shippingfee| currency:"VND"}} (đã áp dụng voucher)</div>
+                    <div *ngIf="!isCodeVoucherShip" style="color: #f33f3f;" class="p-2">{{shippingFeeDiscount | currency:"VND"}}</div>
+                    <div *ngIf="isCodeVoucher &&  discountbyvoucher[0].discountfreeship>0"  style="color: #f33f3f;" class="p-2">{{shippingFeeDiscount| currency:"VND"}} (đã áp dụng voucher)</div>
                   </div>
                  
                   <div class="d-flex align-items-center">
                     <div class="p-2">Nhập voucher để được giảm giá : </div>
-                    <div style="color: #f33f3f;" class="p-2"><input [(ngModel)]="codeVoucher" placeholder="Nhập mã voucher" /></div>
+                    <div style="color: #f33f3f;" class="p-2"><input   [(ngModel)]="codeVoucher" placeholder="Nhập mã voucher" /></div>
                     <div class="p-2"> <button (click)="searchVoucher()" mat-raised-button style="color:#f33f3f">Áp dụng</button> </div>
                   </div>
                   <div *ngIf="isCodeVoucher" class="d-flex flex-row">
@@ -147,7 +147,7 @@
                   </div>
                   <div class="d-flex flex-row">
                     <div class="p-2">Thành tiền : </div>
-                    <div  style="color: #f33f3f;" class="p-2">{{unitPrice + shippingfee | currency :"VND" }}</div>
+                    <div  style="color: #f33f3f;" class="p-2">{{unitPriceDiscount + shippingFeeDiscount | currency :"VND" }}</div>
  
 
                   </div>

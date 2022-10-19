@@ -50,10 +50,21 @@ export class OrderService {
     let header=this.getHeader()
     return this.http.post(this.apiUrl+ "/PaymentPaypal/",data, {headers:header})
   }
+  paymentVnPay(data:any)
+  {
+    
+    let header=this.getHeader()
+    return this.http.post(this.apiUrl+ "/paymentVnPay/",data, {headers:header})
+  }
   checkoutPaypal(data:any)
   {
     this.isCheckout.emit(true)
     let header=this.getHeader()
     return this.http.post(this.apiUrl+ "/CheckoutPaypal/",data, {headers:header})
+  }
+  checkoutVnPay(data:any)
+  {
+    let header=this.getHeader()
+    return this.http.post(this.apiUrl+ "/checkout-paymentVnPay/",data, {headers:header})
   }
 }
