@@ -33,17 +33,21 @@ export class OrdersComponent implements OnInit {
       this.orderService.getOrderWaitConfirm(localStorage.getItem("userId"))
         .subscribe(res => {
            this.allOrder = res
+           console.log(res)
           this.allOrder = this.allOrder.data
+          
+          this.allProduct=[]
           for(let i=0 ; i< this.allOrder.length; i++)
           {
             this.orderDetailService.getOrderDetailByOrderId(this.allOrder[i].id).subscribe(res=>{
               this.prod=res
                this.prod=this.prod.data
-              this.allProduct=[]
+
               for(let i=0; i<this.prod.length;i++)
               {
                 this.allProduct.push(this.prod[i])
               }
+              console.log(this.allProduct)
              
              
             })

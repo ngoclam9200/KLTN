@@ -57,7 +57,7 @@ export class CheckoutComponent implements OnInit {
   }
   getData() {
     let listid = this.route.snapshot.params.id
-
+    this.unitPrice=0
     var id = listid.split("&")
     this.dataCart = []
     for (let i = 0; i < id.length; i++) {

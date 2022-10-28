@@ -18,7 +18,7 @@
                     <div class="filters-content">
                       <div class="row grid">
                         <div
-                          *ngFor="let item of listProduct | paginate :{itemsPerPage :1 , currentPage:page, totalItems:totalLength}"
+                          *ngFor="let item of listProduct | paginate :{itemsPerPage :6 , currentPage:page, totalItems:totalLength}"
                           class="col-lg-4 col-md-4 all des">
                           <div class="product-item">
                             <a routerLink="/product-detail/{{item.id}}"><img class="border" src="{{item.image}}" alt=""></a>

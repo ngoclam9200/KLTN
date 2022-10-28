@@ -50,17 +50,23 @@ export class ProfileComponent implements OnInit {
     this.isSubmit=true
     this.phonenumberValidate = this.validateService.validatePhoneNumber(this.formGroup.controls['phonenumber'].value)
     if(this.formGroup.valid && this.phonenumberValidate)
-    {
+    { 
+
       this.userService.editUser(this.formGroup.value).subscribe(res=>{
+        this.getData()
        })
     }
   }
   changeAvatar()
   {
-    this.dialog.open(ChangeAvatarComponent, {
+    const dialogRef=this.dialog.open(ChangeAvatarComponent, {
       width:"600px",
       data: this.dataUser
     })
+    dialogRef.afterClosed().subscribe(res=>
+      {
+        this.getData()
+      })
   }
 
 }

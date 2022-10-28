@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class ChangeAvatarComponent implements OnInit {
     reader.readAsDataURL(this.selectedFile);
     this.isChooseImage = false
   }
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private userService: UserService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private userService: UserService, private dialog:MatDialog) { }
 
   ngOnInit(): void {
    }
@@ -37,7 +37,7 @@ export class ChangeAvatarComponent implements OnInit {
         avatar: this.imagePreview
       }
        this.userService.editAvatarUser(data).subscribe(res=>{
-         
+         this.dialog.closeAll()
       })
       
     }
