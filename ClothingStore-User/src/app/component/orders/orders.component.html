@@ -71,8 +71,8 @@
                                         </td>
                                         
                                         <td *ngIf="item.orderId==order.id" style="color: #f33f3f" class="text-right font-weight-semibold align-middle p-2 text-center">
-                                            {{(item.product.price-
-                                            item.product.price*item.product.discount/100)*item.productCount |
+                                            {{(item.priceProduct-
+                                            item.priceProduct*item.discountProduct/100)*item.productCount |
                                             currency
                                             :"VND" }}
                                         </td>
@@ -83,7 +83,7 @@
                         <div class="d-flex justify-content-left">
                             <div class="d-flex flex-row">
                                 <div class=" font-weight-bold p-2">Phí vận chuyển :</div>
-                                <div style="color: #f33f3f" class="p-2"> {{order.shippingFee.price | currency:"VND"}} </div>
+                                <div style="color: #f33f3f" class="p-2"> {{order.shippingFee | currency:"VND"}} </div>
                                 
                                  
                             </div>

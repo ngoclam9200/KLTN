@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-change-avatar',
@@ -24,23 +25,51 @@ export class ChangeAvatarComponent implements OnInit {
     reader.readAsDataURL(this.selectedFile);
     this.isChooseImage = false
   }
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private userService: UserService, private dialog:MatDialog) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private userService: UserService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-   }
-  uploadAvatar()
-  {
-    if(this.imagePreview)
-    {
-      var data={
-        id: this.data.id,
-        avatar: this.imagePreview
+  }
+  uploadAvatar() {
+    Swal.fire({
+      title: 'Bạn có chắc chắn muốn thay đổi ảnh đại diện?',
+      text: "Ảnh sẽ bị thay đổi , bạn không thể hoàn tác!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Chỉnh sửa!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (this.imagePreview) {
+          var data = {
+            id: this.data.id,
+            avatar: this.imagePreview
+          }
+          this.userService.editAvatarUser(data)
+          this.userService.avatar.subscribe(res=>{
+            Swal.fire(
+                  'Đã chỉnh sửa!',
+                  'Thông tin được chỉnh sửa',
+                  'success'
+                )
+                this.dialog.closeAll()
+          })
+          // .subscribe(res => {
+          //   Swal.fire(
+          //     'Đã chỉnh sửa!',
+          //     'Thông tin được chỉnh sửa',
+          //     'success'
+          //   )
+          //   this.dialog.closeAll()
+          // })
+
+        }
+
+
+
       }
-       this.userService.editAvatarUser(data).subscribe(res=>{
-         this.dialog.closeAll()
-      })
-      
-    }
+    })
+
   }
 
 }

@@ -1,4 +1,4 @@
-<app-header  active="Profile"></app-header>
+<app-header  active="Profile" ></app-header>
  
 <!DOCTYPE html>
 <html>
@@ -52,7 +52,7 @@
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Số điện thoại</label>
                         <div class="col-sm-10">
-                            <input formControlName="phonenumber" type="number" class="form-control" id="inputPassword">
+                            <input (input)="inputPhoneChange()" formControlName="phonenumber" type="text" class="form-control" id="inputPassword">
                             <mat-hint  *ngIf=" (formGroup.get('phonenumber')?.invalid && formGroup.get('phonenumber')?.touched)"> 
                                 Vui lòng nhập số điện thoại
                             </mat-hint>

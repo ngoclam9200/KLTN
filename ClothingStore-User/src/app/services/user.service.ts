@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
 
   apiUrl=environment.apiUrl+"/User"
- 
+  @Output() avatar = new EventEmitter();
   constructor( private http: HttpClient ,) { }
   forgotPass(email:any)
   {
@@ -32,6 +33,9 @@ export class UserService {
   }
   editAvatarUser(data:any)
   {
-    return this.http.put(this.apiUrl+ "/edit-avatar-user", data)
+
+    return this.http.put(this.apiUrl+ "/edit-avatar-user", data).subscribe(res=>{
+      this.avatar.emit(data.avatar)
+    })
   }
 }

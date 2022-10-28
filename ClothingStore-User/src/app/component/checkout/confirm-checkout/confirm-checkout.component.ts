@@ -39,6 +39,10 @@ export class ConfirmCheckoutComponent implements OnInit {
       var data:any =localStorage.getItem("dataPayment")
       if(data==null)
       this.isPaymentSuccess=true
+      else
+      {
+        this.checkoutPayPal()
+      }
     }
    
     

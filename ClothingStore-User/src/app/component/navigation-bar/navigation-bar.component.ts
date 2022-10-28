@@ -15,6 +15,9 @@ export class NavigationBarComponent implements OnInit {
   
       this.dataUser=res
       this.dataUser=this.dataUser.data
+      this.userService.avatar.subscribe(res=>{
+        this.dataUser.avatar=res
+      })
      })
    
 

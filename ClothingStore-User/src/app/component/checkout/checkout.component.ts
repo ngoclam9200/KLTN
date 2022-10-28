@@ -92,22 +92,31 @@ export class CheckoutComponent implements OnInit {
       this.addressUser = res
       this.addressUser = this.addressUser.data
       console.log(this.addressUser)
-      data. to_district_id=this.addressUser[0].districtID
-      data.to_ward_code= this.addressUser[0].wardCode
-      this.infoShopService.getInfoShop().subscribe(res => {
-
-        this.addressShop = res
-        this.addressShop = this.addressShop.data
-      data.from_district_id=this.addressShop[0].districtID 
-        console.log(data)
-        this.shippingfeeService.getShippingFeeGHN(data).subscribe(res=>{
-          console.log(res)
-          this.shippingfee=res
-          this.shippingfee=this.shippingfee.data.total
-          this.shippingFeeDiscount=this.shippingfee
+      if(this.addressUser.length>0)
+      {
+        data. to_district_id=this.addressUser[0].districtID
+        data.to_ward_code= this.addressUser[0].wardCode
+        this.infoShopService.getInfoShop().subscribe(res => {
+  
+          this.addressShop = res
+          this.addressShop = this.addressShop.data
+        data.from_district_id=this.addressShop[0].districtID 
+          console.log(data)
+          this.shippingfeeService.getShippingFeeGHN(data).subscribe(res=>{
+            console.log(res)
+            this.shippingfee=res
+            this.shippingfee=this.shippingfee.data.total
+            this.shippingFeeDiscount=this.shippingfee
+          })
+           
         })
-         
-      })
+
+      }
+      else
+      {
+        this.addAddress()
+      }
+    
     })
 
 

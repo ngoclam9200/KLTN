@@ -64,8 +64,8 @@
                                 {{item.product.discount}}%
                             </td>
                             <td  style="color: #f33f3f" class="text-right font-weight-semibold align-middle p-4 text-center">
-                                {{item.product.price-
-                                item.product.price*item.product.discount/100 |
+                                {{(item.product.price-
+                                item.product.price*item.product.discount/100)*item.quantity |
                                 currency
                                 :"VND" }}
                             </td>

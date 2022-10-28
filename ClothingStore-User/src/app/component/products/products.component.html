@@ -23,13 +23,18 @@
                           <div class="product-item">
                             <a routerLink="/product-detail/{{item.id}}"><img class="border" src="{{item.image}}" alt=""></a>
                             <div class="down-content">
-                              <div class="d-flex justify-content-between">
-                                <a routerLink="/product-detail/{{item.id}}">
-                                  <h4>{{item.name}}</h4>
-                                </a>
-                                <h6>{{item.price | currency : 'VND'}}</h6>
+                              <div class="d-flex">
+                                <div class="mr-auto p-2">
+                                  <a routerLink="/product-detail/{{item.id}}">
+                                    <h4>{{item.name}}</h4>
+                                  </a>
+                                </div>
+                                <div *ngIf="item.discount>0" class="p-2" style="text-decoration-line:line-through" >{{item.price | currency : 'VND'}}</div>
+                                <div class="p-2" style="color:  #f33f3f ;">{{item.price-item.price*item.discount/100 | currency : 'VND'}}</div>
+                           
                               </div>
-                              <p>{{item.description}}</p>
+                               
+                              <p style="text-align: left;">{{item.description}}</p>
                               <div class="d-flex align-items-center">
                                 <button (click)="addToCart(item.id)" type="button" class="add-cart-btn"><i
                                     class="fas fa-shopping-cart"></i>Thêm vào
