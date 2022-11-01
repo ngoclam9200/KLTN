@@ -23,10 +23,34 @@ export class SignUpComponent implements OnInit {
   confirmpass:string=""
   Gender: any = ""
   isSubmit:boolean=false
+  isLoading:boolean=false
   constructor(private validateService : ValidateService, private userService:UserService, private router :Router) { }
 
   ngOnInit(): void {
     this.initForm()
+  }
+  inputEmailChange()
+  {
+    this.emailValidate = this.validateService.ValidateEmail(this.formGroup.controls['email'].value)
+  }
+  inputPhoneNumberChange()
+  {
+    this.phonenumberValidate = this.validateService.validatePhoneNumber(this.formGroup.controls['phonenumber'].value)
+
+  }
+  inputUsernameChange()
+  {
+    this.usernameValidate=this.validateService.validateUsername(this.formGroup.controls['username'].value)
+  }
+  inputPassChange()
+  {
+    this.passwordValidate=this.validateService.ValidatePassword(this.formGroup.controls['password'].value)
+
+  }
+  inputConfPassChange()
+  {
+    this.isconfirmpassword=this.validateService.confirmPassw(this.formGroup.controls['password'].value,this.confirmpass)
+
   }
   initForm() {
      
@@ -41,8 +65,9 @@ export class SignUpComponent implements OnInit {
   }
   registerUser()
   {
-     this.emailExist=true
-  this.usernameExist=true
+
+    this.emailExist=true
+   this.usernameExist=true
     this.isSubmit=true
     this.emailValidate = this.validateService.ValidateEmail(this.formGroup.controls['email'].value)
     this.phonenumberValidate = this.validateService.validatePhoneNumber(this.formGroup.controls['phonenumber'].value)
@@ -57,8 +82,10 @@ export class SignUpComponent implements OnInit {
     }
     if(this.emailValidate && this.phonenumberValidate && this.usernameValidate && this.isconfirmpassword && this.passwordValidate)
     {
+      this.isLoading=true
       this.userService.registerUser(this.formGroup.value).subscribe(res=>
         {
+          this.isLoading=false
           Swal.fire({
             title: 'Đăng kí tài khoản thành công',
             text: "Vui lòng check mail để xác thực email",

@@ -66,8 +66,7 @@ export class ChangePaymentMethodComponent implements OnInit {
     }
       
       this.data ="Thanh toán qua "+  this.allTransaction[parseInt(this.transactionId)].name
-      console.log(this.data)
-      this.dialogRef.close(this.data)
+       this.dialogRef.close(this.data)
    
   }
 }

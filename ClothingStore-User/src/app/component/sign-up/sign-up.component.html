@@ -1,16 +1,17 @@
 <app-header active="SignUp"></app-header>
+
  
  
+  <app-loading *ngIf="isLoading"></app-loading>
  
- 
-  <div class="container">
+  <div class="container" *ngIf="!isLoading" >
     <div style="font-size: 30px;" class="d-flex justify-content-center">Đăng kí tài khoản</div>
     <form [formGroup]="formGroup">
       <div class="d-flex justify-content-center">
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input formControlName="email" matInput placeholder="Nhập email">
+            <input (input)="inputEmailChange()" formControlName="email" matInput placeholder="Nhập email">
             
             <mat-hint  *ngIf=" (formGroup.get('email')?.invalid && formGroup.get('email')?.touched) || (formGroup.get('email')?.invalid && isSubmit)"> Chọn một
               địa chỉ email</mat-hint>
@@ -23,7 +24,7 @@
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Tên đăng nhập</mat-label>
-            <input formControlName="username" matInput placeholder="Nhập tên đăng nhập">
+            <input (input)="inputUsernameChange()" formControlName="username" matInput placeholder="Nhập tên đăng nhập">
             
             <mat-hint  *ngIf=" (formGroup.get('username')?.invalid && formGroup.get('username')?.touched) || (formGroup.get('username')?.invalid && isSubmit)">  Vui lòng nhập tên đăng nhập</mat-hint>
           <mat-hint   *ngIf=" !usernameValidate && formGroup.get('username')?.valid">Tên đăng nhập không hợp lệ 
@@ -48,7 +49,7 @@
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Số điện thoại</mat-label>
-            <input type="" formControlName="phonenumber" matInput placeholder="Nhập số điện thoại">
+            <input (input)="inputPhoneNumberChange()" type="" formControlName="phonenumber" matInput placeholder="Nhập số điện thoại">
             
             <mat-hint  *ngIf=" (formGroup.get('phonenumber')?.invalid && formGroup.get('phonenumber')?.touched) || (formGroup.get('phonenumber')?.invalid && isSubmit)">Vui lòng nhập số điện thoại</mat-hint>
             <mat-hint *ngIf="!phonenumberValidate && formGroup.get('phonenumber')?.valid">Số điện thoại không hợp lệ </mat-hint>
@@ -59,7 +60,7 @@
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Mật khẩu</mat-label>
-            <input type="password" formControlName="password" matInput placeholder="Nhập mật khẩu">
+            <input (input)="inputPassChange()" type="password" formControlName="password" matInput placeholder="Nhập mật khẩu">
             <mat-hint  *ngIf=" (formGroup.get('password')?.invalid && formGroup.get('password')?.touched) || (formGroup.get('password')?.invalid && isSubmit)">Vui lòng nhập mật khẩu</mat-hint>
 
           <mat-hint *ngIf=" !passwordValidate && formGroup.get('password')?.valid">Mật khẩu  không hợp lệ ( mật khẩu ít nhất 6 kí tự , nhiều nhất 20 kí tự , bao gồm chữ hoa, chữ thường và số) </mat-hint>
@@ -70,7 +71,7 @@
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Nhập lại mật khẩu</mat-label>
-            <input [(ngModel)]="confirmpass" [ngModelOptions]="{standalone: true}" type="password"  matInput placeholder="Nhập lại mật khẩu">
+            <input (input)="inputConfPassChange()" [(ngModel)]="confirmpass" [ngModelOptions]="{standalone: true}" type="password"  matInput placeholder="Nhập lại mật khẩu">
             <!-- <mat-hint *ngIf="confirmpass.length<0"> Vui lòng nhập lại mật khẩu</mat-hint> -->
             <mat-hint *ngIf=" !isconfirmpassword"> Mật khẩu không trùng</mat-hint>
           </mat-form-field>
@@ -78,7 +79,6 @@
       </div>
       <div class="d-flex justify-content-center">
         <button mat-raised-button   (click)="registerUser()"  color="primary" cdkFocusInitial>Đăng kí tài khoản</button>
-
       </div>
       
       
@@ -86,5 +86,5 @@
     </form>
     
     </div>
- 
+
  

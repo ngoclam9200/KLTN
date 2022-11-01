@@ -91,8 +91,7 @@ export class CheckoutComponent implements OnInit {
 
       this.addressUser = res
       this.addressUser = this.addressUser.data
-      console.log(this.addressUser)
-      if(this.addressUser.length>0)
+       if(this.addressUser.length>0)
       {
         data. to_district_id=this.addressUser[0].districtID
         data.to_ward_code= this.addressUser[0].wardCode
@@ -101,10 +100,8 @@ export class CheckoutComponent implements OnInit {
           this.addressShop = res
           this.addressShop = this.addressShop.data
         data.from_district_id=this.addressShop[0].districtID 
-          console.log(data)
-          this.shippingfeeService.getShippingFeeGHN(data).subscribe(res=>{
-            console.log(res)
-            this.shippingfee=res
+           this.shippingfeeService.getShippingFeeGHN(data).subscribe(res=>{
+             this.shippingfee=res
             this.shippingfee=this.shippingfee.data.total
             this.shippingFeeDiscount=this.shippingfee
           })
@@ -221,8 +218,7 @@ export class CheckoutComponent implements OnInit {
         returnUrl: url
       }
 
-      console.log(paypal);
-      
+       
       this.orderService.paymentPayPal(paypal).subscribe(res => {
         this.returnUrl = res
         this.returnUrl = this.returnUrl.data
@@ -240,10 +236,8 @@ export class CheckoutComponent implements OnInit {
      data.bankCode=""
      data.vnpLocale=""
      data.vnp_Returnurl=window.location.origin + "/checkout/"
-     console.log(data)
-     this.orderService.paymentVnPay(data).subscribe(res=>{
-      console.log(res);
-      this.returnUrl=res
+      this.orderService.paymentVnPay(data).subscribe(res=>{
+       this.returnUrl=res
       this.returnUrl = this.returnUrl.data
       window.open(this.returnUrl, "_self");
       localStorage.setItem("dataPayment", JSON.stringify(data))

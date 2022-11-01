@@ -56,6 +56,7 @@ import { VerifyEmailComponent } from './component/verify-email/verify-email.comp
 import { ChangeAvatarComponent } from './component/profile/change-avatar/change-avatar.component';
 import { ConfirmCheckoutComponent } from './component/checkout/confirm-checkout/confirm-checkout.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import { LoadingComponent } from './component/loading/loading.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +85,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     VerifyEmailComponent,
     ChangeAvatarComponent,
     ConfirmCheckoutComponent,
+    LoadingComponent,
      
 
   ],

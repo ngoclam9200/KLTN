@@ -42,8 +42,7 @@ export class AddAddressComponent implements OnInit {
    
     
     this.addressService.getAllProvince().subscribe(res=>{
-      console.log(res);
-      this.allProvince=res
+       this.allProvince=res
       this.allProvince=this.allProvince.data
       
     })
@@ -63,8 +62,7 @@ export class AddAddressComponent implements OnInit {
     var data={
       province_id : event.value
     }
-    console.log(event);
-    for(let i=0 ; i<this.allProvince.length ; i++)
+     for(let i=0 ; i<this.allProvince.length ; i++)
     {
       if(this.allProvince[i].ProvinceID==event.value)
       {
@@ -74,8 +72,7 @@ export class AddAddressComponent implements OnInit {
     }
     
     this.addressService.getAllDistrict(data).subscribe(res=>{
-      console.log(res)
-      this.allDistrict=res
+       this.allDistrict=res
       this.allDistrict=this.allDistrict.data
     
     
@@ -83,8 +80,7 @@ export class AddAddressComponent implements OnInit {
       this.threeFormGroup.controls['threeCtrl'].setValue(undefined)
       this.fourFormGroup.controls['four1Ctrl'].setValue(undefined)
       this.fourFormGroup.controls['four2Ctrl'].setValue(undefined)
-      console.log(this.secondFormGroup.controls['secondCtrl'].value)
-    })
+     })
     
   }
   getWard(event:any)
@@ -101,8 +97,7 @@ export class AddAddressComponent implements OnInit {
       }
     }
     this.addressService.getAllWard(data).subscribe(res=>{
-      console.log(res)
-      this.allWard=res
+       this.allWard=res
       this.allWard=this.allWard.data
     })
 

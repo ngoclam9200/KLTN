@@ -43,8 +43,7 @@ export class UpdateAddressComponent implements OnInit {
    public dialogRef: MatDialogRef<UpdateAddressComponent>) { }
 
   ngOnInit(): void {
-    console.log(this.data.address)
-    let tmp:any=this.data.address.split(",")
+     let tmp:any=this.data.address.split(",")
    
     
     this.sonha=tmp[0]
@@ -52,8 +51,7 @@ export class UpdateAddressComponent implements OnInit {
     this.fourFormGroup.controls['four1Ctrl'].setValue(this.sonha)
     this.fourFormGroup.controls['four2Ctrl'].setValue(this.street)
     this.addressService.getAllProvince().subscribe(res=>{
-      console.log(res);
-      this.allProvince=res
+       this.allProvince=res
       this.allProvince=this.allProvince.data 
       var data={
         province_id :  this.data.provinceID
@@ -67,8 +65,7 @@ export class UpdateAddressComponent implements OnInit {
           district_id :  this.data.districtID
         }
         this.addressService.getAllWard(datadistrict).subscribe(res=>{
-          console.log(res)
-          this.allWard=res
+           this.allWard=res
           this.allWard=this.allWard.data
           
         })
@@ -129,8 +126,7 @@ export class UpdateAddressComponent implements OnInit {
       }
     }
     this.addressService.getAllWard(data).subscribe(res=>{
-      console.log(res)
-      this.allWard=res
+       this.allWard=res
       this.allWard=this.allWard.data
     })
 
@@ -141,8 +137,7 @@ export class UpdateAddressComponent implements OnInit {
       province_id : event.value
     }
     this.data.provinceID=event.value
-    console.log(event);
-    for(let i=0 ; i<this.allProvince.length ; i++)
+     for(let i=0 ; i<this.allProvince.length ; i++)
     {
       if(this.allProvince[i].ProvinceID==event.value)
       {
@@ -152,8 +147,7 @@ export class UpdateAddressComponent implements OnInit {
     }
     
     this.addressService.getAllDistrict(data).subscribe(res=>{
-      console.log(res)
-      this.allDistrict=res
+       this.allDistrict=res
       this.allDistrict=this.allDistrict.data
     
     
@@ -161,8 +155,7 @@ export class UpdateAddressComponent implements OnInit {
       this.threeFormGroup.controls['threeCtrl'].setValue(undefined)
       this.fourFormGroup.controls['four1Ctrl'].setValue(undefined)
       this.fourFormGroup.controls['four2Ctrl'].setValue(undefined)
-      console.log(this.secondFormGroup.controls['secondCtrl'].value)
-    })
+     })
     
   }
   getWardChange(event:any)
