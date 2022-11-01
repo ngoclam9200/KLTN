@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { ValidateService } from 'src/app/services/validate.service';
 import Swal from 'sweetalert2';
 import { ChangeAvatarComponent } from './change-avatar/change-avatar.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @Component({
   selector: 'app-profile',
@@ -90,5 +91,11 @@ export class ProfileComponent implements OnInit {
       this.getData()
     })
   }
-
+  changePassword()
+  {
+    const dialogRef = this.dialog.open(ChangePasswordComponent, {
+      width: "700px",
+      data: this.dataUser
+    })
+  }
 }

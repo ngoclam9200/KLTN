@@ -57,6 +57,7 @@ import { ChangeAvatarComponent } from './component/profile/change-avatar/change-
 import { ConfirmCheckoutComponent } from './component/checkout/confirm-checkout/confirm-checkout.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import { LoadingComponent } from './component/loading/loading.component';
+import { ChangePasswordComponent } from './component/profile/change-password/change-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,6 +87,7 @@ import { LoadingComponent } from './component/loading/loading.component';
     ChangeAvatarComponent,
     ConfirmCheckoutComponent,
     LoadingComponent,
+    ChangePasswordComponent,
      
 
   ],
