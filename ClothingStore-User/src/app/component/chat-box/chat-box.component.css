@@ -1,15 +1,10 @@
 .container{max-width:1170px; margin:auto;}
 img{ max-width:100%;}
-.inbox_people {
-  background: #f8f8f8 none repeat scroll 0 0;
-  float: left;
-  overflow: hidden;
-  width: 40%; border-right:1px solid #c4c4c4;
-}
+ 
 .inbox_msg {
   border: 1px solid #c4c4c4;
   clear: both;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .top_spac{ margin: 20px 0 0;}
 
@@ -130,12 +125,20 @@ img{ max-width:100%;}
 }
 .messaging { padding: 0 0 50px 0;}
 .msg_history {
-  height: 516px;
+  height: 400px;
   overflow-y: auto;
+  
+ 
+  /* position:absolute;  */
 }
-::ng-deep .mat-dialog-container{
-    overflow: hidden;
+ 
+ ::ng-deep .mat-dialog-container{
+    overflow-y:hidden;
+}  
+ ::ng-deep .mat-dialog-content{
+  overflow-y: hidden;
 }
+  
 .mat-dialog-content{
     padding: 0;
 }
