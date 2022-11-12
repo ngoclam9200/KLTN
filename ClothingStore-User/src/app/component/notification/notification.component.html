@@ -13,14 +13,14 @@
 
     <div class="border" style="margin-left:25%;padding:1px 16px;  position: fixed;
     height: 100%;width: 70%;">
-        <!-- <mat-card> -->
+ 
              
               <div *ngFor="let noti of allNotification" class="outgoing_msg">
                 <div class="sent_msg">
                   <p> {{noti.message}}</p>
                   <span class="time_date">  {{noti.dateCreated | date : 'hh:mm a'}} | {{noti.dateCreated | date :"yyyy-MM-dd"}} </span> </div>
               </div>
-        <!-- </mat-card> -->
+      
         <br>
      
       

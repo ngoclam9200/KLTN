@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ClothingStore-User';
+  constructor(private router: Router, private dialog: MatDialog) {
+    this.router.events.subscribe((val) => {
+        this.dialog.closeAll()
+    });
+  }
+
 }

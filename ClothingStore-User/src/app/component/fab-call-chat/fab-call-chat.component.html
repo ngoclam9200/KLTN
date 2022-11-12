@@ -1,10 +1,14 @@
 <div class="example-button-container fab-chat">
     <button (click)="openChatBox()" class="border border-danger" mat-mini-fab  color="white"  aria-label="Example icon button with a home icon">
-      <mat-icon matBadge="15" matBadgeColor="warn" matBadgeSize="small">chat</mat-icon>
+      <mat-icon *ngIf="countMesUnread>0" matBadge="{{countMesUnread}}" matBadgeColor="warn" matBadgeSize="small">chat</mat-icon>
+      <mat-icon *ngIf="countMesUnread==0"  matBadgeColor="warn" matBadgeSize="small">chat</mat-icon>
+
     </button>
   </div>
-  <div class="example-button-container fab-call">
+  <div *ngIf="route!='/notification'" class="example-button-container fab-call">
     <button (click)="goNotificationPage()" class="border border-danger" mat-mini-fab   color="white"  aria-label="Example icon button with a home icon">
-      <mat-icon matBadge="15" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
+      <mat-icon *ngIf="countNotifiUnread==0"  matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
+
+      <mat-icon *ngIf="countNotifiUnread>0" matBadge="{{countNotifiUnread}}" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
     </button>
   </div>

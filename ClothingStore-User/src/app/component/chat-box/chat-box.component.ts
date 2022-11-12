@@ -19,6 +19,12 @@ export class ChatBoxComponent implements OnInit {
  isSeen:boolean=true
   ngOnInit(): void {
 
+    setTimeout(function(){
+       var scroll=document.getElementById("parentDiv")
+       scroll.scrollTop=scroll.scrollHeight
+
+  },100);
+
     Pusher.logToConsole = true;
 
     const pusher = new Pusher('05ba42f251be5a21e7fa', {
@@ -47,6 +53,17 @@ export class ChatBoxComponent implements OnInit {
      
     
     this.getMessage()
+    
+  }
+  seenMessage(id:any)
+  {
+   var data={
+      chatId: id,
+      isAdmin: false,
+    }
+    this.chatService.seenMessage(data).subscribe(res=>{
+ 
+    })
   }
   getMessage()
   {
@@ -58,8 +75,8 @@ export class ChatBoxComponent implements OnInit {
         this.currentMessageId=this.currentMessage[0].chatId;
     
         this.currentMessage=this.currentMessage[0].message
-      this.listMessage=this.currentMessage.split("|")
-   
+        this.listMessage=this.currentMessage.split("|")
+        this.seenMessage(this.currentMessageId)
 
         
 
@@ -102,9 +119,16 @@ export class ChatBoxComponent implements OnInit {
  
      this.chatService.sendMessage(data).subscribe(res=>{
        this.message=""
+       setTimeout(function(){
+        var scroll=document.getElementById("parentDiv")
+        scroll.scrollTop=scroll.scrollHeight
+ 
+   },100);
    
     })
   }
-
+  onKeypress(event) {   
+    if(this.message.length>0) this.sendMessage()
+  }
 
 }

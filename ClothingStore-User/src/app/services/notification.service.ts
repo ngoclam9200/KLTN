@@ -23,4 +23,12 @@ export class NotificationService {
     let header=this.getHeader()
     return this.http.get(this.apiUrl+ "/get-all-notification/"+id, {headers:header})
   }
+  getCountNotifi(id)
+  {
+    return this.http.get(this.apiUrl+ "/get-count-notifi-unread/"+id)
+  }
+  seenNotifi(id)
+  {
+    return this.http.get(this.apiUrl+ "/seen-notifi/"+id)
+  }
 }

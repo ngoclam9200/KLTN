@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
+import { SigninService } from 'src/app/services/signin.service';
 
 @Component({
   selector: 'app-home',
@@ -11,10 +12,23 @@ import { ProductService } from 'src/app/services/product.service';
 export class HomeComponent implements OnInit {
   dataSource:any
   isLoading:boolean=true
-  constructor(private router : Router, private productService : ProductService, private cartService:CartService) { }
+  isLogin:boolean=false
+  constructor(private router : Router, private productService : ProductService,
+     private cartService:CartService, private signInService:SigninService) { }
  
   ngOnInit(): void {
     this.getLastestProduct()
+    if(localStorage.getItem("isLogin")=="true")
+    
+    {
+      this.isLogin=true
+     
+    }
+    
+    this.signInService.isLogin.subscribe(res=>{
+      this.isLogin=true
+     
+    })
   }
   getLastestProduct()
   {

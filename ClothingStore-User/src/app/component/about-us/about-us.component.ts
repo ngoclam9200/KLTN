@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AboutusService } from 'src/app/services/aboutus.service';
+import { SigninService } from 'src/app/services/signin.service';
 
 @Component({
   selector: 'app-about-us',
@@ -8,9 +9,22 @@ import { AboutusService } from 'src/app/services/aboutus.service';
 })
 export class AboutUsComponent implements OnInit {
  allMember:any
-  constructor( private aboutusService :AboutusService) { }
+ isLogin:boolean=false
+  constructor( private aboutusService :AboutusService, private signInService:SigninService) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem("isLogin")=="true")
+    
+    {
+      this.isLogin=true
+     
+    }
+    
+    this.signInService.isLogin.subscribe(res=>{
+      this.isLogin=true
+     
+    })
+    
     this.getData()
   }
   getData()

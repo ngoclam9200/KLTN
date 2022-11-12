@@ -1,9 +1,6 @@
 <h2 mat-dialog-title>Tin nhắn Admin Double-L</h2>
 <mat-dialog-content id="mat-dialog" class="mat-typography">
-  <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-  <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
-  <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-  <!------ Include the above in your HEAD tag ---------->
+ 
 
 
   <html>
@@ -49,7 +46,7 @@
 
             <div class="type_msg">
               <div class="input_msg_write">
-                <input [(ngModel)]="message" type="text" class="write_msg" placeholder="Type a message" />
+                <input [(ngModel)]="message" type="text" (keydown.enter)="onKeypress($event)" class="write_msg" placeholder="Type a message" />
                 <button (click)="sendMessage()" class="msg_send_btn" [disabled]="message.length==0" type="button"><i class="fa fa-paper-plane-o"
                     aria-hidden="true"></i></button>
               </div>

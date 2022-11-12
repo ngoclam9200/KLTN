@@ -72,7 +72,6 @@
           <mat-form-field appearance="outline">
             <mat-label>Nhập lại mật khẩu</mat-label>
             <input (input)="inputConfPassChange()" [(ngModel)]="confirmpass" [ngModelOptions]="{standalone: true}" type="password"  matInput placeholder="Nhập lại mật khẩu">
-            <!-- <mat-hint *ngIf="confirmpass.length<0"> Vui lòng nhập lại mật khẩu</mat-hint> -->
             <mat-hint *ngIf=" !isconfirmpassword"> Mật khẩu không trùng</mat-hint>
           </mat-form-field>
         </p>

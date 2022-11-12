@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
  isLogin=false;
  timedOutCloser:any;
  username:any;
- countProductInCart:any
+ countProductInCart:any=0;
   constructor(private router: Router,private signInService :SigninService, private cartService:CartService ) { }
   @Input() active = "";
   ngOnInit(): void {

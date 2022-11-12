@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
+import { SigninService } from 'src/app/services/signin.service';
 import { SignInComponent } from '../sign-in/sign-in.component';
  
  
@@ -14,7 +15,8 @@ import { SignInComponent } from '../sign-in/sign-in.component';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(private router: Router, private cartService:CartService, private dialog: MatDialog, private categoryService: CategoryService, private productService: ProductService) { }
+  constructor(private router: Router, private signInService:SigninService,
+    private cartService:CartService, private dialog: MatDialog, private categoryService: CategoryService, private productService: ProductService) { }
   item=[1,2,3,4,5,6]
   allCate:any
   listProduct:any
@@ -22,9 +24,20 @@ export class ProductsComponent implements OnInit {
   listProductOnPage:any
   totalLength:any;
   page:number=1;
+  isLogin :boolean=false
  
   ngOnInit(): void {
+    if(localStorage.getItem("isLogin")=="true")
     
+    {
+      this.isLogin=true
+     
+    }
+    
+    this.signInService.isLogin.subscribe(res=>{
+      this.isLogin=true
+     
+    })
     
     
     this.getData()

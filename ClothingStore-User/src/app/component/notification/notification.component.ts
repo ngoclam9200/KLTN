@@ -11,7 +11,9 @@ allNotification:any
   constructor(private notifiService: NotificationService) { }
 
   ngOnInit(): void {
+    
     this.getData()
+    this.seenNotifi()
   }
   getData()
   {
@@ -19,6 +21,12 @@ allNotification:any
   
       this.allNotification=res
       this.allNotification=this.allNotification.data
+    })
+  }
+  seenNotifi()
+  {
+    this.notifiService.seenNotifi(localStorage.getItem("userId")).subscribe(res=>{
+     
     })
   }
 

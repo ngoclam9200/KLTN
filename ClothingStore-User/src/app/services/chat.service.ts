@@ -19,4 +19,8 @@ export class ChatService {
  
     return this.http.put(this.apiUrl+"/send-message",message)
   }
+  seenMessage(id:any)
+  {
+    return this.http.put(this.apiUrl+"/seen-message",id)
+  }
 }
