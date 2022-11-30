@@ -12,3 +12,8 @@
       <mat-icon *ngIf="countNotifiUnread>0" matBadge="{{countNotifiUnread}}" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
     </button>
   </div>
+  <div class="example-button-container fab-mail">
+    <button (click)="openMailBox()" class="border border-danger" mat-mini-fab  color="white"  aria-label="Example icon button with a home icon">
+      <mat-icon  matBadgeColor="warn" matBadgeSize="small">contact_mail</mat-icon>
+    </button>
+  </div>

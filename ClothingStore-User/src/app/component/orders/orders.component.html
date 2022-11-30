@@ -1,14 +1,14 @@
 <app-header></app-header>
- 
+
 <body class="container">
     <app-navigation-bar active="Order"></app-navigation-bar>
     <div class="border" style="margin-left:25%;padding:1px 16px; ;
     height: 100%;width: 75%;">
         
         
-        <mat-tab-group mat-align-tabs="center" (selectedTabChange)="getOrder($event)">
+        <mat-tab-group mat-align-tabs="center" (selectedTabChange)="getOrder($event)"   headerPosition="above" [selectedIndex]="id">
             <mat-tab  *ngFor="let status of allStatus"  label="{{status.name}}">
-               
+
             <div *ngFor="let order of allOrder">
                 
                 <mat-card class="border">
@@ -93,7 +93,7 @@
 
                             </div>
                             <div style="margin-left:40px ;" class="d-flex flex-row">
-                                <div class="  font-weight-bold p-2">Thành tiền:</div>
+                                <div class="  font-weight-bold p-2">Tổng tiền:</div>
                                 <div style="color: #f33f3f" class="p-2">{{order.unitPrice  | currency:"VND"}} </div>
                             </div>
                           
@@ -105,6 +105,13 @@
                         <div   class="d-flex flex-row">
                             <div class="p-2  font-weight-bold">Địa chỉ giao:</div>
                             <div class="p-2">{{order.addressShip}} </div>
+                           
+                        </div>
+                        <div   class="d-flex flex-row">
+                            
+                            <div class="p-2">
+                                <button (click)="cancleOrder(order.id)"  *ngIf="status.id==1 || status.id==2 "  mat-raised-button color="primary">Hủy đơn hàng</button>
+                            </div>
                         </div>
                           
 
@@ -115,12 +122,14 @@
                    </mat-card> 
                    <br>
             </div>    
+            
           
-            <div  *ngIf="allOrder?.length==0" class="d-flex justify-content-center" >Không có đơn hàng</div>
             </mat-tab>
           
           </mat-tab-group>
-
+          
+          <app-loading *ngIf="isLoading"   text="Đang tải dữ liệu ..."></app-loading>
+            <div  *ngIf="allOrder?.length==0 && !isLoading" class="d-flex justify-content-center" >Không có đơn hàng</div>
     </div>
     <app-fab-call-chat></app-fab-call-chat>
 </body>

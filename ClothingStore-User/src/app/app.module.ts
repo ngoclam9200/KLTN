@@ -7,7 +7,6 @@ import { HeaderComponent } from './component/header/header.component';
 import { HomeComponent } from './component/home/home.component';
 import { ProductsComponent } from './component/products/products.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
-import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { SignInComponent } from './component/sign-in/sign-in.component';
 import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -58,6 +57,7 @@ import { ConfirmCheckoutComponent } from './component/checkout/confirm-checkout/
 import {MatStepperModule} from '@angular/material/stepper';
 import { LoadingComponent } from './component/loading/loading.component';
 import { ChangePasswordComponent } from './component/profile/change-password/change-password.component';
+import { SendMailComponent } from './component/send-mail/send-mail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +66,7 @@ import { ChangePasswordComponent } from './component/profile/change-password/cha
     HomeComponent,
     ProductsComponent,
     AboutUsComponent,
-    ContactUsComponent,
+   
     SignInComponent,
     SignUpComponent,
     ShoppingCartComponent,
@@ -88,6 +88,7 @@ import { ChangePasswordComponent } from './component/profile/change-password/cha
     ConfirmCheckoutComponent,
     LoadingComponent,
     ChangePasswordComponent,
+    SendMailComponent,
      
 
   ],

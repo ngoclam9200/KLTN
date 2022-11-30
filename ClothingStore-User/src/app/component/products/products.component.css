@@ -1,6 +1,9 @@
 ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
     background-color: #f33f3f !important;
   }
+  ::ng-deep .mat-tab-label-active {
+    color: #f33f3f !important;
+  }
 .fab-chat{
     position: fixed;
     bottom: 0;
@@ -46,3 +49,10 @@ img{
 pagination-controls   {
     text-align: center !important;
 }
+.input-search{
+    width: 80%;
+  }
+  .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary
+  {
+    background-color: #f33f3f;
+  }

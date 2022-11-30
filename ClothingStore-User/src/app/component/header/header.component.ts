@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
+import { CategoryService } from 'src/app/services/category.service';
 import { SigninService } from 'src/app/services/signin.service';
 
 @Component({
@@ -12,8 +13,10 @@ export class HeaderComponent implements OnInit {
  isLogin=false;
  timedOutCloser:any;
  username:any;
+ allCate:any
  countProductInCart:any=0;
-  constructor(private router: Router,private signInService :SigninService, private cartService:CartService ) { }
+  constructor(private router: Router,private signInService :SigninService,  private categoryService:CategoryService,
+    private cartService:CartService ) { }
   @Input() active = "";
   ngOnInit(): void {
     if(localStorage.getItem("isLogin")=="true")
@@ -60,7 +63,12 @@ export class HeaderComponent implements OnInit {
    
   }
   goProductPage() {
-    this.router.navigate(['products'])
+    this.categoryService.getAllCategory().subscribe(res=>{
+      this.allCate=res
+      this.allCate=this.allCate.data
+      this.router.navigate(['products'], { queryParams: { categoryId: this.allCate[0].id } })
+    })
+    
   }
   goHomePage() {
     this.router.navigate(['home'])
@@ -68,9 +76,7 @@ export class HeaderComponent implements OnInit {
   goAboutUsPage() {
     this.router.navigate(['about-us'])
   }
-  goContactUsPage() {
-    this.router.navigate(['contact-us'])
-  }
+   
   goSignInPage() {
     this.router.navigate(['sign-in'])
   }
@@ -84,7 +90,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['profile'])
   }
   goOrderPage() {
-    this.router.navigate(['orders'])
+    this.router.navigate(['orders/wait-confirm'])
   }
   mouseEnter(trigger:any) {
     if (this.timedOutCloser) {

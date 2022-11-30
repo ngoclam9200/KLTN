@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
   integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
   crossorigin="anonymous" referrerpolicy="no-referrer" />
- 
+
 <div class="latest-products">
   <div class="container">
     <div class="row">
@@ -13,15 +13,23 @@
           <a routerLink="/products" href="">Xem tất cả sản phẩm <i class="fa fa-angle-right"></i></a>
         </div>
       </div>
-      
-      <div *ngFor="let item of dataSource"   class="col-md-4">
+
+      <div *ngFor="let item of dataSource" class="col-md-4">
         <div class="product-item">
           <a routerLink="/product-detail/{{item.id}}"><img class="border" src="{{item.image}}" alt=""></a>
           <div class="down-content">
-            <a routerLink="/product-detail/1" >
-              <h4>{{item.name}}</h4>
-            </a>
-            <h6>{{item.price |  currency:"VND":"symbol"}}</h6>
+           
+            <div class="d-flex">
+              <div class="mr-auto p-2">
+                <a routerLink="/product-detail/{{item.id}}">
+                  <h4>{{item.name}}</h4>
+                </a>
+              </div>
+              <div *ngIf="item.discount>0" class="p-2" style="text-decoration-line:line-through" >{{item.price | currency : 'VND'}}</div>
+              <div class="p-2" style="color:  #f33f3f ;">{{item.price-item.price*item.discount/100 | currency : 'VND'}}</div>
+         
+            </div>
+            <!-- <h6>{{item.price | currency:"VND":"symbol"}}</h6> -->
             <p>{{item.description}}</p>
 
 
@@ -30,14 +38,15 @@
             </ul>
 
 
-            <button (click)="addToCart(item.id)" type="button" class="add-cart-btn"><i class="fas fa-shopping-cart"></i>Thêm vào giỏ</button>
+            <button (click)="addToCart(item.id)" type="button" class="add-cart-btn"><i
+                class="fas fa-shopping-cart"></i>Thêm vào giỏ</button>
 
 
           </div>
 
         </div>
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -54,13 +63,14 @@
         <div class="left-content">
           <h4>Bạn đang muốn tìm sản phẩm tốt nhất ?</h4>
           <p><a rel="nofollow" href="https://templatemo.com/tm-546-sixteen-clothing" target="_parent">Double-L Store</a>
-            luôn là cửa hàng đi đầu trong việc nắm bắt tâm lí , ý định mua sắm của khách hàng  <a rel="nofollow" href="https://templatemo.com/contact">Liên hệ chúng tôi nếu bạn muốn phản hồi về sản phẩm </a></p>
+            luôn là cửa hàng đi đầu trong việc nắm bắt tâm lí , ý định mua sắm của khách hàng <a rel="nofollow"
+              href="https://templatemo.com/contact">Liên hệ chúng tôi nếu bạn muốn phản hồi về sản phẩm </a></p>
           <ul class="featured-list">
-            <li><a  >Sản phẩm mới hợp thời trang</a></li>
-            <li><a  >Nhiều hình thức thanh toán </a></li>
-            <li><a  >Đổi trả miễn phí </a></li>
-            <li><a  >Luôn lắng nghe phản hồi của khách hàng</a></li>
-            <li><a  >Tư vấn nhiệt tình</a></li>
+            <li><a>Sản phẩm mới hợp thời trang</a></li>
+            <li><a>Nhiều hình thức thanh toán </a></li>
+            <li><a>Đổi trả miễn phí </a></li>
+            <li><a>Luôn lắng nghe phản hồi của khách hàng</a></li>
+            <li><a>Tư vấn nhiệt tình</a></li>
           </ul>
           <a routerLink="/about-us" class="filled-button">Xem thêm</a>
         </div>
@@ -74,4 +84,3 @@
   </div>
 </div>
 <app-fab-call-chat *ngIf="isLogin"></app-fab-call-chat>
- 

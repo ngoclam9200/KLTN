@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>Gởi email cho chúng tôi</h2>
+<mat-dialog-content id="mat-dialog" class="mat-typography">
+
+    <div class="send-message">
+
+
+        <form [formGroup]="formGroup">
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Vấn đề </mat-label>
+
+                    <mat-select   formControlName="problem">
+                        <mat-option value="Sản phẩm">Sản phẩm</mat-option>
+                        <mat-option value="CSKH">CSKH</mat-option>
+                        <mat-option value="Khiếu nại">Khiếu nại</mat-option>
+                        <mat-option value="Vấn đề khác">Vấn đề khác</mat-option>
+                    </mat-select>
+                    <mat-hint
+                        *ngIf=" (formGroup.get('problem').invalid && formGroup.get('problem').touched) || (formGroup.get('problem').invalid && isSubmit)">
+                        Vui lòng chọn vấn đề</mat-hint>
+
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Nội dung</mat-label>
+
+                    <textarea formControlName="content" matInput> </textarea>
+
+
+                    <mat-hint
+                        *ngIf=" (formGroup.get('content').invalid && formGroup.get('content').touched) || (formGroup.get('content').invalid && isSubmit)">
+                        Vui lòng nhập nội dung
+                    </mat-hint>
+                </mat-form-field>
+            </p>
+
+
+        </form>
+
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close color="warn">Hủy</button>
+
+    <button (click)="sendEmail()" mat-raised-button color="primary" cdkFocusInitial>Gởi thông tin</button>
+
+</mat-dialog-actions>

@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   isSubmit: boolean = false
   phonenumberValidate: boolean = true;
   formGroup: FormGroup
+  isLoading=true
   ngOnInit(): void {
     this.initForm()
     this.getData()
@@ -27,6 +28,7 @@ export class ProfileComponent implements OnInit {
     this.userService.getUserById(localStorage.getItem("userId")).subscribe(res => {
       this.dataUser = res
       this.dataUser = this.dataUser.data
+      this.isLoading=false
       this.initForm()
     })
   }

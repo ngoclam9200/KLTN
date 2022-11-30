@@ -51,4 +51,9 @@ export class ProductService {
     let headers=this.getHeader()
     return this.http.get(this.apiUrl+"/search-product-by-name/"+prod, {headers:headers})
   }
+  searchProductInCategory (categoryid, name)
+  {
+    let headers=this.getHeader()
+    return this.http.get(this.apiUrl+"/search-product-in-category/"+categoryid + "/"+name, {headers:headers})
+  }
 }

@@ -67,4 +67,9 @@ export class OrderService {
     let header=this.getHeader()
     return this.http.post(this.apiUrl+ "/checkout-paymentVnPay/",data, {headers:header})
   }
+  cancleOrder(id:any)
+  {
+    let header=this.getHeader()
+    return this.http.put(this.apiUrl+ "/cancle-order/",id, {headers:header})
+  }
 }

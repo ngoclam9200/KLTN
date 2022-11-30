@@ -63,3 +63,6 @@ input{
     box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
     vertical-align: middle;
 }
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: #f33f3f !important;
+  }

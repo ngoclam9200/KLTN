@@ -11,10 +11,16 @@
         <div class="col-md-12">
           <div class="filters">
             <ul>
-              <mat-tab-group mat-align-tabs="center" (selectedTabChange)="getProduct($event)">
-                <mat-tab *ngFor="let cate of allCate" label="{{cate.name}}">
+              <mat-tab-group mat-align-tabs="center" (selectedTabChange)="getProduct($event)"  headerPosition="above" [selectedIndex]="id">
+                <mat-tab  *ngFor="let cate of allCate" label="{{cate.name}}" id="{{cate.name}}">
                   <br>
-                  <div class="col-md-12">
+                  <div *ngIf="listProduct?.length>0 || isSearch"  class="d-flex justify-content-center" style="margin-bottom: 10px;">
+                    <input  [(ngModel)]="search" (input)="onChangeTextSearchEvent()"  class="input-search" />
+                    <button  (click)="searchProduct()"  style="margin-left:20px ;" mat-raised-button color="primary">Tìm kiếm</button>
+                  </div>
+                  <div *ngIf="notfound"> Không tìm thấy sản phẩm</div>
+                  <div *ngIf="listProduct?.length==0"> Không tìm thấy sản phẩm trong  loại sản phẩm "{{cate.name}}"</div>
+                  <div *ngIf="!notfound" class="col-md-12">
                     <div class="filters-content">
                       <div class="row grid">
                         <div
@@ -47,6 +53,7 @@
                       </div>
                     </div>
                   </div>
+
                 </mat-tab>
               </mat-tab-group>
             </ul>

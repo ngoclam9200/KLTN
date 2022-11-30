@@ -8,6 +8,14 @@
   }
   .fab-call{
     position: fixed;
+    bottom: 120px;
+    right: 10px;
+    
+  
+    box-sizing: border-box;
+  }
+  .fab-mail{
+    position: fixed;
     bottom: 70px;
     right: 10px;
     

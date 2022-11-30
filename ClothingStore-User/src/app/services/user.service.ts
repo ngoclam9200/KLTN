@@ -42,4 +42,8 @@ export class UserService {
   {
     return this.http.put(this.apiUrl+ "/change-password", data)
   }
+  sendEmail(data)
+  {
+    return this.http.post(this.apiUrl+"/cskh", data)
+  }
 }

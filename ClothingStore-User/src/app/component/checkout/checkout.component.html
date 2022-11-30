@@ -1,5 +1,7 @@
 <app-header></app-header>
-<div class="container">
+<div  class="container">
+<app-loading *ngIf="isLoading" text="Đang tải dữ liệu..."></app-loading>
+<div *ngIf="!isLoading">
 
     <mat-card>
 
@@ -162,4 +164,6 @@
         </mat-card-actions>
 
     </mat-card> 
+</div>
+   
 </div>

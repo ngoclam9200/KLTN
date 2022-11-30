@@ -43,12 +43,7 @@
             <li *ngIf="active!='AboutUs'" class="nav-item">
               <a class="nav-link" (click)="goAboutUsPage()">Double-L Store</a>
             </li>
-            <li *ngIf="active=='ContactUs'" class="nav-item active">
-              <a class="nav-link" (click)="goContactUsPage()">Liên hệ</a>
-            </li>
-            <li *ngIf="active!='ContactUs'" class="nav-item">
-              <a class="nav-link" (click)="goContactUsPage()">Liên hệ</a>
-            </li>
+            
             <li *ngIf="active=='SignIn'  && !isLogin" class="nav-item active">
               <a class="nav-link" (click)="goSignInPage()">Đăng nhập</a>
             </li>

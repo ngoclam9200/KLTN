@@ -1,0 +1,11 @@
+ 
+mat-form-field {
+    width: 550px;
+ }
+ 
+  mat-hint{
+    color: red;
+  }
+  textarea{
+    height: 150px;
+  }

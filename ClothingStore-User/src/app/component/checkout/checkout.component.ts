@@ -6,6 +6,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { InfoshopService } from 'src/app/services/infoshop.service';
 import { OrderService } from 'src/app/services/order.service';
 import { ShippingfeeService } from 'src/app/services/shippingfee.service';
+import { SigninService } from 'src/app/services/signin.service';
 import { VoucherService } from 'src/app/services/voucher.service';
 import Swal from 'sweetalert2';
 import { AddAddressComponent } from './add-address/add-address.component';
@@ -19,7 +20,7 @@ import { ChangePaymentMethodComponent } from './change-payment-method/change-pay
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private dialog: MatDialog, private route: ActivatedRoute,
+  constructor(private dialog: MatDialog, private route: ActivatedRoute,private signInService: SigninService,
     private cartService: CartService, private addressService: AddressUserService
     , private infoShopService: InfoshopService, private shippingfeeService: ShippingfeeService,
     private voucherService: VoucherService,
@@ -46,13 +47,15 @@ export class CheckoutComponent implements OnInit {
   message: any = " "
   transactionName = "Thanh toán khi nhận hàng"
   returnUrl: any
+  isLoading= true
   displayedColumns: string[] = ['ten', 'dongia', 'discount', 'soluong', 'thanhtien'];
   // dataSource:any;
   changePayment = false
   data: any
 
   ngOnInit(): void {
-
+    
+    
     this.getData()
   }
   getData() {
@@ -113,9 +116,9 @@ export class CheckoutComponent implements OnInit {
       {
         this.addAddress()
       }
-    
+      this.isLoading=false
     })
-
+   
 
   }
  
@@ -265,7 +268,7 @@ export class CheckoutComponent implements OnInit {
               'Sản phẩm đã được mua.',
               'success'
             )
-            this.router.navigate(['/orders'])
+            this.router.navigate(['/orders/wait-confirm'])
           })
 
         }

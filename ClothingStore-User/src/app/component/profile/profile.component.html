@@ -6,10 +6,10 @@
 <head>
 
 </head>
+<app-loading *ngIf="isLoading" text="Đang tải dữ liệu..."></app-loading>
+<body *ngIf="!isLoading" class="container">
 
-<body class="container">
-
-<app-navigation-bar active="Profile"></app-navigation-bar>
+<app-navigation-bar  active="Profile"></app-navigation-bar>
 
     <div  class="border" style="margin-left:25%;padding:1px 16px;  position: fixed;
     height: 100%;width: 70%;">

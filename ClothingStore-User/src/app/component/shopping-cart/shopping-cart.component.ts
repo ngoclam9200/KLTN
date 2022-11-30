@@ -14,6 +14,8 @@ export class ShoppingCartComponent implements OnInit {
   checked = false;
   allProduct: any
   quantity: number
+  isLoading=true
+  isLogin: boolean = false
   tasks = [{
     completed: true
   },
@@ -21,6 +23,15 @@ export class ShoppingCartComponent implements OnInit {
   constructor(private alertService: AlertService, private signInService: SigninService, private cartService: CartService, private router: Router) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem("isLogin") == "true") {
+      this.isLogin = true
+
+    }
+
+    this.signInService.isLogin.subscribe(res => {
+      this.isLogin = true
+
+    })
     this.getData()
   }
   deleteItem() {
@@ -51,6 +62,7 @@ export class ShoppingCartComponent implements OnInit {
           this.allProduct[i].increaseProduct = true
         }
       }
+      this.isLoading=false
      })
   }
   increaseProduct(id: any, productId: any) {

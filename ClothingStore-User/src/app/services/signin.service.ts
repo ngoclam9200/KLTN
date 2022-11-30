@@ -36,9 +36,9 @@ export class SigninService {
       let token = this.data.data
       
       localStorage.setItem("token", token)
-      this.decodedToken = jwt_decode(token);
- 
+      this.decodedToken = jwt_decode(token);    
       localStorage.setItem("isLogin", "true")
+      localStorage.setItem("fullname", this.decodedToken.Fullname)
       localStorage.setItem("usernameLogin", data.username)
       localStorage.setItem("username", this.decodedToken.username)
       localStorage.setItem("role", "user")
@@ -76,6 +76,8 @@ export class SigninService {
   {
     this.cartService.getCountProductInCart(localStorage.getItem("userId")).subscribe(res=>
       {
+     
+        
          this.countProductInCart.emit(res)
 
 
