@@ -5,11 +5,11 @@
     <div *ngIf="!isLoading" class=" px-3 my-5 clearfix">
         <div class="card">
             <div class="card-header">
-                <h2>Giỏ hàng</h2>
+                <h5>Giỏ hàng</h5>
             </div>
             <div *ngIf="allProduct?.length>0" class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered m-0">
+                    <table class="table ">
                         <thead>
                             <tr>
                                 <th></th>
@@ -17,8 +17,8 @@
                                 </th>
                                 <th class="text-center py-3 px-4" style="width: 100px;">Giá</th>
                                 <th class="text-center py-3 px-4" style="width: 120px;">Số lượng</th>
-                                <th class="text-center py-3 px-4" style="width: 100px;">Tổng tiền</th>
-                                <th class="text-center align-middle py-3 px-0" style="width: 150px;">
+                                <th class="text-center py-3 px-4" style="width: 150px;">Tổng tiền</th>
+                                <th class="text-center align-middle py-3 px-0" style="width: 150px;">  
                                 </th>
 
                             </tr>
@@ -54,15 +54,15 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-right font-weight-semibold align-middle p-4">
+                                <td class="text-center font-weight-semibold align-middle p-4">
                                     <div class="d-flex flex-row">
-                                        <div class="p-2">
+                                        <div *ngIf="item.product.discount>0" class="p-2">
                                             <p style="text-decoration: line-through;">
                                                 {{item.product.price | currency :"VND"}}
                                             </p>
                                         </div>
-                                        <div class="p-2">
-                                            <p style="color: red;">
+                                        <div class="p-2 text-center font-weight-semibold align-middle">
+                                            <p>
                                                 {{item.product.price- item.product.price*item.product.discount/100 |
                                                 currency
                                                 :"VND" }}
@@ -78,7 +78,7 @@
                                         <div class="p-2"><button [disabled]="!item.decreaseProduct"
                                                 (click)="decreaseProduct(item.id, item.productId)" mat-raised-button
                                                 class="btn-decrease" color="">-</button></div>
-                                        <div class="p-2"> <input type="number" value="{{item.quantity}}" readonly></div>
+                                        <div class="p-2"> <input type="number" style="text-align:center;" value="{{item.quantity}}" readonly></div>
                                         <div class="p-2">
                                             <button [disabled]="!item.increaseProduct"
                                                 (click)="increaseProduct(item.id, item.productId)" mat-raised-button
@@ -86,18 +86,24 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-right font-weight-semibold align-middle p-4"> {{(item.product.price-
+                                <td class="text-center font-weight-semibold align-middle p-4" style="color: red;"> {{(item.product.price-
                                     item.product.price*item.product.discount/100)*item.quantity | currency
                                     :"VND" }}</td>
                                 <td class="text-center align-middle px-0">
                                     <div class="d-flex flex-row">
                                         <div class="p-2">
-                                            <button (click)="buy(item.id)" mat-raised-button
-                                                color="primary">Mua</button>
+                                            <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon">
+                                                <mat-icon (click)="buy(item.id)">shopping_cart</mat-icon>
+                                              </button>
+                                            <!-- <button  mat-raised-button
+                                                color="primary">Mua</button> -->
                                         </div>
                                         <div class="p-2">
-                                            <button (click)="deleteCart(item.id)" mat-raised-button
-                                                color="warn">Xóa</button>
+                                            <button mat-icon-button color="warn" aria-label="Example icon button with a menu icon">
+                                                <mat-icon (click)="deleteCart(item.id)">delete</mat-icon>
+                                              </button>
+                                            <!-- <button  mat-raised-button
+                                                color="warn">Xóa</button> -->
                                         </div>
 
                                     </div>

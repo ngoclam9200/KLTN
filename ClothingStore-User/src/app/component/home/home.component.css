@@ -1,11 +1,12 @@
 .add-cart-btn{
-    background-color: #f33f3f;
-    border: 2px solid #f33f3f;
+    background-color:  #fff;
+    border: 2px solid black;
     margin-right: 8px;
     border-radius: 25px;
 }
 .add-cart-btn:hover{
-    background-color: #fff;
+    background-color: #f33f3f;
+    border: 2px solid #f33f3f;
     color: black;
 }
 .fab-chat{

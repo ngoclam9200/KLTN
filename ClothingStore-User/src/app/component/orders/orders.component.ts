@@ -26,7 +26,7 @@ export class OrdersComponent implements OnInit {
 
   }
   getData() {
-    this.statusOrderService.getAllStatus().subscribe(res => {
+     this.statusOrderService.getAllStatus().subscribe(res => {
       this.allStatus = res
       this.allStatus = this.allStatus.data
       this.statusOrder = this.route.snapshot.paramMap.get('status');
@@ -130,17 +130,16 @@ export class OrdersComponent implements OnInit {
   }
   getOrder($event: any) {
 
-
+     
     this.isLoading = true
     this.allOrder = []
     this.allProduct = []
     let id = this.allStatus[$event.index].id
 
-    if (id == "1") {
+    if (id == "1" && this.id!=0) {
        this.router.navigate(['orders/wait-confirm'])
       this.id = 0
-      this.orderService.getOrderWaitConfirm(localStorage.getItem("userId"))
-        .subscribe(res => {
+      this.orderService.getOrderWaitConfirm(localStorage.getItem("userId")).subscribe(res => {
           this.allOrder = res
           this.allOrder = this.allOrder.data
 

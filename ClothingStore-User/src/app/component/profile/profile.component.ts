@@ -49,32 +49,36 @@ export class ProfileComponent implements OnInit {
 
   }
   editUser() {
-    Swal.fire({
-      title: 'Bạn có chắc chắn muốn thay đổi?',
-      text: "Thông tin này sẽ bị thay đổi , bạn không thể hoàn tác!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Chỉnh sửa!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.isSubmit = true
-        this.phonenumberValidate = this.validateService.validatePhoneNumber(this.formGroup.controls['phonenumber'].value)
-        if (this.formGroup.valid && this.phonenumberValidate) {
-          this.userService.editUser(this.formGroup.value).subscribe(res => {
-            Swal.fire(
-              'Đã chỉnh sửa!',
-              'Thông tin được chỉnh sửa',
-              'success'
-            )
-            this.getData()
-          })
+    if(this.formGroup.valid)
+    {
+      Swal.fire({
+        title: 'Bạn có chắc chắn muốn thay đổi?',
+        text: "Thông tin này sẽ bị thay đổi , bạn không thể hoàn tác!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Chỉnh sửa!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.isSubmit = true
+          this.phonenumberValidate = this.validateService.validatePhoneNumber(this.formGroup.controls['phonenumber'].value)
+          if (this.formGroup.valid && this.phonenumberValidate) {
+            this.userService.editUser(this.formGroup.value).subscribe(res => {
+              Swal.fire(
+                'Đã chỉnh sửa!',
+                'Thông tin được chỉnh sửa',
+                'success'
+              )
+              this.getData()
+            })
+          }
+  
+  
         }
-
-
-      }
-    })
+      })
+    }
+ 
 
 
   }
