@@ -105,5 +105,8 @@
       }
     }
   },
-  "defaultProject": "ClothingStore-User"
+  "defaultProject": "ClothingStore-User",
+  "cli": {
+    "analytics": "64f75e14-422e-418f-b7c0-369f488b312f"
+  }
 }
