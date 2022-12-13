@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 import { CartService } from 'src/app/services/cart.service';
+import { ProductService } from 'src/app/services/product.service';
 import { SigninService } from 'src/app/services/signin.service';
 import Swal from 'sweetalert2';
 
@@ -15,12 +16,15 @@ export class ShoppingCartComponent implements OnInit {
   allProduct: any
   quantity: number
   isLoading=true
+  productDetail:any
+  tmpproductDetail:any
+  allproductDetail:any=[]
   isLogin: boolean = false
   tasks = [{
     completed: true
   },
   { completed: false }]
-  constructor(private alertService: AlertService, private signInService: SigninService, private cartService: CartService, private router: Router) { }
+  constructor(private alertService: AlertService,private productService: ProductService, private signInService: SigninService, private cartService: CartService, private router: Router) { }
 
   ngOnInit(): void {
     if (localStorage.getItem("isLogin") == "true") {
@@ -39,11 +43,20 @@ export class ShoppingCartComponent implements OnInit {
 
   }
   getData() {
+    this.allproductDetail=[]
     var userId = localStorage.getItem("userId")
     this.cartService.getAllProductInCart(userId).subscribe(res => {
        this.allProduct = res
       this.allProduct = this.allProduct.data
+       
       for (let i = 0; i < this.allProduct.length; i++) {
+        this.productService.getProductDetailById(this.allProduct[i].productId).subscribe(res=>
+          {
+           
+            this.tmpproductDetail=res
+            this.tmpproductDetail=this.tmpproductDetail.data[0]
+            this.allproductDetail.push(this.tmpproductDetail)
+          })
         this.allProduct[i].checked = false
         if (this.allProduct[i].product.stock == 1) {
           this.allProduct[i].decreaseProduct = false
@@ -63,26 +76,76 @@ export class ShoppingCartComponent implements OnInit {
         }
       }
       this.isLoading=false
+       
      })
   }
-  increaseProduct(id: any, productId: any) {
-
-    var data = {
-      id: id,
-      productId: productId
+  changeSizeProduct(item, $event)
+  {
+     if($event.target.value!=item.sizeProduct)
+    {
+     var data=
+     {
+      id:item.id,
+      size:$event.target.value
+     }
+     this.cartService.changeSizeProduct(data).subscribe(res=>{
+      this.allproductDetail=[]
+      this.getData()
+     })
+      
     }
-     this.cartService.increaseProduct(data).subscribe(res => {
-       this.getData()
-    })
+    
   }
-  decreaseProduct(id: any, productId: any) {
-    var data = {
-      id: id,
-      productId: productId
+  getProductDetail(id)
+  {
+    this.productService.getProductDetailById(id).subscribe(res=>
+      {
+        this.productDetail=res
+        this.productDetail=this.productDetail.data[0]
+       
+        
+      })
+  }
+  increaseProduct(item) {
+ for(let i=0; i < this.allproductDetail.length;i++)
+    {
+      var count:any
+      if(this.allproductDetail[i].productId==item.productId)
+      {
+        if(item.sizeProduct=="S") count=this.allproductDetail[i].s
+        if(item.sizeProduct=="M") count=this.allproductDetail[i].m
+        if(item.sizeProduct=="L") count=this.allproductDetail[i].l
+        if(item.sizeProduct=="XL") count=this.allproductDetail[i].xl
+        if(item.sizeProduct=="XXL") count=this.allproductDetail[i].xxl
+        if(item.sizeProduct=="Không") count=item.product.stock
+        if(item.quantity<count)
+        {
+          var data = {
+            id: item.id,
+            productId: item.productId
+          }
+           this.cartService.increaseProduct(data).subscribe(res => {
+             this.getData()
+          })
+        }
+        break
+      }
     }
-    this.cartService.decreaseProduct(data).subscribe(res => {
-       this.getData()
-    })
+   
+  }
+  decreaseProduct(item) {
+   
+    if(item.quantity!=1)
+    {
+      var data = {
+        id: item.id,
+        productId:item.productId
+      }
+      this.cartService.decreaseProduct(data).subscribe(res => {
+         this.getData()
+      })
+    }
+   
   }
   deleteCart(id: any) {
     this.cartService.deleteCart(id).subscribe(res => {

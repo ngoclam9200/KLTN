@@ -1,46 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Image Change</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <app-header></app-header>
-<body>
 
-    <div class = "main-wrapper">
-        <div class = "container">
-            <div class = "product-div">
-                <div class = "product-div-left border">
-                    <div class = "img-container">
-                        <img class="main-image" src = "{{currentImage}}" alt = "watch">
+<!-- <body> -->
+
+    <div class="main-wrapper">
+        <div class="container">
+            <div class="product-div">
+                <div class="product-div-left border">
+                    <div class="img-container">
+                        <img class="main-image" src="{{currentImage}}" alt="watch">
                     </div>
-                    <div class = "hover-container border">
-                        <div *ngFor="let image of images" (click)="changeImage(image.url)"><img  src = {{image.url}}></div>
-                       
+                    <div class="hover-container border">
+                        <div *ngFor="let image of images" (click)="changeImage(image.url)"><img src={{image.url}}></div>
+
                     </div>
                 </div>
-                <div class = "product-div-right border">
-                    <span class = "product-name">{{dataProduct?.name}}</span>
-                    <span class = "product-price">{{dataProduct?.price | currency :"VND" }}</span>
-                    <div class = "product-rating">
-                        <span>Số lượng còn lại </span>
-                        
+                <div class="product-div-right border">
+                    <span class="product-name">{{dataProduct?.name}}</span>
+                    <!-- <span class = "product-price">{{dataProduct?.price | currency :"VND" }}</span> -->
+                    <div class="d-flex">
+
+                        <div *ngIf="dataProduct?.discount>0" class="p-2" style="text-decoration-line:line-through">
+                            {{dataProduct?.price | currency : 'VND'}}
+                        </div>
+                        <div class="p-2" style="color:  #f33f3f ;">
+                            {{dataProduct?.price-dataProduct?.price*dataProduct?.discount/100 |
+                            currency : 'VND'}}
+                        </div>
+
+                    </div>
+                    <div class="product-rating">
+
+                        <span class="p-2">Số lượng còn lại </span>
+
                         <span>({{dataProduct?.stock}})</span>
                     </div>
-                    <p class = "product-description">{{dataProduct?.description}}</p>
-                    <div class = "btn-groups">
-                        <button (click)="addCart()" type = "button" class = "add-cart-btn"><i class = "fas fa-shopping-cart"></i>Thêm vào giỏ</button>
-                     </div>
+
+
+                    <div *ngIf="dataProduct?.isSize" class="d-flex align-items-center">
+                        <div style="height: 34px; width:80px" class="p-2">SIZE: </div>
+
+
+                        <button *ngIf="productDetail?.s>0" id="S" (click)="clickBtnSize($event)" style="margin-left: 20px;"
+                            class="product-variation " aria-label="Trắng" aria-disabled="false">S
+
+                        </button>
+                        <button id="M" *ngIf="productDetail?.m>0" (click)="clickBtnSize($event)" style="margin-left: 20px;"
+                            class="product-variation " aria-label="Trắng" aria-disabled="false">M
+
+                        </button>
+                        <button id="L" *ngIf="productDetail?.l>0" (click)="clickBtnSize($event)" style="margin-left: 20px;"
+                            class="product-variation " aria-label="Trắng" aria-disabled="false">L
+
+                        </button>
+
+                        <button id="XL"  *ngIf="productDetail?.xl>0"(click)="clickBtnSize($event)" style="margin-left: 20px;"
+                            class="product-variation " aria-label="Trắng" aria-disabled="false">XL
+
+                        </button>
+
+                        <button id="XXL" *ngIf="productDetail?.xxl>0" style="margin-left: 20px;" (click)="clickBtnSize($event)"
+                            class="product-variation " aria-label="Trắng" aria-disabled="false">XXL
+
+                        </button>
+                      
+
+
+                    </div>
+                    <div style="color: #f33f3f;font-size: 15px;margin-left: 100px;" class="p-2">{{errtext}}</div>
+
+                    <div *ngIf="isChooseSize" class="d-flex align-items-center quantity">
+                        <div style=" width:80px" class="p-2">Số lượng</div>
+                        <div class="flex items-center">
+                            <div style="margin-right: 20px;">
+                                <div style="margin-right: 20px;" class="input-quantity shopee-input-quantity">
+                                    <button (click)="decreasingQuantity()" class="btn-quantity">
+                                        <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0"
+                                            class="icon-svg">
+                                            <polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5">
+                                            </polygon>
+                                        </svg>
+                                    </button>
+                                    <input     (input)="inputquatitychange()" class="btn-quantity inp-quantity" type="text" role="spinbutton"
+                                        aria-valuenow="2" [(ngModel)]="quantity">
+                                    <button (click)="increasingQuantity()" class="btn-quantity"><svg enable-background="new 0 0 10 10"
+                                            viewBox="0 0 10 10" x="0" y="0" class="icon-svg icon-plus-sign">
+                                            <polygon
+                                                points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5">
+                                            </polygon>
+                                        </svg>
+                                    </button>
+                                    <div style="margin-left: 20px;">{{countProdInSize}}</div>
+                                </div>
+                                
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                    <div class="btn-groups">
+                        <button (click)="addCart()" type="button" class="add-cart-btn"><i
+                                class="fas fa-shopping-cart"></i>Thêm vào giỏ</button>
+                    </div>
                 </div>
             </div>
+       
         </div>
+   
     </div>
  
-    
-</body>
+ 
+    <mat-card class="card border">
+        <mat-card-header>
+        
+          <mat-card-title >Mô tả sản phẩm</mat-card-title>
+       
+        </mat-card-header>
+        <img class="img-description" mat-card-image src="{{dataProduct.image}}"  >
+        <!-- <br> -->
+        <mat-card-content>
+          <p style="margin-left: 20px;">
+           {{dataProduct.description}}
+          </p>
+        </mat-card-content>
+       
+      </mat-card>
+ 
+  
+<!-- </body> -->
 
 </html>

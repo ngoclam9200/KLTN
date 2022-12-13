@@ -117,6 +117,7 @@ export class CheckoutComponent implements OnInit {
         this.addAddress()
       }
       this.isLoading=false
+       
     })
    
 
@@ -207,7 +208,8 @@ export class CheckoutComponent implements OnInit {
     for (let i = 0; i < this.dataCart.length; i++) {
       data.listProduct.push({
         productId: this.dataCart[i].product.id,
-        productCount: this.dataCart[i].quantity
+        productCount: this.dataCart[i].quantity,
+        productSize:this.dataCart[i].sizeProduct
       })
     }
 

@@ -33,6 +33,11 @@ export class CartService {
     let headers=this.getHeader()
     return this.http.put(this.apiUrl+ "/increase-product", quantity, {headers:headers})
   }
+  changeSizeProduct(data:any)
+  {
+    let headers=this.getHeader()
+    return this.http.put(this.apiUrl+ "/change-size-product", data, {headers:headers})
+  }
   decreaseProduct(quantity:any)
   {
     let headers=this.getHeader()

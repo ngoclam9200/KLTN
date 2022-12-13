@@ -726,7 +726,7 @@ body {
   }
   
   .product-item .down-content {
-      padding: 30px;
+      padding: 0px 10px 20px 10px;
       position: relative;
   }
   
@@ -738,7 +738,7 @@ body {
   .product-item .down-content h4 {
       font-size: 17px;
       color: #1a6692;
-      margin-bottom: 20px;
+      margin-bottom: 5px;
   }
   
   .product-item .down-content h6 {

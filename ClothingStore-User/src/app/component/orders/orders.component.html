@@ -50,6 +50,7 @@
                                         <th class="text-center  " style="width: 300px;">Sản phẩm
                                         </th>
                                         <th class="text-center  " style="width: 100px;">Số lượng</th>
+                                        <th class="text-center  " style="width: 100px;">Size</th>
                                        
                                         <th class="text-center  " style="width: 100px;">Thành  tiền</th>
                                     </tr>
@@ -68,7 +69,9 @@
                                         <td *ngIf="item.orderId==order.id" class="text-right font-weight-semibold align-middle p-2 text-center">
                                             {{item.productCount}}
                                         </td>
-                                        
+                                        <td *ngIf="item.orderId==order.id" class="text-right font-weight-semibold align-middle p-2 text-center">
+                                            {{item.productSize}}
+                                        </td>
                                         <td *ngIf="item.orderId==order.id" style="color: #f33f3f" class="text-right font-weight-semibold align-middle p-2 text-center">
                                             {{(item.priceProduct-
                                             item.priceProduct*item.discountProduct/100)*item.productCount |

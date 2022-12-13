@@ -23,6 +23,7 @@ export class ProductService {
     let headers=this.getHeader()
     return this.http.get(this.apiUrl+"/get-all-product", {headers:headers})
   }
+  
   getLastestProduct()
   {
     let headers=this.getHeader()
@@ -37,6 +38,11 @@ export class ProductService {
   {
     let headers=this.getHeader()
     return this.http.get(this.apiUrl+"/get-product-by-id/"+id, {headers:headers})
+  }
+  getProductDetailById(id:any)
+  {
+    let headers=this.getHeader()
+    return this.http.get(this.apiUrl+"/get-product-detail-by-product-id/"+id, {headers:headers})
   }
   getProductByCateId(id:any)
   {

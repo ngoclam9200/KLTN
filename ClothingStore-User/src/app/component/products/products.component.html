@@ -1,9 +1,11 @@
-<app-header active="Products"></app-header> <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
+<app-header active="Products"></app-header>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-   
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
   integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
   crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <body>
   <div class="products">
     <div class="container">
@@ -11,15 +13,18 @@
         <div class="col-md-12">
           <div class="filters">
             <ul>
-              <mat-tab-group mat-align-tabs="center" (selectedTabChange)="getProduct($event)"  headerPosition="above" [selectedIndex]="id">
-                <mat-tab  *ngFor="let cate of allCate" label="{{cate.name}}" id="{{cate.name}}">
+              <mat-tab-group mat-align-tabs="center" (selectedTabChange)="getProduct($event)" headerPosition="above"
+                [selectedIndex]="id">
+                <mat-tab *ngFor="let cate of allCate" label="{{cate.name}}" id="{{cate.name}}">
                   <br>
-                  <div *ngIf="listProduct?.length>0 || isSearch"  class="d-flex justify-content-center" style="margin-bottom: 10px;">
-                    <input  [(ngModel)]="search" (input)="onChangeTextSearchEvent()"  class="input-search" />
-                    <button  (click)="searchProduct()"  style="margin-left:20px ;" mat-raised-button color="primary">Tìm kiếm</button>
+                  <div *ngIf="listProduct?.length>0 || isSearch" class="d-flex justify-content-center"
+                    style="margin-bottom: 10px;">
+                    <input [(ngModel)]="search" (input)="onChangeTextSearchEvent()" class="input-search" />
+                    <button (click)="searchProduct()" style="margin-left:20px ;" mat-raised-button color="primary">Tìm
+                      kiếm</button>
                   </div>
                   <div *ngIf="notfound"> Không tìm thấy sản phẩm</div>
-                  <div *ngIf="listProduct?.length==0"> Không tìm thấy sản phẩm trong  loại sản phẩm "{{cate.name}}"</div>
+                  <div *ngIf="listProduct?.length==0"> Không tìm thấy sản phẩm trong loại sản phẩm "{{cate.name}}"</div>
                   <div *ngIf="!notfound" class="col-md-12">
                     <div class="filters-content">
                       <div class="row grid">
@@ -27,25 +32,36 @@
                           *ngFor="let item of listProduct | paginate :{itemsPerPage :6 , currentPage:page, totalItems:totalLength}"
                           class="col-lg-4 col-md-4 all des">
                           <div class="product-item">
-                            <a routerLink="/product-detail/{{item.id}}"><img class="border" src="{{item.image}}" alt=""></a>
+
+                            <a routerLink="/product-detail/{{item.id}}">
+                               
+                              <div *ngIf="item.discount>0" class="bookmarkRibbon"><span style="color:red;position: relative;top: -9px;right:10px;text-align: center;"> Giảm {{item.discount}}% </span></div>
+                              <img class="border" src="{{item.image}}" alt="">
+                             </a>
                             <div class="down-content">
                               <div class="d-flex">
-                                <div class="mr-auto p-2">
+                                <div class="p-2">
                                   <a routerLink="/product-detail/{{item.id}}">
                                     <h4>{{item.name}}</h4>
                                   </a>
                                 </div>
-                                <div *ngIf="item.discount>0" class="p-2" style="text-decoration-line:line-through" >{{item.price | currency : 'VND'}}</div>
-                                <div class="p-2" style="color:  #f33f3f ;">{{item.price-item.price*item.discount/100 | currency : 'VND'}}</div>
-                           
+                                 
+
                               </div>
+                              <div class="d-flex">
+                                 
+                                <div *ngIf="item.discount>0" class="p-2" style="text-decoration-line:line-through">
+                                  {{item.price | currency : 'VND'}} </div>
+                                <div class="p-2" style="color:  #f33f3f ;">{{item.price-item.price*item.discount/100 |
+                                  currency : 'VND'}}</div>
+
+                              </div>
+
+                           
+                              <div class="d-flex align-items-center" style="margin-top: 25px;">
                                
-                              <p style="text-align: left;">{{item.description}}</p>
-                              <div class="d-flex align-items-center">
-                                <button (click)="addToCart(item.id)" type="button" class="add-cart-btn"><i
-                                    class="fas fa-shopping-cart"></i>Thêm vào
-                                  giỏ</button>
-                                <span>Số lượng ({{item.stock}})</span>
+                                <div class="daban p-2 ">Đã bán  ({{item.count-item.stock}})</div><br>
+                                <span class="p-2">Số lượng còn lại  ({{item.stock}})</span>
                               </div>
                             </div>
                           </div>
@@ -65,4 +81,3 @@
   </div>
 </body>
 <app-fab-call-chat *ngIf="isLogin"></app-fab-call-chat>
- 

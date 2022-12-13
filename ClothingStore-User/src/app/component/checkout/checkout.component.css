@@ -15,3 +15,9 @@ table {
 input{
     width: 400px;
 }
+td{
+    padding: 4px !important;
+}
+th{
+    padding: 6px !important;
+}
