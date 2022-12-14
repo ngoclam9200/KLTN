@@ -42,17 +42,11 @@
                                             alt="">
                                         <div class="media-body">
                                             <a class="d-block text-dark">{{item.product.name}}</a>
-                                            <!-- <a class="d-block text-dark">Số lượng còn lại {{item.product.stock}}</a> -->
-                                            <small>
+                                             <small>
 
                                                 <span class="text-muted">Giảm giá: </span> {{item.product.discount}}%
                                                 &nbsp;
-                                                <!-- <span class="text-muted">Mô tả: </span> -->
-                                                <!-- <span
-                                                    *ngIf="item.product.description.length>30">{{item.product.description.slice(0,30)}}...
-                                                </span> -->
-                                                <!-- <span
-                                                    *ngIf="item.product.description.length<30">{{item.product.description}}</span> -->
+                                                
                                             </small>
                                         </div>
                                     </div>
@@ -81,8 +75,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div>{{item.sizeProduct}}</div>
                                         <button *ngIf="item.product.isSize" (click)="getProductDetail(item.productId)" class="changeSize" [matMenuTriggerFor]="menu"></button>
-                                        <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button> -->
-                                        <mat-menu #menu="matMenu">
+                                         <mat-menu #menu="matMenu">
                                           <button value="S" (click)="changeSizeProduct(item, $event)" *ngIf="productDetail?.s>0" mat-menu-item >Size S</button>
                                           <button value="M" (click)="changeSizeProduct(item , $event)"  *ngIf="productDetail?.m>0" mat-menu-item>Size M</button>
                                           <button  value="L" (click)="changeSizeProduct(item , $event)" *ngIf="productDetail?.l>0" mat-menu-item>Size L</button>

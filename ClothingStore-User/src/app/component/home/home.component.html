@@ -16,33 +16,11 @@
 
       <div *ngFor="let item of dataSource" class="col-md-4">
         <div class="product-item">
-          <a routerLink="/product-detail/{{item.id}}"><img class="border" src="{{item.image}}" alt=""></a>
-          <!-- <div class="down-content">
-           
-            <div class="d-flex">
-              <div class="mr-auto p-2">
-                <a routerLink="/product-detail/{{item.id}}">
-                  <h4>{{item.name}}</h4>
-                </a>
-              </div>
-              <div *ngIf="item.discount>0" class="p-2" style="text-decoration-line:line-through" >{{item.price | currency : 'VND'}}</div>
-              <div class="p-2" style="color:  #f33f3f ;">{{item.price-item.price*item.discount/100 | currency : 'VND'}}</div>
+          <a routerLink="/product-detail/{{item.id}}">
+            <div *ngIf="item.discount>0" class="bookmarkRibbon"><span style="color:red;position: relative;top: -9px;right:10px;text-align: center;"> Giảm {{item.discount}}% </span></div>
+
+            <img class="border" src="{{item.image}}" alt=""></a>
          
-            </div>
-          
-            <p>{{item.description}}</p>
-
-
-            <ul>
-              <span>Số lượng ({{item.stock}})</span>
-            </ul>
-
-
-            <button (click)="addToCart(item.id)" type="button" class="add-cart-btn"><i
-                class="fas fa-shopping-cart"></i>Thêm vào giỏ</button>
-
-
-          </div> -->
           <div class="down-content">
             <div class="d-flex">
               <div class="p-2">
@@ -65,7 +43,7 @@
          
             <div class="d-flex align-items-center" style="margin-top: 15px;">
              
-              <div class="daban p-2 ">Đã bán  ({{item.count-item.stock}})</div><br>
+              <div class="daban p-2">Đã bán  ({{item.count-item.stock}})</div><br>
               <span class="p-2">Số lượng còn lại  ({{item.stock}})</span>
             </div>
           </div>

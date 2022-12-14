@@ -29,8 +29,7 @@
                 </div>
                 <div class="product-div-right border">
                     <span class="product-name">{{dataProduct?.name}}</span>
-                    <!-- <span class = "product-price">{{dataProduct?.price | currency :"VND" }}</span> -->
-                    <div class="d-flex">
+                     <div class="d-flex">
 
                         <div *ngIf="dataProduct?.discount>0" class="p-2" style="text-decoration-line:line-through">
                             {{dataProduct?.price | currency : 'VND'}}
@@ -129,8 +128,7 @@
        
         </mat-card-header>
         <img class="img-description" mat-card-image src="{{dataProduct.image}}"  >
-        <!-- <br> -->
-        <mat-card-content>
+         <mat-card-content>
           <p style="margin-left: 20px;">
            {{dataProduct.description}}
           </p>
@@ -139,6 +137,5 @@
       </mat-card>
  
   
-<!-- </body> -->
-
+ 
 </html>
