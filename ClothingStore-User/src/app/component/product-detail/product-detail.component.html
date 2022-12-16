@@ -23,7 +23,15 @@
                         <img class="main-image" src="{{currentImage}}" alt="watch">
                     </div>
                     <div class="hover-container border">
-                        <div *ngFor="let image of images" (click)="changeImage(image.url)"><img src={{image.url}}></div>
+                        <div *ngFor="let image of images" (click)="changeImage(image.url)">
+                            <div *ngIf="currentImage==image.url" class="active-img">
+                                <img class="active-image" src={{image.url}}>
+                            </div>
+                            <div *ngIf="currentImage!=image.url">
+                                <img class="active-image" src={{image.url}}>
+                            </div>
+                          
+                        </div>
 
                     </div>
                 </div>
