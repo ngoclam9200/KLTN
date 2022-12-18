@@ -24,7 +24,12 @@
                       kiếm</button>
                   </div>
                   <div *ngIf="notfound"> Không tìm thấy sản phẩm</div>
-                  <div *ngIf="listProduct?.length==0"> Không tìm thấy sản phẩm trong loại sản phẩm "{{cate.name}}"</div>
+                  <div *ngIf="listProduct?.length==0" class="d-flex flex-column">
+                    <div class="p-2"><img style="width: 100px;height: 100px;" src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png"> </div>
+                    <div class="p-2">Không tìm thấy sản phẩm trong loại sản phẩm "{{cate.name}}"</div>
+                    
+                  </div>
+                  <div > </div>
                   <div *ngIf="!notfound" class="col-md-12">
                     <div class="filters-content">
                       <div class="row grid">
@@ -75,9 +80,12 @@
             </ul>
           </div>
         </div>
-        <pagination-controls *ngIf="isPagination" (pageChange)="page= $event"></pagination-controls>
+        <pagination-controls *ngIf="isPagination" (click)="scrollTop()" (pageChange)="page= $event"></pagination-controls>
       </div>
     </div>
   </div>
 </body>
+<br>
+<app-footer *ngIf="listProduct?.length==0 " style="top:100%; position:absolute"></app-footer>
+<app-footer *ngIf="listProduct?.length>0 "  ></app-footer>
 <app-fab-call-chat *ngIf="isLogin"></app-fab-call-chat>

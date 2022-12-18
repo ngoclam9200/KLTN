@@ -56,7 +56,10 @@ export class SignInComponent implements OnInit {
     signIn()
     {
       // localStorage.setItem("isLogin", "true")
+      if(this.formGroup.valid)
       this.signInService.login(this.formGroup.value)
+      else
+      this.errText="Bạn chưa nhập đầy đủ thông tin"
      
   
       

@@ -3,13 +3,118 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
   integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
   crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
 
 <div class="latest-products">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="section-heading">
-          <h2>Sản phẩm mới nhất</h2>
+
+          <div class="mySlides w3-animate-right" style="display: block;">
+
+            <div class="card">
+              <img class="logoshop" src="../../../assets/images/slide.png" style="margin: 0px;">
+           
+
+            </div>
+
+
+          </div>
+          <div *ngFor="let v of dataSource; let i=index" class="mySlides w3-animate-right">
+
+            <div (click)="goDetailProductPage(v.id)" class="card">
+
+              <div class="main">
+                <div class="d-flex justify-content-center">
+                  <div class="co-img">
+                    <img class="image-voucher" src="{{v.image}}" alt="" />
+                  </div>
+                  <div class="vertical"></div>
+                  <div class="content">
+                    <h2 style="margin-bottom: 0px;">{{v.name}}</h2>
+                    <h1 *ngIf="v.discount>0"><span>Giảm</span> {{v.discount}}% <span>giá trị sản phẩm</span></h1>
+                    <div class="d-flex justify-content-start">
+                      <h1 style="margin-right: 30px;"><span *ngIf="v.discount>0"
+                          style="text-decoration-line:line-through ; margin-top: 0px !important;margin-right: 40px; margin-top: 0px;margin-right: 0px;">{{v.price
+                          | currency : 'VND'}}</span></h1>
+                      <h1><span style="color:  #f33f3f ;margin-top: 0px !important;">{{v.price-v.price*v.discount/100 |
+                          currency : 'VND'}}</span></h1>
+  
+                    </div>
+  
+  
+  
+  
+                  </div>
+                </div>
+               
+              </div>
+
+
+
+            </div>
+
+
+          </div>
+         
+          <div *ngFor="let v of allvoucher; let i=index" class="mySlides w3-animate-right">
+
+            <div class="card">
+              <div class="main">
+                <div class="d-flex justify-content-center">
+                  <div class="co-img">
+                    <img class="image-voucher" src="../../../assets/images/voucher-qua-tang.jpg" alt="" />
+                  </div>
+                  <div class="vertical"></div>
+                  <div class="content">
+                    <h2>Voucher của bạn</h2>
+                    <h1 *ngIf="v.discountprice>0"><span>Giảm</span> {{v.discountprice}}% <span>Giá trị đơn hàng</span>
+                    </h1>
+                    <h1 *ngIf="v.discountfreeship>0"> <span>Giảm</span> {{v.discountfreeship}}% <span>Phí vận
+                        chuyển</span></h1>
+                    <p>Ngày hết hạn : {{v.dateCreated | date: 'dd-MM-yyyy'}}</p>
+                  </div>
+                  </div>
+              
+              </div>
+              <div class="copy-button">
+                <input id="{{i}}" type="text" style="text-align: center;" readonly value="{{v.code}}" />
+                <button (click)="copyCode()" class="copybtn">COPY</button>
+              </div>
+
+            </div>
+
+
+          </div>  
+
+
+
+
+
+
+          <br>
+          <h3 style="margin: 20px 0 20px 0;">Danh mục sản phẩm </h3>
+          <div class="d-flex flex-wrap bd-highlight ">
+            <div  *ngFor="let cate of allCate" class="p-2 bd-highlight border  ">
+              <div (click)="goProductPage(cate.id)" class="d-flex flex-column">
+                <div class="d-flex justify-content-center">
+                  <div class="p-2">
+                  <img style="width:50px;height:50px;" class="rounded-circle" src="{{cate.image}}">
+                </div> 
+              </div>
+                
+                <div class="p-2 text-center" style="min-width: 100px;max-width: 300px;">{{cate.name}}</div>
+               
+              </div>
+            </div>
+       
+          </div>
+
+      
+          <h3 style="margin: 20px 0 20px 0;">Sản phẩm mới nhất</h3>
           <a routerLink="/products" href="">Xem tất cả sản phẩm <i class="fa fa-angle-right"></i></a>
         </div>
       </div>
@@ -17,10 +122,13 @@
       <div *ngFor="let item of dataSource" class="col-md-4">
         <div class="product-item">
           <a routerLink="/product-detail/{{item.id}}">
-            <div *ngIf="item.discount>0" class="bookmarkRibbon"><span style="color:red;position: relative;top: -9px;right:10px;text-align: center;"> Giảm {{item.discount}}% </span></div>
+            <div *ngIf="item.discount>0" class="bookmarkRibbon"><span
+                style="color:red;position: relative;top: -9px;right:10px;text-align: center;"> Giảm {{item.discount}}%
+              </span></div>
 
-            <img class="border" src="{{item.image}}" alt=""></a>
-         
+            <img class="border" src="{{item.image}}" alt="">
+          </a>
+
           <div class="down-content">
             <div class="d-flex">
               <div class="p-2">
@@ -28,11 +136,11 @@
                   <h4>{{item.name}}</h4>
                 </a>
               </div>
-               
+
 
             </div>
             <div class="d-flex">
-               
+
               <div *ngIf="item.discount>0" class="p-2" style="text-decoration-line:line-through">
                 {{item.price | currency : 'VND'}} </div>
               <div class="p-2" style="color:  #f33f3f ;">{{item.price-item.price*item.discount/100 |
@@ -40,11 +148,11 @@
 
             </div>
 
-         
+
             <div class="d-flex align-items-center" style="margin-top: 15px;">
-             
-              <div class="daban p-2">Đã bán  ({{item.count-item.stock}})</div><br>
-              <span class="p-2">Số lượng còn lại  ({{item.stock}})</span>
+
+              <div class="daban p-2">Đã bán ({{item.count-item.stock}})</div><br>
+              <span class="p-2">Số lượng còn lại ({{item.stock}})</span>
             </div>
           </div>
         </div>
@@ -67,7 +175,7 @@
           <h4>Bạn đang muốn tìm sản phẩm tốt nhất ?</h4>
           <p><a rel="nofollow" href="/about-us" target="_parent">Double-L Store</a>
             luôn là cửa hàng đi đầu trong việc nắm bắt tâm lí , ý định mua sắm của khách hàng <a rel="nofollow"
-            href="/about-us">Liên hệ chúng tôi nếu bạn muốn phản hồi về sản phẩm </a></p>
+              href="/about-us">Liên hệ chúng tôi nếu bạn muốn phản hồi về sản phẩm </a></p>
           <ul class="featured-list">
             <li><a>Sản phẩm mới hợp thời trang</a></li>
             <li><a>Nhiều hình thức thanh toán </a></li>
@@ -86,4 +194,6 @@
     </div>
   </div>
 </div>
+ 
+<app-footer></app-footer>
 <app-fab-call-chat *ngIf="isLogin"></app-fab-call-chat>

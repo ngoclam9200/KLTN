@@ -12,7 +12,10 @@
                     <table class="table table-bordered m-0 border ">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>  <section style="margin-top: 15px;" class="example-section">
+                                    <mat-checkbox (input)="checkAll($event)" [(ngModel)]="checkedAll"class="example-margin"></mat-checkbox>
+
+                                </section></th>
                                 <th class="text-center py-3 px-4" style="min-width: 300px;">Sản phẩm &amp; Mô tả
                                 </th>
                                 <th class="text-center py-3 px-4" style="width: 100px;">Giá</th>
@@ -26,12 +29,12 @@
                         </thead>
                         <tbody>
 
-                            <tr *ngFor="let item of allProduct">
+                            <tr *ngFor="let item of allProduct ; let i=index">
 
 
                                 <td>
                                     <section style="margin-top: 15px;" class="example-section">
-                                        <mat-checkbox [(ngModel)]="item.checked" class="example-margin"></mat-checkbox>
+                                        <mat-checkbox [(ngModel)]="item.checked" (input)="checkOne($event)" class="example-margin"></mat-checkbox>
 
                                     </section>
                                 </td>
@@ -115,13 +118,13 @@
                                                     
                                                     
                                                 </div>
-                                                <div *ngFor="let a of allproductDetail">
-                                                    <div  *ngIf="a.productId==item.productId" style="margin-left: 20px;">
-                                                        <div style="width:160px" *ngIf="item.sizeProduct=='S'"> Còn: {{a.s}} SP (size {{item.sizeProduct}}) </div>
-                                                        <div style="width:160px" *ngIf="item.sizeProduct=='M'"> Còn: {{a.m}} SP (size {{item.sizeProduct}})  </div>
-                                                        <div style="width:160px" *ngIf="item.sizeProduct=='L'">Còn: {{a.l}} SP (size {{item.sizeProduct}})  </div>
-                                                        <div style="width:160px" *ngIf="item.sizeProduct=='XL'"> Còn: {{a.xl}} SP (size {{item.sizeProduct}})  </div>
-                                                        <div style="width:160px" *ngIf="item.sizeProduct=='XXL'"> Còn: {{a.xxl}} SP (size {{item.sizeProduct}})  </div>
+                                                <div >
+                                                    <div    style="margin-left: 20px;">
+                                                        <div style="width:160px" *ngIf="item.sizeProduct=='S'"> Còn: {{allproductDetail[i]?.s}} SP (size {{item.sizeProduct}}) </div>
+                                                        <div style="width:160px" *ngIf="item.sizeProduct=='M'"> Còn: {{allproductDetail[i]?.m}} SP (size {{item.sizeProduct}})  </div>
+                                                        <div style="width:160px" *ngIf="item.sizeProduct=='L'">Còn: {{allproductDetail[i]?.l}} SP (size {{item.sizeProduct}})  </div>
+                                                        <div style="width:160px" *ngIf="item.sizeProduct=='XL'"> Còn: {{allproductDetail[i]?.xl}} SP (size {{item.sizeProduct}})  </div>
+                                                        <div style="width:160px" *ngIf="item.sizeProduct=='XXL'"> Còn: {{allproductDetail[i]?.xxl}} SP (size {{item.sizeProduct}})  </div>
                                                         <div style="width:160px" *ngIf="item.sizeProduct=='Không'"> Còn: {{item.product.stock}} SP  </div>
                                                     </div>
                                                 </div>

@@ -58,6 +58,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { LoadingComponent } from './component/loading/loading.component';
 import { ChangePasswordComponent } from './component/profile/change-password/change-password.component';
 import { SendMailComponent } from './component/send-mail/send-mail.component';
+import { FooterComponent } from './component/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,6 +90,7 @@ import { SendMailComponent } from './component/send-mail/send-mail.component';
     LoadingComponent,
     ChangePasswordComponent,
     SendMailComponent,
+    FooterComponent,
      
 
   ],

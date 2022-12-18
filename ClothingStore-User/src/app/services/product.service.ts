@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class ProductService {
 
   apiUrl=environment.apiUrl+"/Product"
- 
+ voucherApi=environment.apiUrl+"/Voucher"
   constructor( private http: HttpClient ,) { }
   getHeader()
   {
@@ -61,5 +61,11 @@ export class ProductService {
   {
     let headers=this.getHeader()
     return this.http.get(this.apiUrl+"/search-product-in-category/"+categoryid + "/"+name, {headers:headers})
+  }
+  
+  getAllVoucher()
+  {
+    let headers=this.getHeader()
+    return this.http.get(this.voucherApi+"/get-all-voucher", {headers:headers})
   }
 }

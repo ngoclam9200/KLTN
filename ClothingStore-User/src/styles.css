@@ -919,7 +919,7 @@ body {
   
   .products .filters {
       text-align: center;
-      border-bottom: 1px solid #eee;
+      /* border-bottom: 1px solid #eee; */
       padding-bottom: 10px;
       margin-bottom: 60px;
   }

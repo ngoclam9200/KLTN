@@ -189,4 +189,10 @@ export class ProductsComponent implements OnInit {
       })
     }
   }
+  scrollTop()
+{
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
 }
+}
+
