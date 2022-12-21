@@ -11,37 +11,48 @@ export class SendMailComponent implements OnInit {
 
   constructor(private userService: UserService) { }
   formGroup: FormGroup;
-  isSubmit=false
+  isSubmit = false
+
+  dataUser: any
   ngOnInit(): void {
-     this.initForm()
+    this.initForm()
 
   }
   initForm() {
-    
-      this.formGroup = new FormGroup({
 
-        
-        fullname: new FormControl(localStorage.getItem("fullname"), [Validators.required]),
-      
-        email: new FormControl(localStorage.getItem("email"), [Validators.required]),
-        problem: new FormControl("", [Validators.required]),
-        
-        content: new FormControl("", [Validators.required]),
+    this.formGroup = new FormGroup({
 
-      });
-   
-    
+
+      fullname: new FormControl(localStorage.getItem(""), [Validators.required]),
+
+      email: new FormControl(localStorage.getItem(""), [Validators.required]),
+      problem: new FormControl("", [Validators.required]),
+
+      content: new FormControl("", [Validators.required]),
+
+    });
+
+
   }
- 
-  sendEmail()
-  {
-    this.isSubmit=true
- 
-    if(this.formGroup.valid)
-    {
-      this.userService.sendEmail(this.formGroup.value).subscribe(res=>{
-       })
-    }
+
+  sendEmail() {
+    this.isSubmit = true
+
+    this.userService.getUserById(localStorage.getItem("userId")).subscribe(res => {
+      this.dataUser = res
+      this.dataUser = this.dataUser.data
+     
+
+      this.formGroup.controls['email'].setValue(this.dataUser.email)
+      this.formGroup.controls['fullname'].setValue(this.dataUser.fullname)
+     
+      if (this.formGroup.valid) {
+        this.userService.sendEmail(this.formGroup.value).subscribe(res => {
+        })
+      }
+    })
+
+
   }
 
 }
