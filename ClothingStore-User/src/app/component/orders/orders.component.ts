@@ -93,7 +93,11 @@ export class OrdersComponent implements OnInit {
                 this.prod = this.prod.data
                 this.allProduct = []
                 for (let i = 0; i < this.prod.length; i++) {
-                  this.allProduct.push(this.prod[i])
+                  // this.allProduct.push(this.prod[i])
+                  this.allProduct.forEach((c) => {
+                    if (!this.allProduct.includes(c)) {
+                        this.allProduct.push(c);
+                    }})
                 }
 
 
@@ -194,7 +198,7 @@ export class OrdersComponent implements OnInit {
             this.orderDetailService.getOrderDetailByOrderId(this.allOrder[i].id).subscribe(res => {
               this.prod = res
               this.prod = this.prod.data
-              this.allProduct = []
+              // this.allProduct = []
               for (let i = 0; i < this.prod.length; i++) {
                 this.allProduct.push(this.prod[i])
               }
