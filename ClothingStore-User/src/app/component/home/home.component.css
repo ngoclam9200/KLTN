@@ -25,10 +25,10 @@
  
     box-sizing: border-box;
 }
-img{
+.img-lastestprod{
     height: 200px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 20px;
+    /* margin-right: 10px; */
     width: 90%;
     margin-top: 10px;
     
@@ -59,7 +59,7 @@ font-weight: 500;
     font-size: 11px;
     font-weight:400;
     position: absolute;
-    right: 44px;
+    right: 34px;
     top: 12px;
 }
  
@@ -111,13 +111,14 @@ cursor: pointer;
  
 .co-img
 {
-    width:    50%;
+    width:    100%;
 }
 .co-img img {
-  width:    100%;
+  width:    50%;
   height: 150px;
+  text-align: center;
   /* position: absolute; */
-  /* margin-left: 20%; */
+  margin-left: 25%;
  
  
   

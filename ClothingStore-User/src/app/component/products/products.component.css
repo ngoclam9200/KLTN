@@ -37,10 +37,10 @@
     color: black;
 }
 img{
-    height: 200px;
+    height: 160px;
     margin-left: 10px;
     margin-right: 10px;
-    width: 90%;
+    width: 70%;
     margin-top: 10px;
 }
 ::ng-deep .ngx-pagination .current {
@@ -73,8 +73,8 @@ pagination-controls   {
     font-size: 11px;
     font-weight:400;
     position: absolute;
-    right: 33px;
-    top: 12px;
+    right: 12px;
+    top: 0px;
 }
 .product-item:hover{
     border: 1px solid #f33f3f;
@@ -85,6 +85,6 @@ pagination-controls   {
     bottom: 30px;
     font-size: 13px;
     /* color: #f33f3f; */
-    font-weight: 500;
+    font-weight: 400;
 }
  

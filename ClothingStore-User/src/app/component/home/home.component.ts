@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   allvoucher:any
   idCode:any
   allCate:any
+ 
   constructor(private router: Router, private productService: ProductService,private categoryService:CategoryService,
     private cartService: CartService, private signInService: SigninService) { }
 
@@ -80,7 +81,8 @@ export class HomeComponent implements OnInit {
           
         x[myIndex - 1].style.display = "block";
         localStorage.setItem("idVoucher",(myIndex-1).toString())
-    
+     
+          
         
         }
       
@@ -115,18 +117,22 @@ export class HomeComponent implements OnInit {
     
     
       var id=localStorage.getItem("idVoucher")
+      var i=parseInt(id)
+      i=i-4
+      id=i.toString()
+      
+      
+      var copyText = document.getElementById(id)  as HTMLInputElement ;
      
       
-      var copyText = document.getElementById(id) as HTMLInputElement;
- 
       copyText.select();
       copyText.setSelectionRange(0, 99999); // For mobile devices
     
-      // Copy the text inside the text field
+      // // Copy the text inside the text field
       navigator.clipboard.writeText(copyText.value);
       
       // Alert the copied text
-      alert("Copied the text: " + copyText.value);
+      alert("Đã copy mã voucher: " + copyText.value);
     
   }
   getLastestProduct() {

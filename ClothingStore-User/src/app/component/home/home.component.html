@@ -75,7 +75,7 @@
                     </h1>
                     <h1 *ngIf="v.discountfreeship>0"> <span>Giảm</span> {{v.discountfreeship}}% <span>Phí vận
                         chuyển</span></h1>
-                    <p>Ngày hết hạn : {{v.dateCreated | date: 'dd-MM-yyyy'}}</p>
+                    <p>Ngày hết hạn : {{v.dateExpiration | date: 'dd-MM-yyyy'}}</p>
                   </div>
                   </div>
               
@@ -126,7 +126,7 @@
                 style="color:red;position: relative;top: -9px;right:10px;text-align: center;"> Giảm {{item.discount}}%
               </span></div>
 
-            <img class="border" src="{{item.image}}" alt="">
+            <img class="border img-lastestprod" src="{{item.image}}" alt="">
           </a>
 
           <div class="down-content">

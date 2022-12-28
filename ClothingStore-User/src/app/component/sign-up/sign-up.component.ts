@@ -103,6 +103,7 @@ export class SignUpComponent implements OnInit {
         
         },
         err=>{
+          this.isLoading=false
            this.errorRes=err
           this.errorRes=this.errorRes.error.message
            
