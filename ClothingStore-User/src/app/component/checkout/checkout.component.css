@@ -21,3 +21,9 @@ td{
 th{
     padding: 6px !important;
 }
+.voucher{
+text-transform: uppercase;
+}
+::-webkit-input-placeholder {  
+    text-transform: none;
+}

@@ -143,7 +143,7 @@
                  
                   <div class="d-flex align-items-center">
                     <div class="p-2">Nhập voucher để được giảm giá : </div>
-                    <div style="color: #f33f3f;" class="p-2"><input   [(ngModel)]="codeVoucher" placeholder="Nhập mã voucher" /></div>
+                    <div style="color: #f33f3f;" class="p-2"><input class="voucher"  [(ngModel)]="codeVoucher" placeholder="Nhập mã voucher" /></div>
                     <div class="p-2"> <button (click)="searchVoucher()" mat-raised-button style="color:#f33f3f">Áp dụng</button> </div>
                   </div>
                   <div *ngIf="isCodeVoucher" class="d-flex flex-row">
